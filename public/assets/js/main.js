@@ -243,7 +243,7 @@ function formatDate(dateString) {
 // Utility: Truncate Text
 function truncateText(text, maxLength) {
     if (text.length <= maxLength) return text;
-    return text.substr(0, maxLength) + '...';
+    return text.slice(0, maxLength) + '...';
 }
 
 // Utility: Create Tag Element
@@ -266,4 +266,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Console message for developers
 console.log('%c👋 Welcome to iwriteyouread.org', 'font-size: 16px; font-weight: bold; color: #1d4ed8;');
-console.log('%cInterested in the code? Check out the source at https://github.com/Lyrion1/iwriteyouread', 'font-size: 12px; color: #666;');
+console.log('%cInterested in the technical details? View the source code.', 'font-size: 12px; color: #666;');
