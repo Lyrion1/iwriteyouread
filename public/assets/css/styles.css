@@ -1,0 +1,279 @@
+/* Custom Styles for iwriteyouread.org */
+
+/* Font Configuration */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.font-serif,
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lora', Georgia, 'Times New Roman', serif;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Animation Utilities */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Navbar Styles */
+#navbar {
+    transition: all 0.3s ease;
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 50%;
+    background-color: #1d4ed8;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Mobile Menu Transitions */
+#mobile-menu {
+    transition: max-height 0.3s ease-in-out;
+}
+
+/* Button Hover Effects */
+.btn-primary,
+.btn-secondary,
+.btn-tertiary {
+    transition: all 0.2s ease;
+}
+
+/* Card Hover Effects */
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Blog Post Styles */
+.blog-post {
+    transition: all 0.3s ease;
+}
+
+.blog-post:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.blog-post img {
+    transition: transform 0.3s ease;
+}
+
+.blog-post:hover img {
+    transform: scale(1.05);
+}
+
+/* Tag Filter Styles */
+.tag-filter {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.tag-filter.active {
+    background-color: #1d4ed8;
+    color: white;
+    border-color: #1d4ed8;
+}
+
+/* Prose Styles for Blog Content */
+.prose {
+    max-width: 65ch;
+}
+
+.prose p {
+    margin-bottom: 1.25em;
+    line-height: 1.75;
+}
+
+.prose h2 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.prose h3 {
+    margin-top: 1.6em;
+    margin-bottom: 0.6em;
+    font-size: 1.25em;
+    font-weight: 600;
+}
+
+.prose a {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+.prose a:hover {
+    color: #1e40af;
+}
+
+/* Newsletter Modal Styles */
+#newsletter-modal {
+    backdrop-filter: blur(4px);
+}
+
+#newsletter-modal > div {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Form Styles */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #1d4ed8;
+    ring: 2px;
+    ring-color: rgba(29, 78, 216, 0.2);
+}
+
+/* Loading Animation */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Responsive Images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Gradient Backgrounds */
+.gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Book Cover Shadow */
+.book-shadow {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Gumroad Button Override */
+.gumroad-button {
+    display: inline-block;
+    text-decoration: none !important;
+}
+
+/* Footer Links */
+footer a {
+    transition: color 0.2s ease;
+}
+
+/* Accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Focus Visible */
+*:focus-visible {
+    outline: 2px solid #1d4ed8;
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    nav,
+    footer,
+    #newsletter-modal {
+        display: none;
+    }
+    
+    body {
+        background: white;
+    }
+}
+
+/* Dark Mode Support (Future Enhancement) */
+@media (prefers-color-scheme: dark) {
+    /* Keep light mode for now as per requirements */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Selection */
+::selection {
+    background-color: #1d4ed8;
+    color: white;
+}
+
+::-moz-selection {
+    background-color: #1d4ed8;
+    color: white;
+}
+
+/* Excerpt Toggle Animation */
+#excerpt-content {
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+#excerpt-icon {
+    transition: transform 0.3s ease;
+}
+
+#excerpt-icon.rotate {
+    transform: rotate(180deg);
+}
