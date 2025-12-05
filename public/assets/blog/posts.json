@@ -1,0 +1,58 @@
+{
+  "posts": [
+    {
+      "id": "the-view-from-outside",
+      "title": "The View from Outside: On Democracy and Distance",
+      "date": "2025-01-15",
+      "summary": "There is a particular clarity that comes from standing at the margins. This essay explores what it means to observe American democracy from a position of intellectual distance—close enough to see the details, far enough to recognize the patterns.",
+      "image": "",
+      "tags": ["Democracy", "American Politics"],
+      "url": "#"
+    },
+    {
+      "id": "liberty-paradox",
+      "title": "The Liberty Paradox: Freedom's Contradictions",
+      "date": "2025-01-08",
+      "summary": "Freedom is not a simple concept. It requires constraints, demands responsibility, and thrives on paradox. This essay examines the tension between individual liberty and collective flourishing in contemporary America.",
+      "image": "",
+      "tags": ["Liberty", "American Politics"],
+      "url": "#"
+    },
+    {
+      "id": "immigration-identity",
+      "title": "Immigration and the American Identity",
+      "date": "2025-01-02",
+      "summary": "Who gets to be American? How do we balance the nation's immigrant heritage with concerns about cultural cohesion and economic stability? An exploration of one of the most contentious issues of our time.",
+      "image": "",
+      "tags": ["Immigration", "American Politics"],
+      "url": "#"
+    },
+    {
+      "id": "justice-equity-distinction",
+      "title": "Justice vs. Equity: A Necessary Distinction",
+      "date": "2024-12-20",
+      "summary": "The conflation of justice and equity has muddied our political discourse. This essay draws clear lines between these concepts and argues for precision in how we talk about fairness in society.",
+      "image": "",
+      "tags": ["Justice", "American Politics"],
+      "url": "#"
+    },
+    {
+      "id": "polarization-problem",
+      "title": "The Polarization Problem: Can We Find Common Ground?",
+      "date": "2024-12-12",
+      "summary": "American politics has become a zero-sum game where compromise feels like betrayal. Is there a path forward, or are we destined for deeper division? An honest assessment of where we stand.",
+      "image": "",
+      "tags": ["Democracy", "American Politics"],
+      "url": "#"
+    },
+    {
+      "id": "free-speech-limits",
+      "title": "The Limits of Free Speech in a Digital Age",
+      "date": "2024-12-05",
+      "summary": "The First Amendment was written for a different era. How do we preserve the principle of free expression while addressing the unique challenges posed by social media and digital communication?",
+      "image": "",
+      "tags": ["Liberty", "American Politics"],
+      "url": "#"
+    }
+  ]
+}
