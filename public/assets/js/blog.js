@@ -82,6 +82,8 @@ function createPostElement(post) {
     let imageUrl = post.image;
     
     // If no image provided, generate Unsplash URL from first tag
+    // Note: Using source.unsplash.com for dynamic image generation based on tags
+    // This provides automatic fallback images for blog posts without custom images
     if (!imageUrl && post.tags && post.tags.length > 0) {
         // Trim and check if tag is not empty
         const trimmedTag = post.tags[0].toLowerCase().trim();
