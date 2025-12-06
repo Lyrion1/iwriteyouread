@@ -82,11 +82,29 @@ The "Buy Me a Coffee" button on `/blog.html` will automatically use the environm
 
 ### Option 1: Zoho Mail (Free)
 
+**Important: Domain Verification Required**
+
+Before using Zoho Mail, you must verify your domain ownership by adding a TXT record:
+
+```
+Type: TXT
+Name: @ (or leave blank for root domain)
+Value: zoho-verification=76528d1030.neverify.zoho.eu
+TTL: 3600 (or Auto)
+```
+
+**Setup Steps:**
+
 - [ ] Sign up at https://www.zoho.com/mail
 - [ ] Add custom domain: `iwriteread.org`
+- [ ] Add the TXT verification record to your domain's DNS settings (see above)
+- [ ] Wait for DNS propagation (typically 5-30 minutes)
+- [ ] Complete verification in Zoho Mail dashboard
 - [ ] Create email: `hello@iwriteread.org`
-- [ ] Update MX records in domain registrar
+- [ ] Update MX records in domain registrar (Zoho will provide these after verification)
 - [ ] Test sending/receiving emails
+
+**Note:** The TXT record should be added via your domain registrar's DNS management panel (e.g., GoDaddy, Namecheap, Cloudflare) or via Netlify's DNS panel if you're using Netlify DNS.
 
 ### Option 2: Google Workspace (Paid)
 
