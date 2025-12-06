@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You | iwriteyouread</title>
+    <title>Thank You for Your Support | iwriteyouread</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -22,18 +22,55 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        h1 {
+        h1, h2 {
             font-family: 'Merriweather', serif;
+        }
+        .thank-you-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            margin: 0.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background-color: #1f2937;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #111827;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background-color: #6b7280;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #4b5563;
+            transform: translateY(-2px);
         }
     </style>
 </head>
-<body style="padding: 4rem; text-align: center; background: linear-gradient(to bottom right, #f9fafb, #ffffff, #eff6ff); min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+<body style="padding: 2rem; text-align: center; background: linear-gradient(to bottom right, #f9fafb, #ffffff, #eff6ff); min-height: 100vh; display: flex; align-items: center; justify-content: center;">
     
-    <div style="max-width: 600px;">
-        <h1 style="font-size: 3rem; font-weight: bold; color: #111827; margin-bottom: 1.5rem;">Thank You!</h1>
-        <p style="font-size: 1.25rem; color: #4b5563; line-height: 1.75;">
-            Your support helps us keep writing thoughtfully and independently.
+    <div style="max-width: 700px;">
+        <div class="thank-you-icon">☕</div>
+        <h1 style="font-size: 3rem; font-weight: bold; color: #111827; margin-bottom: 1rem;">Thank You!</h1>
+        <h2 style="font-size: 1.5rem; color: #374151; margin-bottom: 1.5rem;">Your Support Means the World</h2>
+        <p style="font-size: 1.125rem; color: #4b5563; line-height: 1.75; margin-bottom: 2rem;">
+            Your generous contribution helps us continue writing thoughtfully and independently. 
+            Every coffee you buy supports the creation of meaningful essays and stories that explore 
+            democracy, liberty, and the human experience.
         </p>
+        <div style="margin-top: 2rem;">
+            <a href="/blog.html" class="btn btn-primary">Read More Essays</a>
+            <a href="/index.html" class="btn btn-secondary">Back to Home</a>
+        </div>
     </div>
     
 </body>
