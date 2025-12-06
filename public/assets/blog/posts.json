@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "id": "uk-immigration-conversation",
+      "title": "Why Immigration Conversations in the UK Need to Change",
+      "date": "2025-01-20",
+      "summary": "The immigration debate in the UK has become trapped in tired narratives and political point-scoring. This essay argues for a more honest, nuanced approach that acknowledges complexity without sacrificing principle.",
+      "image": "",
+      "tags": ["Immigration", "UK Politics", "Culture"],
+      "url": "#"
+    },
+    {
       "id": "the-view-from-outside",
       "title": "The View from Outside: On Democracy and Distance",
       "date": "2025-01-15",
@@ -43,15 +52,6 @@
       "summary": "American politics has become a zero-sum game where compromise feels like betrayal. Is there a path forward, or are we destined for deeper division? An honest assessment of where we stand.",
       "image": "",
       "tags": ["Democracy", "American Politics"],
-      "url": "#"
-    },
-    {
-      "id": "free-speech-limits",
-      "title": "The Limits of Free Speech in a Digital Age",
-      "date": "2024-12-05",
-      "summary": "The First Amendment was written for a different era. How do we preserve the principle of free expression while addressing the unique challenges posed by social media and digital communication?",
-      "image": "",
-      "tags": ["Liberty", "American Politics"],
       "url": "#"
     }
   ]

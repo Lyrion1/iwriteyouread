@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Thoughtful essays and commentary on democracy, liberty, American politics, immigration, and justice.">
-    <meta name="keywords" content="political blog, essays, American politics, democracy, liberty, immigration">
+    <meta name="description" content="Essays and commentary by Alexander Afolabi on politics, culture, immigration, and society.">
+    <meta name="keywords" content="Alexander Afolabi, political essays, blog, UK immigration, democracy, cultural commentary">
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Blog | iwriteyouread">
-    <meta property="og:description" content="Thoughtful essays and commentary on democracy, liberty, and American politics.">
+    <meta property="og:description" content="Essays and commentary by Alexander Afolabi on politics, culture, and society.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://iwriteyouread.org/blog">
     
     <title>Blog | iwriteyouread</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" type="image/svg+xml" href="/assets/images/favicon.svg">
-    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
     
     <!-- TailwindCSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,29 +26,30 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="font-sans text-gray-900 bg-gradient-to-br from-gray-50 via-white to-blue-50 min-h-screen">
+<body class="font-sans text-gray-800 bg-white min-h-screen">
     
     <!-- Navigation Bar -->
-    <nav id="navbar" class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300">
+    <nav id="navbar" class="fixed w-full top-0 z-50 bg-white shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0">
-                    <a href="/" class="text-2xl font-serif font-bold text-gray-900 hover:text-blue-700 transition-colors">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <img src="/assets/logo.png" alt="iwriteyouread logo" class="h-10 w-10 rounded-full object-cover">
+                    <a href="/" class="text-2xl font-serif font-bold text-gray-900 hover:text-gray-700 transition-colors">
                         iwriteyouread
                     </a>
                 </div>
                 
                 <div class="hidden md:flex space-x-8">
-                    <a href="/" class="nav-link text-gray-700 hover:text-blue-700 transition-colors font-medium">Home</a>
-                    <a href="/about.html" class="nav-link text-gray-700 hover:text-blue-700 transition-colors font-medium">About</a>
-                    <a href="/book.html" class="nav-link text-gray-700 hover:text-blue-700 transition-colors font-medium">The Book</a>
-                    <a href="/blog.html" class="nav-link text-blue-700 font-semibold">Blog</a>
-                    <a href="/contact.html" class="nav-link text-gray-700 hover:text-blue-700 transition-colors font-medium">Contact</a>
+                    <a href="/" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">Home</a>
+                    <a href="/about.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">About</a>
+                    <a href="/works.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">Works</a>
+                    <a href="/blog.html" class="nav-link text-gray-900 font-semibold">Blog</a>
+                    <a href="/contact.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">Contact</a>
                 </div>
                 
-                <button id="mobile-menu-button" class="md:hidden text-gray-700 hover:text-blue-700 focus:outline-none" aria-label="Toggle menu">
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 hover:text-gray-900 focus:outline-none" aria-label="Toggle menu">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -58,13 +58,13 @@
             </div>
         </div>
         
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
             <div class="px-4 pt-2 pb-4 space-y-2">
-                <a href="/" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors font-medium">Home</a>
-                <a href="/about.html" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors font-medium">About</a>
-                <a href="/book.html" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors font-medium">The Book</a>
-                <a href="/blog.html" class="block px-3 py-2 bg-blue-50 text-blue-700 rounded-md font-semibold">Blog</a>
-                <a href="/contact.html" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors font-medium">Contact</a>
+                <a href="/" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">Home</a>
+                <a href="/about.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">About</a>
+                <a href="/works.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">Works</a>
+                <a href="/blog.html" class="block px-3 py-2 bg-gray-100 text-gray-900 rounded-md font-semibold">Blog</a>
+                <a href="/contact.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">Contact</a>
             </div>
         </div>
     </nav>
@@ -145,7 +145,7 @@
                     <ul class="space-y-2">
                         <li><a href="/" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
                         <li><a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About</a></li>
-                        <li><a href="/book.html" class="text-gray-400 hover:text-white transition-colors">The Book</a></li>
+                        <li><a href="/works.html" class="text-gray-400 hover:text-white transition-colors">Works</a></li>
                         <li><a href="/blog.html" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
                         <li><a href="/contact.html" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
                     </ul>
