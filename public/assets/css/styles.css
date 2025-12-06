@@ -180,19 +180,22 @@ img {
 
 /* Site Logo Styles */
 .site-logo {
-    height: 2.5rem; /* 40px - equivalent to h-10 */
-    width: 2.5rem;  /* 40px - equivalent to w-10 */
-    border-radius: 50%; /* rounded-full */
+    max-width: 100px; /* Maximum width of 100px */
+    width: 3rem; /* 48px for desktop */
+    height: 3rem; /* 48px for desktop */
+    border-radius: 50%; /* Circular shape */
     object-fit: cover;
     object-position: center;
-    image-rendering: crisp-edges;
+    display: block;
+    flex-shrink: 0; /* Prevent logo from shrinking */
+    margin-right: 10px; /* 10px spacing between logo and title */
 }
 
 /* Responsive logo sizing */
 @media (max-width: 640px) {
     .site-logo {
-        height: 2rem; /* 32px for mobile */
-        width: 2rem;
+        width: 2.5rem; /* 40px for mobile */
+        height: 2.5rem; /* 40px for mobile */
     }
 }
 
