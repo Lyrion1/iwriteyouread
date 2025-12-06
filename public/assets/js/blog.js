@@ -3,34 +3,40 @@
 let allPosts = [];
 let currentFilter = 'all';
 
-// Detect if running in production/Netlify environment
-const isProduction = window.location.hostname === 'iwriteyouread.org' || 
-                     window.location.hostname.includes('netlify.app');
+// Category-to-image mapping for blog post thumbnails
+// Maps post categories/tags to predefined thumbnail images
+const CATEGORY_IMAGE_MAP = {
+    'Immigration': '/images/immigration.jpg',
+    'UK Politics': '/images/uk-politics.jpg',
+    'Culture': '/images/culture.jpg',
+    'Liberty': '/images/liberty.jpg',
+    'Democracy': '/images/democracy.jpg',
+    'Justice': '/images/justice.jpg',
+    'American Politics': '/images/us-politics.jpg'
+};
 
-// Constants for image fallback URLs
-// Use local fallback in production to avoid firewall issues, Unsplash in dev
-const FALLBACK_IMAGE_URL = isProduction ? 
-    '/assets/Blogimage.png' : 
-    'https://source.unsplash.com/featured/?writing,book,essay';
-const PRIORITY_TAGS = ['Democracy', 'American Politics', 'Liberty', 'Justice'];
+// Default fallback image for posts without matching categories
+const DEFAULT_IMAGE = '/images/default.jpg';
 
-// Function to get image URL based on tag with firewall-proof fallback
-// Uses Unsplash in local/development but falls back to local images in production
+// Priority tags for selecting the most relevant category image
+const PRIORITY_TAGS = ['Democracy', 'American Politics', 'Liberty', 'Justice', 'Immigration', 'UK Politics', 'Culture'];
+
+// Function to get image URL based on post tags
+// Returns predefined category image or default fallback
 function getImageForTag(tag) {
     // Validate tag parameter
     if (!tag || typeof tag !== 'string' || !tag.trim()) {
-        // Return appropriate fallback based on environment
-        return isProduction ? '/assets/Blogimage.png' : FALLBACK_IMAGE_URL;
+        return DEFAULT_IMAGE;
     }
     
-    // Return local fallback for production, otherwise use Unsplash for local dev
-    if (isProduction) {
-        return '/assets/Blogimage.png';
+    // Check if tag matches a category in our mapping
+    const normalizedTag = tag.trim();
+    if (CATEGORY_IMAGE_MAP[normalizedTag]) {
+        return CATEGORY_IMAGE_MAP[normalizedTag];
     }
     
-    // For local development, use Unsplash with the tag
-    const encodedTag = encodeURIComponent(tag.toLowerCase().trim());
-    return `https://source.unsplash.com/featured/?${encodedTag}`;
+    // Return default if no match found
+    return DEFAULT_IMAGE;
 }
 
 // Load blog posts from JSON
@@ -116,34 +122,45 @@ function createPostElement(post) {
     postLink.href = post.url || '#';
     postLink.className = 'block';
     
-    // BLOG IMAGE DYNAMIC FETCH (UNSPLASH)
-    // Goal: Dynamically load free blog post images from Unsplash based on post tags
-    // 1. Get the first tag for the blog post, or use a fallback like "writing"
-    // 2. Generate Unsplash image URL for that tag with proper encoding
-    // 3. Use this imageUrl in blog card with lazy loading
+    // BLOG IMAGE CATEGORY MAPPING
+    // Goal: Use predefined category-based thumbnail images for blog posts
+    // 1. Get the first matching tag from the post that has a category image
+    // 2. Use that category's predefined thumbnail image
+    // 3. Fallback to default image if no matching category
     
-    // Post image - use Unsplash if no image provided
+    // Post image - use category mapping
     let imageUrl = post.image;
     
-    // If no image provided, generate image URL from first tag using getImageForTag
+    // If no image provided, select image based on post tags
     if (!imageUrl && post.tags && post.tags.length > 0) {
-        // Try to use a priority tag if available, otherwise use first tag
-        let selectedTag = post.tags[0];
+        // Try to use a priority tag if available, otherwise use first matching tag
+        let selectedTag = null;
         
+        // First, check for priority tags
         for (const tag of post.tags) {
-            if (PRIORITY_TAGS.includes(tag)) {
+            if (PRIORITY_TAGS.includes(tag) && CATEGORY_IMAGE_MAP[tag]) {
                 selectedTag = tag;
                 break;
             }
         }
         
-        // Use the getImageForTag function with firewall-proof fallback
-        imageUrl = getImageForTag(selectedTag);
+        // If no priority tag found, use first tag that has a mapping
+        if (!selectedTag) {
+            for (const tag of post.tags) {
+                if (CATEGORY_IMAGE_MAP[tag]) {
+                    selectedTag = tag;
+                    break;
+                }
+            }
+        }
+        
+        // Use the getImageForTag function to get the mapped image
+        imageUrl = selectedTag ? getImageForTag(selectedTag) : DEFAULT_IMAGE;
     }
     
-    // If still no image, fallback to a soft writing-themed image
+    // If still no image, fallback to default
     if (!imageUrl) {
-        imageUrl = FALLBACK_IMAGE_URL;
+        imageUrl = DEFAULT_IMAGE;
     }
     
     if (imageUrl) {
@@ -156,12 +173,12 @@ function createPostElement(post) {
         img.className = 'w-full h-full object-cover transition-transform duration-300 elegant-image';
         img.loading = 'lazy';
         
-        // Add error handler to fallback to writing-themed image if primary fails
+        // Add error handler to fallback to default image if category image fails
         img.onerror = function() {
             // Prevent infinite recursion by checking if we've already tried fallback
             if (this.dataset.fallbackAttempted) {
-                console.error('Fallback image also failed, showing placeholder');
-                // If even the fallback fails, show a nice placeholder
+                console.error('Default image also failed, showing placeholder');
+                // If even the default fails, show a nice placeholder
                 const parent = this.parentElement;
                 if (parent) {
                     // Remove the failed image element
@@ -184,9 +201,9 @@ function createPostElement(post) {
                     parent.appendChild(placeholderIcon);
                 }
             } else {
-                console.log('Primary Unsplash image failed, falling back to writing-themed image');
+                console.log('Category image failed, falling back to default image');
                 this.dataset.fallbackAttempted = 'true';
-                this.src = FALLBACK_IMAGE_URL;
+                this.src = DEFAULT_IMAGE;
             }
         };
         

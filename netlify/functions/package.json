@@ -1,0 +1,9 @@
+{
+  "name": "iwriteyouread-netlify-functions",
+  "version": "1.0.0",
+  "description": "Netlify Functions for iwriteyouread.org",
+  "private": true,
+  "dependencies": {
+    "stripe": "^14.0.0"
+  }
+}
