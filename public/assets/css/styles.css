@@ -50,6 +50,29 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Scroll-Reveal Animation Enhancement */
+/* Customize AOS animations to match literary aesthetic */
+[data-aos] {
+    transition-timing-function: ease-out;
+}
+
+/* Ensure animations are subtle and refined */
+[data-aos][data-aos][data-aos-duration="600"] {
+    transition-duration: 600ms;
+}
+
+/* Custom fade-up animation for poetic elements */
+[data-aos="fade-up"] {
+    transform: translateY(20px);
+    opacity: 0;
+    transition-property: transform, opacity;
+}
+
+[data-aos="fade-up"].aos-animate {
+    transform: translateY(0);
+    opacity: 1;
+}
+
 /* Animation Utilities */
 @keyframes fadeIn {
     from {

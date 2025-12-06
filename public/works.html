@@ -36,6 +36,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS (Animate on Scroll) Library -->
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
 </head>
 <body class="font-sans text-gray-800 bg-white min-h-screen">
     
@@ -93,7 +96,7 @@
             </div>
             
             <!-- Featured Book: The Spirit of America -->
-            <section class="mb-20">
+            <section class="mb-20" data-aos="fade-up">
                 <div class="flex flex-col lg:flex-row gap-12 items-start bg-gray-50 p-8 rounded-xl">
                     
                     <!-- Book Cover -->
@@ -136,7 +139,7 @@
             </section>
             
             <!-- Featured Poem: The City Wanderer -->
-            <section class="mb-20">
+            <section class="mb-20" data-aos="fade-up" data-aos-delay="200">
                 <div class="flex flex-col lg:flex-row gap-12 items-start bg-gray-50 p-8 rounded-xl">
                     
                     <!-- Poem Image -->
@@ -179,7 +182,7 @@
             </section>
             
             <!-- Other Works Placeholder -->
-            <section>
+            <section data-aos="fade-up" data-aos-delay="300">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Placeholder for Poems -->
                     <div class="bg-gray-50 p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
@@ -342,5 +345,20 @@
     
     <!-- JavaScript -->
     <script src="/assets/js/main.js"></script>
+    
+    <!-- AOS (Animate on Scroll) Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Initialize AOS with custom settings
+        AOS.init({
+            duration: 600,
+            delay: 100,
+            once: true,
+            easing: 'ease-out',
+            disable: function() {
+                return window.innerWidth < 768;
+            }
+        });
+    </script>
 </body>
 </html>

@@ -36,6 +36,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS (Animate on Scroll) Library -->
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
 </head>
 <body class="font-sans text-gray-800 bg-white min-h-screen">
     
@@ -96,7 +99,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 
                 <!-- Contact Form -->
-                <div class="bg-white rounded-xl shadow-lg p-8">
+                <div class="bg-white rounded-xl shadow-lg p-8" data-aos="fade-up">
                     <h2 class="font-serif text-2xl font-bold text-gray-800 mb-6">Send a Message</h2>
                     
                     <form name="contact" method="POST" data-netlify="true" action="/contact.html?success=true" class="space-y-6">
@@ -161,7 +164,7 @@
                 <div class="space-y-8">
                     
                     <!-- Newsletter Signup -->
-                    <div class="bg-gradient-to-br from-blue-700 to-blue-900 text-white rounded-xl shadow-lg p-8">
+                    <div class="bg-gradient-to-br from-blue-700 to-blue-900 text-white rounded-xl shadow-lg p-8" data-aos="fade-up" data-aos-delay="200">
                         <h2 class="font-serif text-2xl font-bold mb-4">Join the Newsletter</h2>
                         <p class="text-blue-100 mb-6">
                             Get updates on new essays, public letters, and publications delivered directly to your inbox. 
@@ -189,7 +192,7 @@
                     </div>
                     
                     <!-- Contact Info -->
-                    <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="bg-white rounded-xl shadow-lg p-8" data-aos="fade-up" data-aos-delay="300">
                         <h2 class="font-serif text-2xl font-bold text-gray-800 mb-6">Other Ways to Connect</h2>
                         
                         <div class="space-y-6">
@@ -315,5 +318,20 @@
     
     <!-- JavaScript -->
     <script src="/assets/js/main.js"></script>
+    
+    <!-- AOS (Animate on Scroll) Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Initialize AOS with custom settings
+        AOS.init({
+            duration: 600,
+            delay: 100,
+            once: true,
+            easing: 'ease-out',
+            disable: function() {
+                return window.innerWidth < 768;
+            }
+        });
+    </script>
 </body>
 </html>
