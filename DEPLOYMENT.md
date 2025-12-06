@@ -107,7 +107,65 @@ Create and add these files before deploying:
    href="https://YOUR-USERNAME.gumroad.com/l/YOUR-PRODUCT-ID"
    ```
 
-### Step 4: Update Social Media Links
+### Step 4: Configure Custom Domain and DNS
+
+1. **Add Custom Domain in Netlify**
+   - Go to Netlify → Site Settings → Domain Management
+   - Click "Add custom domain"
+   - Enter: `iwriteread.org` (or your custom domain)
+   - Click "Verify"
+
+2. **Configure DNS Settings**
+   
+   Update your domain registrar's DNS settings to point to Netlify:
+   
+   **A Record:**
+   - Type: `A`
+   - Name: `@` (or leave blank)
+   - Value: `75.2.60.5`
+   - TTL: 3600 (or Auto)
+   
+   **CNAME Record (for www subdomain):**
+   - Type: `CNAME`
+   - Name: `www`
+   - Value: `yoursite.netlify.app` (use your actual Netlify subdomain)
+   - TTL: 3600 (or Auto)
+   
+   **Note:** DNS propagation can take 24-48 hours, but is often faster (1-2 hours).
+
+3. **Enable HTTPS**
+   - Once DNS is configured, Netlify automatically provisions SSL certificates
+   - Wait a few minutes for the certificate to be active
+   - HTTPS will be automatically enforced
+
+### Step 5: Configure Environment Variables (Stripe, etc.)
+
+1. **Set Up Stripe for Donations**
+   
+   To enable the "Buy Me a Coffee" button:
+   
+   - Create a Stripe account at https://stripe.com
+   - Create a payment link or checkout session for donations
+   - Get your Stripe keys (Dashboard → Developers → API keys)
+   
+2. **Add Environment Variables in Netlify**
+   
+   Go to: Netlify → Site Settings → Environment Variables → Add Variable
+   
+   Add the following variables:
+   ```
+   STRIPE_PUBLIC_KEY=[your_publishable_key]
+   STRIPE_SECRET_KEY=[your_secret_key]
+   ```
+   
+   **Important:** Never commit these keys to your repository!
+
+3. **Update the Support Button**
+   
+   The "Buy Me a Coffee" button is currently only visible on the `/blog` page.
+   It uses the environment variables configured above for secure donations.
+
+### Step 6: Update Social Media Links
 
 Update all social media handles in these files:
 
@@ -217,6 +275,50 @@ After deployment, test these features:
    - Aim for 90+ scores
 
 ## 📝 Ongoing Maintenance
+
+### Monetization Strategies
+
+Beyond the core website, consider these monetization options:
+
+1. **Google AdSense or EthicalAds**
+   - Integrate ads on blog pages for passive income
+   - Apply at https://www.google.com/adsense or https://www.ethicalads.io
+   - Add ad blocks in strategic locations (sidebar, between posts)
+
+2. **Email Newsletter (Monetization)**
+   - Build your email list with the newsletter signup
+   - Consider premium tiers with exclusive content
+   - Use platforms like Buttondown Pro, Substack, or Ghost
+
+3. **Paywalled Content**
+   - Create "Deep Dives" section with premium essays
+   - Use Stripe to protect content behind a paywall
+   - Offer subscription tiers (monthly/annual)
+
+4. **Affiliate Marketing**
+   - Add Amazon affiliate links to book recommendations
+   - Join Bookshop.org affiliate program
+   - Include affiliate disclosures
+
+5. **Patreon or Substack**
+   - Create a Patreon page for ongoing support
+   - Or use Substack for paid newsletter subscriptions
+   - Link prominently in About page and footer
+
+6. **Medium Partner Program**
+   - Crosspost essays to Medium
+   - Join the Partner Program for additional income
+   - Link back to your main site
+
+7. **Custom Email Setup**
+   - Set up professional email: `hello@iwriteread.org`
+   - Use Zoho Mail (free) or Google Workspace (paid)
+   - Enhances credibility and professionalism
+
+8. **Contact Form**
+   - Enable Netlify Forms for contact functionality
+   - Add form to contact page with fields: Name, Email, Message
+   - No backend coding required
 
 ### Adding Blog Posts
 
