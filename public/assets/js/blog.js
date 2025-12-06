@@ -82,6 +82,12 @@ function createPostElement(post) {
     postLink.href = post.url || '#';
     postLink.className = 'block';
     
+    // BLOG IMAGE DYNAMIC FETCH (UNSPLASH)
+    // Goal: Dynamically load free blog post images from Unsplash based on post tags
+    // 1. Get the first tag for the blog post, or use a fallback like "writing"
+    // 2. Generate Unsplash image URL for that tag with proper encoding
+    // 3. Use this imageUrl in blog card with lazy loading
+    
     // Post image - use Unsplash if no image provided
     let imageUrl = post.image;
     
