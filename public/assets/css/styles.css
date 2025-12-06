@@ -191,6 +191,16 @@ img {
     margin-right: 10px; /* 10px spacing between logo and title */
 }
 
+/* Author Logo in Header */
+.author-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin-right: 10px;
+}
+
 /* Responsive logo sizing */
 @media (max-width: 640px) {
     .site-logo {
@@ -239,32 +249,29 @@ footer a {
     outline-offset: 2px;
 }
 
-/* Buy Me Coffee Button - Chocolate Brown Stamp Style */
+/* Buy Me Coffee Button - Woodgrain Dark Brown Theme */
 .coffee-button {
-    background-color: #92400e;
+    background-color: #5e3c2f;
     color: white;
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 6px rgba(146, 64, 14, 0.3);
-    transition: all 0.3s ease;
+    border-radius: 30px;
+    padding: 10px 18px;
     position: fixed;
-    right: 2rem;
-    bottom: 100px;
+    bottom: 20px;
+    right: 20px;
+    font-family: Georgia, serif;
+    box-shadow: 0 2px 8px rgba(94, 60, 47, 0.3);
+    transition: all 0.3s ease;
     z-index: 40;
     font-weight: 600;
-    font-size: 0.75rem;
-    text-align: center;
-    line-height: 1.2;
+    font-size: 0.875rem;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .coffee-button:hover {
-    background-color: #78350f;
-    transform: scale(1.05);
-    box-shadow: 0 6px 10px rgba(146, 64, 14, 0.4);
+    background-color: #4a2f24;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(94, 60, 47, 0.4);
 }
 
 /* Print Styles */
@@ -325,4 +332,13 @@ footer a {
 
 #excerpt-icon.rotate {
     transform: rotate(180deg);
+}
+
+/* Prose Photo Styling */
+.prose-photo {
+    width: 80%;
+    max-width: 500px;
+    border-radius: 12px;
+    margin: 20px auto;
+    display: block;
 }
