@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="About the author - A bold intellectual voice exploring democracy, liberty, politics, and justice through essays, books, and public commentary.">
-    <meta name="keywords" content="author bio, political writer, democracy, liberty, American politics">
+    <meta name="description" content="About Alexander Afolabi - Author, essayist, and political commentator exploring democracy, culture, and society.">
+    <meta name="keywords" content="Alexander Afolabi, author bio, political writer, democracy, liberty, American politics">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="About | iwriteyouread">
-    <meta property="og:description" content="Learn about the author behind The Spirit of America - a bold voice in political and philosophical discourse.">
+    <meta property="og:title" content="About | Alexander Afolabi">
+    <meta property="og:description" content="Learn about Alexander Afolabi - a bold voice in political and philosophical discourse.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://iwriteyouread.org/about">
     
     <title>About | iwriteyouread</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" type="image/svg+xml" href="/assets/images/favicon.svg">
-    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
     
     <!-- TailwindCSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,29 +26,30 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="font-sans text-gray-900 bg-gradient-to-br from-gray-50 via-white to-blue-50 min-h-screen">
+<body class="font-sans text-gray-800 bg-white min-h-screen">
     
     <!-- Navigation Bar -->
-    <nav id="navbar" class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300">
+    <nav id="navbar" class="fixed w-full top-0 z-50 bg-white shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0">
-                    <a href="/" class="text-2xl font-serif font-bold text-gray-900 hover:text-blue-700 transition-colors">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <img src="/assets/logo.png" alt="iwriteyouread logo" class="h-10 w-10 rounded-full object-cover">
+                    <a href="/" class="text-2xl font-serif font-bold text-gray-900 hover:text-gray-700 transition-colors">
                         iwriteyouread
                     </a>
                 </div>
                 
                 <div class="hidden md:flex space-x-8">
-                    <a href="/" class="nav-link text-gray-700 hover:text-blue-700 transition-colors font-medium">Home</a>
-                    <a href="/about.html" class="nav-link text-blue-700 font-semibold">About</a>
-                    <a href="/book.html" class="nav-link text-gray-700 hover:text-blue-700 transition-colors font-medium">The Book</a>
-                    <a href="/blog.html" class="nav-link text-gray-700 hover:text-blue-700 transition-colors font-medium">Blog</a>
-                    <a href="/contact.html" class="nav-link text-gray-700 hover:text-blue-700 transition-colors font-medium">Contact</a>
+                    <a href="/" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">Home</a>
+                    <a href="/about.html" class="nav-link text-gray-900 font-semibold">About</a>
+                    <a href="/works.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">Works</a>
+                    <a href="/blog.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">Blog</a>
+                    <a href="/contact.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">Contact</a>
                 </div>
                 
-                <button id="mobile-menu-button" class="md:hidden text-gray-700 hover:text-blue-700 focus:outline-none" aria-label="Toggle menu">
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 hover:text-gray-900 focus:outline-none" aria-label="Toggle menu">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -58,13 +58,13 @@
             </div>
         </div>
         
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
             <div class="px-4 pt-2 pb-4 space-y-2">
-                <a href="/" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors font-medium">Home</a>
-                <a href="/about.html" class="block px-3 py-2 bg-blue-50 text-blue-700 rounded-md font-semibold">About</a>
-                <a href="/book.html" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors font-medium">The Book</a>
-                <a href="/blog.html" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors font-medium">Blog</a>
-                <a href="/contact.html" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors font-medium">Contact</a>
+                <a href="/" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">Home</a>
+                <a href="/about.html" class="block px-3 py-2 bg-gray-100 text-gray-900 rounded-md font-semibold">About</a>
+                <a href="/works.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">Works</a>
+                <a href="/blog.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">Blog</a>
+                <a href="/contact.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">Contact</a>
             </div>
         </div>
     </nav>
@@ -76,18 +76,18 @@
             <!-- Page Header -->
             <div class="text-center mb-16">
                 <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-                    About the Author
+                    About Alexander Afolabi
                 </h1>
-                <div class="w-24 h-1 bg-blue-700 mx-auto"></div>
+                <div class="w-24 h-1 bg-amber-700 mx-auto"></div>
             </div>
             
             <!-- Author Profile Section -->
-            <div class="bg-white rounded-xl shadow-lg p-8 md:p-12 mb-12">
+            <div class="bg-gray-50 rounded-xl shadow-lg p-8 md:p-12 mb-12">
                 <div class="flex flex-col md:flex-row gap-8 items-start">
                     <!-- Author Photo Placeholder -->
                     <div class="flex-shrink-0">
-                        <div class="w-48 h-48 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center">
-                            <svg class="w-24 h-24 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-48 h-48 bg-gradient-to-br from-amber-100 to-amber-200 rounded-full flex items-center justify-center">
+                            <svg class="w-24 h-24 text-amber-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
                         </div>
@@ -95,46 +95,30 @@
                     
                     <!-- Biography -->
                     <div class="flex-1">
-                        <h2 class="font-serif text-3xl font-bold text-gray-900 mb-6">Mission & Vision</h2>
+                        <h2 class="font-serif text-3xl font-bold text-gray-900 mb-6">A Voice for Thoughtful Discourse</h2>
                         <div class="space-y-4 text-gray-700 leading-relaxed">
                             <p>
-                                Welcome to <strong>iwriteyouread</strong> — a space dedicated to exploring the fundamental questions 
-                                that shape our democracy, our liberties, and our shared future. Through rigorous analysis, 
-                                thoughtful essays, and bold commentary, this platform seeks to illuminate the complex intersections 
-                                of politics, philosophy, and culture in modern America.
+                                Alexander Afolabi is an independent writer, author, and political commentator whose work explores 
+                                the intersections of democracy, culture, and identity. With a sharp analytical mind and a commitment 
+                                to intellectual honesty, Alexander challenges conventional narratives and invites readers to engage 
+                                with complex ideas about society and governance.
                             </p>
                             <p>
-                                The work presented here is rooted in a commitment to intellectual honesty and a belief that 
-                                meaningful discourse can bridge divides. Whether examining immigration policy, democratic institutions, 
-                                or the nature of justice itself, the goal remains constant: to offer perspectives that challenge, 
-                                inform, and inspire.
+                                His writing spans books, essays, and commentary on issues ranging from immigration policy and political 
+                                philosophy to cultural criticism and social justice. Through <em>iwriteyouread</em>, Alexander creates 
+                                a space for thoughtful dialogue that transcends partisan divisions.
                             </p>
                             <p>
-                                <em>The Spirit of America: Views from the Other Side</em> represents the culmination of years of 
-                                observation, analysis, and reflection on what it means to be American in an increasingly polarized 
-                                world. This is not just a book — it's an invitation to think deeply about who we are and who we 
-                                aspire to be.
+                                Author of <em>The Spirit of America: Views from the Other Side</em>, Alexander brings a unique perspective 
+                                to American political discourse, examining the nation's foundational values and contemporary challenges 
+                                through the eyes of an independent thinker unafraid to question both left and right.
                             </p>
-                        </div>
-                        
-                        <!-- Support Button (Wax Stamp Style) -->
-                        <div class="mt-8">
-                            <a href="https://donate.stripe.com/placeholder" target="_blank" rel="noopener noreferrer" 
-                               class="inline-flex items-center justify-center w-40 h-40 rounded-full bg-gradient-to-br from-amber-900 to-yellow-900 text-white shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 relative group"
-                               style="background: linear-gradient(135deg, #5D4037 0%, #3E2723 100%);">
-                                <div class="text-center">
-                                    <svg class="w-10 h-10 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.43 2.1-1.43 1.38 0 1.9.66 1.94 1.64h1.71c-.05-1.34-.87-2.57-2.49-2.97V5H10.9v1.69c-1.51.32-2.72 1.3-2.72 2.81 0 1.79 1.49 2.69 3.66 3.21 1.95.46 2.34 1.15 2.34 1.87 0 .53-.39 1.39-2.1 1.39-1.6 0-2.23-.72-2.32-1.64H8.04c.1 1.7 1.36 2.66 2.86 2.97V19h2.34v-1.67c1.52-.29 2.72-1.16 2.73-2.77-.01-2.2-1.9-2.96-3.66-3.42z"></path>
-                                    </svg>
-                                    <span class="font-semibold text-sm leading-tight">Support<br/>the Work</span>
-                                </div>
-                            </a>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Intellectual Focus Areas -->
+            <!-- Areas of Focus -->
             <div class="mb-12">
                 <h2 class="font-serif text-3xl font-bold text-gray-900 mb-8 text-center">Areas of Focus</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -165,41 +149,31 @@
                 </div>
             </div>
             
-            <!-- Media & Appearances Section -->
-            <div class="bg-white rounded-xl shadow-lg p-8 md:p-12 mb-12">
-                <h2 class="font-serif text-3xl font-bold text-gray-900 mb-8 text-center">Media & Appearances</h2>
-                <div class="text-center text-gray-600">
-                    <p class="mb-4">Featured appearances and interviews coming soon.</p>
-                    <p class="text-sm text-gray-500">
-                        For media inquiries, please <a href="/contact.html" class="text-blue-700 hover:underline">contact us</a>.
-                    </p>
-                </div>
-            </div>
-            
-            <!-- Podcasts Section -->
-            <div class="bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-lg p-8 md:p-12 mb-12">
-                <h2 class="font-serif text-3xl font-bold text-gray-900 mb-8 text-center">Podcast Appearances</h2>
-                <div class="text-center text-gray-600">
-                    <p class="mb-4">Podcast episodes and discussions will be featured here.</p>
-                    <p class="text-sm text-gray-500">
-                        Stay tuned for upcoming conversations on politics, philosophy, and culture.
-                    </p>
-                </div>
-            </div>
-            
             <!-- Contact CTA -->
             <div class="text-center">
                 <h2 class="font-serif text-2xl font-bold text-gray-900 mb-4">Get in Touch</h2>
                 <p class="text-gray-600 mb-8">
                     Interested in collaboration, speaking engagements, or media opportunities?
                 </p>
-                <a href="/contact.html" class="inline-block px-8 py-4 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition-colors shadow-lg hover:shadow-xl">
+                <a href="/contact.html" class="inline-block px-8 py-4 bg-amber-700 text-white font-semibold rounded-lg hover:bg-amber-800 transition-colors shadow-lg hover:shadow-xl">
                     Contact Me
                 </a>
             </div>
             
         </div>
     </main>
+    
+    <!-- Buy Me a Coffee Button - Floating -->
+    <a href="https://donate.stripe.com/placeholder" target="_blank" rel="noopener noreferrer" 
+       class="coffee-button"
+       title="Support the Work">
+        <div class="text-center">
+            <svg class="w-8 h-8 mx-auto mb-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M2 21h19v-3H2v3zM20 8H4V6h16v2zm-1-5H5v1h14V3zm-8 9.29c.96-.52 2.08-.99 3.27-1.38a4.74 4.74 0 00-.24-1.93c-.64-1.5-2.12-2.48-3.76-2.48-1.64 0-3.12.98-3.76 2.48-.36.85-.4 1.78-.15 2.68 1.35.36 2.59.81 3.64 1.63zm2.07 2.11c-.48.24-.96.48-1.43.74a13.82 13.82 0 00-1.43-.74c.48-.26.96-.5 1.43-.74.47.24.95.48 1.43.74z"/>
+            </svg>
+            <span class="text-xs font-semibold leading-tight">Buy Me<br/>Coffee</span>
+        </div>
+    </a>
     
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
@@ -208,7 +182,7 @@
                 <div>
                     <h3 class="font-serif text-xl font-bold mb-4">iwriteyouread</h3>
                     <p class="text-gray-400 leading-relaxed">
-                        A bold voice exploring democracy, liberty, and the American experience through thoughtful essays and books.
+                        A bold voice exploring politics, culture, and ideas through essays and books by Alexander Afolabi.
                     </p>
                 </div>
                 
@@ -217,7 +191,7 @@
                     <ul class="space-y-2">
                         <li><a href="/" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
                         <li><a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About</a></li>
-                        <li><a href="/book.html" class="text-gray-400 hover:text-white transition-colors">The Book</a></li>
+                        <li><a href="/works.html" class="text-gray-400 hover:text-white transition-colors">Works</a></li>
                         <li><a href="/blog.html" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
                         <li><a href="/contact.html" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
                     </ul>
@@ -225,25 +199,16 @@
                 
                 <div>
                     <h3 class="font-serif text-xl font-bold mb-4">Connect</h3>
+                    <p class="text-gray-400 mb-4">contact@iwriteyouread.org</p>
                     <div class="flex space-x-4">
                         <a href="https://twitter.com/iwriteyouread" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="Twitter">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
                             </svg>
                         </a>
-                        <a href="https://threads.net/@iwriteyouread" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="Threads">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 14.478c-.546 2.239-2.497 3.96-4.894 3.96-2.844 0-5.15-2.306-5.15-5.15S9.156 8.138 12 8.138c1.126 0 2.165.362 3.012.974l-1.315 1.315c-.546-.382-1.208-.608-1.914-.608-1.776 0-3.219 1.443-3.219 3.219s1.443 3.219 3.219 3.219c1.538 0 2.825-1.08 3.129-2.524H12v-1.931h5.825c.07.337.107.686.107 1.043 0 .388-.037.768-.107 1.133z"></path>
-                            </svg>
-                        </a>
                         <a href="https://instagram.com/iwriteyouread" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="Instagram">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
-                            </svg>
-                        </a>
-                        <a href="https://youtube.com/@iwriteyouread" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="YouTube">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path>
                             </svg>
                         </a>
                     </div>
@@ -252,7 +217,7 @@
             
             <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
                 <p class="mb-2">&copy; 2025 iwriteyouread.org. All rights reserved.</p>
-                <p class="text-sm text-gray-500">Built with purpose on iwriteyouread.org</p>
+                <p class="text-sm text-gray-500">Alexander Afolabi</p>
             </div>
         </div>
     </footer>
