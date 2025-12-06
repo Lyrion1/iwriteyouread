@@ -3,23 +3,23 @@
 let allPosts = [];
 let currentFilter = 'all';
 
+// Detect if running in production/Netlify environment
+const isProduction = window.location.hostname === 'iwriteyouread.org' || 
+                     window.location.hostname.includes('netlify.app');
+
 // Constants for image fallback URLs
-const FALLBACK_IMAGE_URL = 'https://source.unsplash.com/featured/?writing,book,essay';
+// Use local fallback in production to avoid firewall issues, Unsplash in dev
+const FALLBACK_IMAGE_URL = isProduction ? 
+    '/assets/Blogimage.png' : 
+    'https://source.unsplash.com/featured/?writing,book,essay';
 const PRIORITY_TAGS = ['Democracy', 'American Politics', 'Liberty', 'Justice'];
 
 // Function to get image URL based on tag with firewall-proof fallback
-// Uses Unsplash in local/development but falls back to local images in Netlify/CI
+// Uses Unsplash in local/development but falls back to local images in production
 function getImageForTag(tag) {
-    // Detect if running in Netlify or CI environment
-    const isNetlify = typeof process !== 'undefined' && 
-                      (process.env?.NETLIFY || process.env?.CI);
-    
-    // For Netlify/CI builds, use local fallback image
-    const fallbackImagePath = '/images/blog-fallback.jpg';
-    
-    // Return fallback for Netlify/CI, otherwise use Unsplash
-    if (isNetlify) {
-        return fallbackImagePath;
+    // Return local fallback for production, otherwise use Unsplash for local dev
+    if (isProduction) {
+        return '/assets/Blogimage.png';
     }
     
     // For local development, use Unsplash with the tag
