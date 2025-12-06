@@ -6,17 +6,17 @@ let currentFilter = 'all';
 // Category-to-image mapping for blog post thumbnails
 // Maps post categories/tags to predefined thumbnail images
 const CATEGORY_IMAGE_MAP = {
-    'Immigration': '/images/immigration.jpg',
-    'UK Politics': '/images/uk-politics.jpg',
-    'Culture': '/images/culture.jpg',
-    'Liberty': '/images/liberty.jpg',
-    'Democracy': '/images/democracy.jpg',
-    'Justice': '/images/justice.jpg',
-    'American Politics': '/images/us-politics.jpg'
+    'Immigration': '/images/immigration.svg',
+    'UK Politics': '/images/uk-politics.svg',
+    'Culture': '/images/culture.svg',
+    'Liberty': '/images/liberty.svg',
+    'Democracy': '/images/democracy.svg',
+    'Justice': '/images/justice.svg',
+    'American Politics': '/images/us-politics.svg'
 };
 
 // Default fallback image for posts without matching categories
-const DEFAULT_IMAGE = '/images/default.jpg';
+const DEFAULT_IMAGE = '/images/default.svg';
 
 // Priority tags for selecting the most relevant category image
 const PRIORITY_TAGS = ['Democracy', 'American Politics', 'Liberty', 'Justice', 'Immigration', 'UK Politics', 'Culture'];
