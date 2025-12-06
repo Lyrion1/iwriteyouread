@@ -123,18 +123,14 @@ function createPostElement(post) {
         
         // Add error handler to fallback to writing-themed image if primary fails
         img.onerror = function() {
-            if (this.src !== FALLBACK_IMAGE_URL) {
-                console.log('Primary Unsplash image failed, falling back to writing-themed image');
-                this.src = FALLBACK_IMAGE_URL;
-            } else {
+            // Prevent infinite recursion by checking if we've already tried fallback
+            if (this.dataset.fallbackAttempted) {
                 console.error('Fallback image also failed, showing placeholder');
                 // If even the fallback fails, show a nice placeholder
                 const parent = this.parentElement;
                 if (parent) {
                     // Remove the failed image element
-                    while (parent.firstChild) {
-                        parent.removeChild(parent.firstChild);
-                    }
+                    parent.replaceChildren();
                     parent.className = 'relative h-64 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center';
                     
                     const placeholderIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -152,6 +148,10 @@ function createPostElement(post) {
                     placeholderIcon.appendChild(path);
                     parent.appendChild(placeholderIcon);
                 }
+            } else {
+                console.log('Primary Unsplash image failed, falling back to writing-themed image');
+                this.dataset.fallbackAttempted = 'true';
+                this.src = FALLBACK_IMAGE_URL;
             }
         };
         
