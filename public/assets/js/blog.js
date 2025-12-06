@@ -95,6 +95,11 @@ function displayPosts(posts) {
         const postElement = createPostElement(post);
         blogPostsContainer.appendChild(postElement);
     });
+    
+    // Refresh AOS to detect new elements (if AOS is loaded)
+    if (typeof AOS !== 'undefined') {
+        AOS.refresh();
+    }
 }
 
 // Create a single blog post element
@@ -102,6 +107,9 @@ function createPostElement(post) {
     const article = document.createElement('article');
     article.className = 'blog-post bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all';
     article.dataset.tags = JSON.stringify(post.tags || []);
+    
+    // Add AOS fade-up animation
+    article.setAttribute('data-aos', 'fade-up');
     
     // Create post link wrapper
     const postLink = document.createElement('a');

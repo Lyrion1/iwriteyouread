@@ -38,6 +38,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS (Animate on Scroll) Library -->
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
 </head>
 <body class="font-sans text-gray-800 bg-white min-h-screen">
     
@@ -88,7 +91,7 @@
         <section class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
             <div class="max-w-5xl mx-auto text-center">
                 <!-- Poem Section -->
-                <div class="poem-section max-w-3xl mx-auto mb-12">
+                <div class="poem-section max-w-3xl mx-auto mb-12" data-aos="fade-up">
                     <p class="poem-text">
                         But that's the picture.<br>
                         A ghost of cadence,<br>
@@ -205,5 +208,20 @@
     
     <!-- JavaScript -->
     <script src="/assets/js/main.js"></script>
+    
+    <!-- AOS (Animate on Scroll) Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Initialize AOS with custom settings
+        AOS.init({
+            duration: 600,
+            delay: 100,
+            once: true,
+            easing: 'ease-out',
+            disable: function() {
+                return window.innerWidth < 768;
+            }
+        });
+    </script>
 </body>
 </html>
