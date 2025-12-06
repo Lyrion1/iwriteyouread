@@ -5,6 +5,11 @@
   # No build command needed for static site
   publish = "public"
 
+# Note: Netlify form notifications are configured in the Netlify UI
+# The contact form (name="contact") will send notifications to the email
+# address configured in: Site Settings > Forms > Form notifications
+# Default email for this site: contact@iwriteyouread.org
+
 # Redirects and rewrites
 [[redirects]]
   from = "/index"
