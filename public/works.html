@@ -35,7 +35,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex-shrink-0 flex items-center">
-                    <img src="/assets/logo.png" alt="Alexander Afolabi Logo" class="author-logo" />
+                    <img src="/assets/logoo.png" alt="Alexander Afolabi Logo" class="author-logo" />
                     <a href="/" class="text-2xl font-serif font-bold text-gray-900 hover:text-gray-700 transition-colors">
                         iwriteyouread
                     </a>
@@ -120,13 +120,19 @@
                             </p>
                         </div>
                         
-                        <!-- Amazon Button -->
-                        <div class="mb-8">
+                        <!-- Amazon Buttons -->
+                        <div class="mb-8 flex flex-col sm:flex-row gap-4">
                             <a class="inline-block px-8 py-3 bg-amber-700 text-white font-semibold rounded-lg hover:bg-amber-800 transition-colors shadow-md hover:shadow-lg text-center" 
-                               href="https://www.amazon.com/dp/placeholder" 
+                               href="https://www.amazon.co.uk/dp/B0G58J7DF5" 
                                target="_blank" 
                                rel="noopener noreferrer">
-                                Available on Amazon
+                                Buy Paperback on Amazon
+                            </a>
+                            <a class="inline-block px-8 py-3 bg-amber-700 text-white font-semibold rounded-lg hover:bg-amber-800 transition-colors shadow-md hover:shadow-lg text-center" 
+                               href="https://www.amazon.co.uk/dp/B0G4XPKX4K" 
+                               target="_blank" 
+                               rel="noopener noreferrer">
+                                Buy Kindle on Amazon
                             </a>
                         </div>
                     </div>
@@ -257,8 +263,8 @@
     </main>
     
     <!-- Buy Me a Coffee Button -->
-    <a href="https://buy.stripe.com/YOUR-LIVE-STRIPE-LINK" target="_blank" rel="noopener noreferrer" class="coffee-button">
-        ☕ Buy Me a Coffee
+    <a href="#" id="support-button" target="_blank" rel="noopener noreferrer" class="coffee-button">
+        ☕ Support My Work
     </a>
     
     <!-- Footer -->
@@ -303,6 +309,13 @@
             </div>
         </div>
     </footer>
+    
+    <!-- Environment Variables (injected by Netlify) -->
+    <script>
+        // This will be replaced with actual environment variable during Netlify build
+        // Set STRIPE_CHECKOUT_URL in Netlify Environment Variables settings
+        const STRIPE_CHECKOUT_URL = "https://your-real-stripe-link.com";
+    </script>
     
     <!-- JavaScript -->
     <script src="/assets/js/main.js"></script>
