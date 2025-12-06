@@ -2,12 +2,12 @@
 
 /* Font Configuration */
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Lato', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
 .font-serif,
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Lora', Georgia, 'Times New Roman', serif;
+    font-family: 'Merriweather', 'Playfair Display', Georgia, 'Times New Roman', serif;
 }
 
 /* Smooth Scrolling */
@@ -47,7 +47,7 @@ html {
     height: 2px;
     bottom: -4px;
     left: 50%;
-    background-color: #1d4ed8;
+    background-color: #1e3a8a;
     transition: all 0.3s ease;
     transform: translateX(-50%);
 }
@@ -103,9 +103,9 @@ html {
 }
 
 .tag-filter.active {
-    background-color: #1d4ed8;
+    background-color: #92400e;
     color: white;
-    border-color: #1d4ed8;
+    border-color: #92400e;
 }
 
 /* Prose Styles for Blog Content */
@@ -133,7 +133,7 @@ html {
 }
 
 .prose a {
-    color: #1d4ed8;
+    color: #1e3a8a;
     text-decoration: underline;
 }
 
@@ -156,9 +156,9 @@ input:focus,
 textarea:focus,
 select:focus {
     outline: none;
-    border-color: #1d4ed8;
+    border-color: #1e3a8a;
     ring: 2px;
-    ring-color: rgba(29, 78, 216, 0.2);
+    ring-color: rgba(30, 58, 138, 0.2);
 }
 
 /* Loading Animation */
@@ -214,8 +214,36 @@ footer a {
 
 /* Focus Visible */
 *:focus-visible {
-    outline: 2px solid #1d4ed8;
+    outline: 2px solid #1e3a8a;
     outline-offset: 2px;
+}
+
+/* Buy Me Coffee Button - Chocolate Brown Stamp Style */
+.coffee-button {
+    background-color: #92400e;
+    color: white;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(146, 64, 14, 0.3);
+    transition: all 0.3s ease;
+    position: fixed;
+    right: 2rem;
+    bottom: 100px;
+    z-index: 40;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.coffee-button:hover {
+    background-color: #78350f;
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(146, 64, 14, 0.4);
 }
 
 /* Print Styles */
@@ -256,12 +284,12 @@ footer a {
 
 /* Selection */
 ::selection {
-    background-color: #1d4ed8;
+    background-color: #92400e;
     color: white;
 }
 
 ::-moz-selection {
-    background-color: #1d4ed8;
+    background-color: #92400e;
     color: white;
 }
 
