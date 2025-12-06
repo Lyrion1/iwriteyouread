@@ -10,8 +10,9 @@ document.head.appendChild(stripeScript);
 // Wait for Stripe to load and initialize
 stripeScript.onload = function() {
   // Check if STRIPE_PUBLISHABLE_KEY is defined (from env.js)
-  if (typeof STRIPE_PUBLISHABLE_KEY === 'undefined' || !STRIPE_PUBLISHABLE_KEY) {
-    console.error('STRIPE_PUBLISHABLE_KEY is not defined. Please set it in Netlify environment variables.');
+  if (typeof STRIPE_PUBLISHABLE_KEY === 'undefined' || !STRIPE_PUBLISHABLE_KEY || STRIPE_PUBLISHABLE_KEY === 'pk_test_placeholder') {
+    console.error('STRIPE_PUBLISHABLE_KEY is not configured. Please update /public/assets/js/env.js with your actual Stripe publishable key before deployment.');
+    // Keep button disabled since Stripe won't work without a valid key
     return;
   }
 

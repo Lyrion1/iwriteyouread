@@ -77,6 +77,28 @@ This environment variable was used for the previous implementation and is now op
 5. After successful payment, user is redirected to `/donation-thank-you.html`
 6. If cancelled, user is redirected back to `/blog.html`
 
+## How to Update Environment Variables in Client-Side Code
+
+**Important**: Environment variables in Netlify are NOT automatically injected into client-side JavaScript files. The STRIPE_PUBLISHABLE_KEY in `/public/assets/js/env.js` needs to be manually updated before deployment.
+
+### Option 1: Manual Update (Recommended for simplicity)
+
+1. Before deploying, edit `/public/assets/js/env.js`
+2. Replace `pk_test_placeholder` with your actual Stripe publishable key
+3. Commit and deploy
+
+```javascript
+const STRIPE_PUBLISHABLE_KEY = "pk_live_your_actual_key_here";
+```
+
+### Option 2: Build-Time Injection (Advanced)
+
+Use a build script or Netlify build plugin to inject the environment variable during build:
+
+1. Create a build script that replaces the placeholder with `process.env.STRIPE_PUBLISHABLE_KEY`
+2. Configure Netlify to run the script during build
+3. Set the environment variable in Netlify UI
+
 ## Testing Locally
 
 When testing locally, the button will use placeholder values. To test the full integration:
