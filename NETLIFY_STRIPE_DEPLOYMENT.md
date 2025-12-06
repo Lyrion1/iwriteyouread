@@ -8,7 +8,7 @@ This document outlines the correct Netlify configuration for the Stripe-powered 
 ### ✅ 1. Stripe Dependency Configuration
 - **Location**: `netlify/functions/package.json`
 - **Status**: ✅ Configured correctly
-- **Dependency**: `"stripe": "^14.0.0"`
+- **Dependency**: `"stripe": "14.25.0"` (exact version pinned)
 - **Lock file**: `netlify/functions/package-lock.json` (v14.25.0 installed)
 
 ### ✅ 2. Netlify Functions Directory
