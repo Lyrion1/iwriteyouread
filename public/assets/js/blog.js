@@ -17,6 +17,12 @@ const PRIORITY_TAGS = ['Democracy', 'American Politics', 'Liberty', 'Justice'];
 // Function to get image URL based on tag with firewall-proof fallback
 // Uses Unsplash in local/development but falls back to local images in production
 function getImageForTag(tag) {
+    // Validate tag parameter
+    if (!tag || typeof tag !== 'string' || !tag.trim()) {
+        // Return appropriate fallback based on environment
+        return isProduction ? '/assets/Blogimage.png' : FALLBACK_IMAGE_URL;
+    }
+    
     // Return local fallback for production, otherwise use Unsplash for local dev
     if (isProduction) {
         return '/assets/Blogimage.png';
