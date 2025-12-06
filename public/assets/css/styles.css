@@ -389,5 +389,15 @@ footer a {
 
 /* Feather icon styling */
 .feather-icon {
-    font-size: 1.2em;
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+    margin-left: 0.3em;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: transform 0.3s ease;
+}
+
+.feather-icon:hover {
+    transform: translateY(-2px) rotate(5deg);
 }
