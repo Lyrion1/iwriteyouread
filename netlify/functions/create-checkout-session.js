@@ -18,7 +18,20 @@ exports.handler = async (event, context) => {
 
   try {
     // Parse the request body to get the custom amount
-    const { amount } = JSON.parse(event.body);
+    let amount;
+    try {
+      const body = JSON.parse(event.body);
+      amount = body.amount;
+    } catch (parseError) {
+      return {
+        statusCode: 400,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+        body: JSON.stringify({ error: 'Invalid request body' }),
+      };
+    }
     
     // Validate the amount
     if (!amount || amount < 1) {

@@ -143,19 +143,19 @@
     
     <!-- Buy Me a Coffee Form -->
     <div class="coffee-button">
-        <form id="donation-form" style="margin: 0; display: flex; align-items: center; gap: 8px;">
-            <label for="amount" style="font-size: 1rem; margin: 0;">☕</label>
+        <form id="donation-form" class="donation-form">
+            <label for="amount">☕</label>
             <input 
                 type="number" 
                 id="amount" 
                 name="amount" 
+                class="amount-input"
                 min="1" 
                 step="0.01"
                 placeholder="£5" 
                 required 
-                style="width: 60px; padding: 4px 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.875rem;"
             />
-            <button type="submit" style="background: none; border: none; color: white; font-size: 0.875rem; font-weight: 600; cursor: pointer; padding: 0; font-family: Georgia, serif;">
+            <button type="submit" class="submit-button">
                 Buy Me Coffee
             </button>
         </form>

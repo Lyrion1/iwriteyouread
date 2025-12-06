@@ -15,7 +15,15 @@ if (donationForm) {
     
     // Validate the amount
     if (!amount || amount < 1) {
-      alert('Please enter a valid amount (minimum £1)');
+      // Show validation error visually
+      amountInput.style.borderColor = '#ef4444';
+      amountInput.focus();
+      
+      // Reset border color after 3 seconds
+      setTimeout(() => {
+        amountInput.style.borderColor = '#ddd';
+      }, 3000);
+      
       return;
     }
     
@@ -36,7 +44,8 @@ if (donationForm) {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to create checkout session');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create checkout session');
       }
 
       const { url } = await response.json();
@@ -45,11 +54,17 @@ if (donationForm) {
       window.location.href = url;
     } catch (error) {
       console.error('Error:', error);
-      alert('Sorry, there was an error processing your donation. Please try again.');
       
-      // Re-enable button
-      submitButton.disabled = false;
-      submitButton.innerHTML = originalButtonText;
+      // Show error to user
+      amountInput.style.borderColor = '#ef4444';
+      submitButton.innerHTML = '❌ Error';
+      
+      // Reset after 3 seconds
+      setTimeout(() => {
+        amountInput.style.borderColor = '#ddd';
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonText;
+      }, 3000);
     }
   });
 }
