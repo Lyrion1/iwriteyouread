@@ -14,7 +14,7 @@ if (donationForm) {
     const amount = parseFloat(amountInput.value);
     
     // Validate the amount
-    if (!amount || amount < 1) {
+    if (isNaN(amount) || amount < 1) {
       // Show validation error visually
       amountInput.style.borderColor = '#ef4444';
       amountInput.focus();

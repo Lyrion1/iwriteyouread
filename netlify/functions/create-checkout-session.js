@@ -34,7 +34,7 @@ exports.handler = async (event, context) => {
     }
     
     // Validate the amount
-    if (!amount || amount < 1) {
+    if (typeof amount !== 'number' || isNaN(amount) || amount < 1) {
       return {
         statusCode: 400,
         headers: {
