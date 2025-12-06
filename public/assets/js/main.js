@@ -267,3 +267,22 @@ document.addEventListener('DOMContentLoaded', function() {
 // Console message for developers
 console.log('%c👋 Welcome to iwriteyouread.org', 'font-size: 16px; font-weight: bold; color: #1d4ed8;');
 console.log('%cInterested in the technical details? View the source code.', 'font-size: 12px; color: #666;');
+
+// Support Button Handler
+document.addEventListener('DOMContentLoaded', function() {
+    const supportButton = document.getElementById('support-button');
+    if (supportButton) {
+        // In production, this will be injected by Netlify at build time via env.js
+        // If STRIPE_CHECKOUT_URL is not defined, the button remains disabled
+        if (typeof STRIPE_CHECKOUT_URL !== 'undefined' && STRIPE_CHECKOUT_URL !== 'https://your-real-stripe-link.com') {
+            supportButton.href = STRIPE_CHECKOUT_URL;
+            supportButton.style.pointerEvents = 'auto';
+            supportButton.style.opacity = '1';
+        } else {
+            // If STRIPE_CHECKOUT_URL is not properly set, log a warning and keep button disabled
+            console.warn('⚠️ STRIPE_CHECKOUT_URL not configured. Support button is disabled. Please set it in Netlify environment variables or update /assets/js/env.js');
+            supportButton.style.cursor = 'not-allowed';
+            supportButton.title = 'Support link not configured';
+        }
+    }
+});
