@@ -386,3 +386,8 @@ footer a {
     transform: translateY(-2px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
+
+/* Feather icon styling */
+.feather-icon {
+    font-size: 1.2em;
+}

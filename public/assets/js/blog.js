@@ -3,9 +3,35 @@
 let allPosts = [];
 let currentFilter = 'all';
 
+// Detect if running in production/Netlify environment
+const isProduction = window.location.hostname === 'iwriteyouread.org' || 
+                     window.location.hostname.includes('netlify.app');
+
 // Constants for image fallback URLs
-const FALLBACK_IMAGE_URL = 'https://source.unsplash.com/featured/?writing,book,essay';
+// Use local fallback in production to avoid firewall issues, Unsplash in dev
+const FALLBACK_IMAGE_URL = isProduction ? 
+    '/assets/Blogimage.png' : 
+    'https://source.unsplash.com/featured/?writing,book,essay';
 const PRIORITY_TAGS = ['Democracy', 'American Politics', 'Liberty', 'Justice'];
+
+// Function to get image URL based on tag with firewall-proof fallback
+// Uses Unsplash in local/development but falls back to local images in production
+function getImageForTag(tag) {
+    // Validate tag parameter
+    if (!tag || typeof tag !== 'string' || !tag.trim()) {
+        // Return appropriate fallback based on environment
+        return isProduction ? '/assets/Blogimage.png' : FALLBACK_IMAGE_URL;
+    }
+    
+    // Return local fallback for production, otherwise use Unsplash for local dev
+    if (isProduction) {
+        return '/assets/Blogimage.png';
+    }
+    
+    // For local development, use Unsplash with the tag
+    const encodedTag = encodeURIComponent(tag.toLowerCase().trim());
+    return `https://source.unsplash.com/featured/?${encodedTag}`;
+}
 
 // Load blog posts from JSON
 async function loadBlogPosts() {
@@ -91,7 +117,7 @@ function createPostElement(post) {
     // Post image - use Unsplash if no image provided
     let imageUrl = post.image;
     
-    // If no image provided, generate Unsplash URL from first tag
+    // If no image provided, generate image URL from first tag using getImageForTag
     if (!imageUrl && post.tags && post.tags.length > 0) {
         // Try to use a priority tag if available, otherwise use first tag
         let selectedTag = post.tags[0];
@@ -103,13 +129,8 @@ function createPostElement(post) {
             }
         }
         
-        // Trim and check if tag is not empty
-        const trimmedTag = selectedTag.toLowerCase().trim();
-        if (trimmedTag) {
-            // Properly encode the tag for URL safety
-            const tag = encodeURIComponent(trimmedTag);
-            imageUrl = `https://source.unsplash.com/featured/?${tag}`;
-        }
+        // Use the getImageForTag function with firewall-proof fallback
+        imageUrl = getImageForTag(selectedTag);
     }
     
     // If still no image, fallback to a soft writing-themed image
