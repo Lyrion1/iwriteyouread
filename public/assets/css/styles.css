@@ -254,9 +254,9 @@ footer a {
     outline-offset: 2px;
 }
 
-/* Buy Me Coffee Button - Woodgrain Dark Brown Theme */
+/* Buy Me Coffee Button - Brown Theme */
 .coffee-button {
-    background-color: #5e3c2f;
+    background-color: #6f4e37;
     color: white;
     border-radius: 30px;
     padding: 10px 18px;
@@ -264,7 +264,7 @@ footer a {
     bottom: 20px;
     right: 20px;
     font-family: Georgia, serif;
-    box-shadow: 0 2px 8px rgba(94, 60, 47, 0.3);
+    box-shadow: 0 2px 8px rgba(111, 78, 55, 0.3);
     transition: all 0.3s ease;
     z-index: 40;
     font-weight: 600;
@@ -274,9 +274,9 @@ footer a {
 }
 
 .coffee-button:hover {
-    background-color: #4a2f24;
+    background-color: #5a3d2c;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(94, 60, 47, 0.4);
+    box-shadow: 0 4px 12px rgba(111, 78, 55, 0.4);
 }
 
 /* Print Styles */
@@ -346,4 +346,43 @@ footer a {
     border-radius: 12px;
     margin: 20px auto;
     display: block;
+}
+
+/* Poem Section Styling */
+.poem-section {
+    text-align: center;
+}
+
+.poem-text {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.5rem;
+    line-height: 2.2;
+    color: #374151;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .poem-text {
+        font-size: 1.25rem;
+        line-height: 2;
+    }
+}
+
+@media (max-width: 640px) {
+    .poem-text {
+        font-size: 1.125rem;
+        line-height: 1.8;
+    }
+}
+
+/* Image with rounded corners and shadows */
+.elegant-image {
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.elegant-image:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
