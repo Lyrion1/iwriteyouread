@@ -178,6 +178,32 @@ img {
     height: auto;
 }
 
+/* Site Logo Styles */
+.site-logo {
+    height: 2.5rem; /* 40px - equivalent to h-10 */
+    width: 2.5rem;  /* 40px - equivalent to w-10 */
+    border-radius: 50%; /* rounded-full */
+    object-fit: cover;
+    object-position: center;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Responsive logo sizing */
+@media (max-width: 640px) {
+    .site-logo {
+        height: 2rem; /* 32px for mobile */
+        width: 2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .site-logo {
+        height: 2.5rem; /* Keep 40px for desktop */
+        width: 2.5rem;
+    }
+}
+
 /* Gradient Backgrounds */
 .gradient-bg {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
