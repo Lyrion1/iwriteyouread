@@ -14,6 +14,11 @@
 
 # Redirects and rewrites
 [[redirects]]
+  from = "/thank-you"
+  to = "/donation-thank-you.html"
+  status = 200
+
+[[redirects]]
   from = "/index"
   to = "/"
   status = 301

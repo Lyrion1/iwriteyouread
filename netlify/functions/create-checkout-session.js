@@ -34,7 +34,7 @@ exports.handler = async (event, context) => {
         },
       ],
       mode: 'payment',
-      success_url: `${baseUrl}/donation-thank-you.html`,
+      success_url: `${baseUrl}/thank-you`,
       cancel_url: `${baseUrl}/blog.html`,
     });
 
