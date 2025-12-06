@@ -34,7 +34,7 @@ exports.handler = async (event, context) => {
     }
     
     // Validate the amount
-    if (typeof amount !== 'number' || amount < 1) {
+    if (typeof amount !== 'number' || !Number.isFinite(amount) || amount < 1) {
       return {
         statusCode: 400,
         headers: {
@@ -56,7 +56,7 @@ exports.handler = async (event, context) => {
               name: 'Buy Me a Coffee',
               description: 'Support Alexander Afolabi\'s writing and essays',
             },
-            unit_amount: Math.round(amount * 100), // Convert £ to pence
+            unit_amount: Math.round(parseFloat((amount * 100).toFixed(2))), // Convert £ to pence with proper rounding
           },
           quantity: 1,
         },
