@@ -272,10 +272,14 @@ console.log('%cInterested in the technical details? View the source code.', 'fon
 document.addEventListener('DOMContentLoaded', function() {
     const supportButton = document.getElementById('support-button');
     if (supportButton) {
-        // In production, this will be injected by Netlify at build time
-        const stripeCheckoutUrl = typeof STRIPE_CHECKOUT_URL !== 'undefined' 
-            ? STRIPE_CHECKOUT_URL 
-            : 'https://your-real-stripe-link.com';
-        supportButton.href = stripeCheckoutUrl;
+        // In production, this will be injected by Netlify at build time via inline script
+        // If STRIPE_CHECKOUT_URL is not defined, the button will use the href from HTML
+        if (typeof STRIPE_CHECKOUT_URL !== 'undefined' && STRIPE_CHECKOUT_URL !== 'https://your-real-stripe-link.com') {
+            supportButton.href = STRIPE_CHECKOUT_URL;
+        }
+        // If STRIPE_CHECKOUT_URL is not properly set, log a warning in development
+        if (supportButton.href.includes('your-real-stripe-link.com')) {
+            console.warn('⚠️ STRIPE_CHECKOUT_URL not configured. Please set it in Netlify environment variables.');
+        }
     }
 });
