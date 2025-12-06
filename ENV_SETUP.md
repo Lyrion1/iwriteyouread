@@ -34,10 +34,12 @@ This environment variable contains the Stripe publishable key for client-side AP
 4. Click "Add a variable"
 5. Set:
    - **Key**: `STRIPE_PUBLISHABLE_KEY`
-   - **Value**: `pk_live_51SbDJfAScifOaVAqYBQsAA6j79muTZ99cK8ramdd3IM2zeXrj3wxY1VPJGJAwL3VP8iz73jX8Fw9cKRDOmzi7nen00P7pBeI9`
+   - **Value**: Your Stripe publishable key (e.g., `pk_live_xxxxxxxxxxxxxxxxxx`)
    - **Scopes**: Select "Functions" and "Builds" (Context: All)
 
 6. Click "Create variable"
+
+**Note**: Use the actual publishable key from your Stripe dashboard. The key provided in the project requirements should be entered directly in Netlify's UI, not committed to the repository.
 
 ### 3. STRIPE_SECRET_KEY
 
@@ -51,13 +53,13 @@ This environment variable contains the Stripe secret key for server-side API acc
 4. Click "Add a variable"
 5. Set:
    - **Key**: `STRIPE_SECRET_KEY`
-   - **Value**: `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`
+   - **Value**: Your Stripe secret key (e.g., `sk_live_xxxxxxxxxxxxxxxxxx`)
    - **Scopes**: Select "Functions" and "Builds" (Context: All)
 
 6. Click "Create variable"
 7. Redeploy your site for changes to take effect
 
-**Security Note**: The secret key should only be used in Netlify Functions (serverless functions) and never exposed to the client-side JavaScript. Keep this key confidential.
+**Security Note**: The secret key should only be used in Netlify Functions (serverless functions) and never exposed to the client-side JavaScript. Keep this key confidential. Use the actual secret key from your Stripe dashboard, entered directly in Netlify's UI.
 
 ### Alternative: Manual Script Update
 
