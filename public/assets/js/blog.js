@@ -3,21 +3,9 @@
 let allPosts = [];
 let currentFilter = 'all';
 
-// Test Unsplash API availability
-async function testUnsplashAvailability() {
-    try {
-        const testUrl = 'https://source.unsplash.com/featured/?test';
-        const response = await fetch(testUrl, { 
-            method: 'HEAD',
-            mode: 'no-cors' // Unsplash doesn't support CORS for source API, but this will still verify connectivity
-        });
-        console.log('Unsplash API connectivity test completed');
-        return true;
-    } catch (error) {
-        console.warn('Unsplash API may not be accessible:', error);
-        return false;
-    }
-}
+// Constants for image fallback URLs
+const FALLBACK_IMAGE_URL = 'https://source.unsplash.com/featured/?writing,book,essay';
+const PRIORITY_TAGS = ['Democracy', 'American Politics', 'Liberty', 'Justice'];
 
 // Load blog posts from JSON
 async function loadBlogPosts() {
@@ -98,15 +86,12 @@ function createPostElement(post) {
     let imageUrl = post.image;
     
     // If no image provided, generate Unsplash URL from first tag
-    // Priority tags for better image matching
-    const priorityTags = ['Democracy', 'American Politics', 'Liberty', 'Justice'];
-    
     if (!imageUrl && post.tags && post.tags.length > 0) {
         // Try to use a priority tag if available, otherwise use first tag
         let selectedTag = post.tags[0];
         
         for (const tag of post.tags) {
-            if (priorityTags.includes(tag)) {
+            if (PRIORITY_TAGS.includes(tag)) {
                 selectedTag = tag;
                 break;
             }
@@ -123,7 +108,7 @@ function createPostElement(post) {
     
     // If still no image, fallback to a soft writing-themed image
     if (!imageUrl) {
-        imageUrl = 'https://source.unsplash.com/featured/?writing,book,essay';
+        imageUrl = FALLBACK_IMAGE_URL;
     }
     
     if (imageUrl) {
@@ -138,9 +123,9 @@ function createPostElement(post) {
         
         // Add error handler to fallback to writing-themed image if primary fails
         img.onerror = function() {
-            if (this.src !== 'https://source.unsplash.com/featured/?writing,book,essay') {
+            if (this.src !== FALLBACK_IMAGE_URL) {
                 console.log('Primary Unsplash image failed, falling back to writing-themed image');
-                this.src = 'https://source.unsplash.com/featured/?writing,book,essay';
+                this.src = FALLBACK_IMAGE_URL;
             } else {
                 console.error('Fallback image also failed, showing placeholder');
                 // If even the fallback fails, show a nice placeholder
@@ -303,9 +288,6 @@ document.addEventListener('DOMContentLoaded', function() {
             filterPosts(tag);
         });
     });
-    
-    // Test Unsplash availability on page load
-    testUnsplashAvailability();
     
     // Load blog posts
     loadBlogPosts();
