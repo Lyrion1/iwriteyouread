@@ -83,8 +83,13 @@ function createPostElement(post) {
     
     // If no image provided, generate Unsplash URL from first tag
     if (!imageUrl && post.tags && post.tags.length > 0) {
-        const tag = post.tags[0].toLowerCase().replace(/\s+/g, '+');
-        imageUrl = `https://source.unsplash.com/featured/?${tag}`;
+        // Trim and check if tag is not empty
+        const trimmedTag = post.tags[0].toLowerCase().trim();
+        if (trimmedTag) {
+            // Properly encode the tag for URL safety
+            const tag = encodeURIComponent(trimmedTag);
+            imageUrl = `https://source.unsplash.com/featured/?${tag}`;
+        }
     }
     
     if (imageUrl) {

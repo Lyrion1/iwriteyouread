@@ -4,9 +4,7 @@
 
 // Stripe Link for "Buy Me a Coffee" button
 // Set this in Netlify: Site settings > Environment variables > STRIPE_LINK
+// This will be used for the support button on Works and Blog pages
 const STRIPE_LINK = "https://your-real-stripe-link.com";
-
-// Backward compatibility
-const STRIPE_CHECKOUT_URL = STRIPE_LINK;
 
 // Add other environment variables here as needed
