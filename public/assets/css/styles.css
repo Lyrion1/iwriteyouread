@@ -207,6 +207,11 @@ img {
         width: 2.5rem; /* 40px for mobile */
         height: 2.5rem; /* 40px for mobile */
     }
+    
+    .author-logo {
+        width: 60px; /* Smaller on mobile */
+        height: 60px; /* Smaller on mobile */
+    }
 }
 
 /* Gradient Backgrounds */
