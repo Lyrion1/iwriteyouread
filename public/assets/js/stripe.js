@@ -16,12 +16,12 @@ if (donationForm) {
     // Validate the amount
     if (isNaN(amount) || amount < 1) {
       // Show validation error visually
-      amountInput.style.borderColor = '#ef4444';
+      amountInput.classList.add('error');
       amountInput.focus();
       
-      // Reset border color after 3 seconds
+      // Reset error state after 3 seconds
       setTimeout(() => {
-        amountInput.style.borderColor = '#ddd';
+        amountInput.classList.remove('error');
       }, 3000);
       
       return;
@@ -44,8 +44,15 @@ if (donationForm) {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to create checkout session');
+        let errorMessage = 'Failed to create checkout session';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch (jsonError) {
+          // If response is not JSON, use default error message
+          console.error('Error parsing error response:', jsonError);
+        }
+        throw new Error(errorMessage);
       }
 
       const { url } = await response.json();
@@ -56,12 +63,12 @@ if (donationForm) {
       console.error('Error:', error);
       
       // Show error to user
-      amountInput.style.borderColor = '#ef4444';
+      amountInput.classList.add('error');
       submitButton.innerHTML = '❌ Error';
       
       // Reset after 3 seconds
       setTimeout(() => {
-        amountInput.style.borderColor = '#ddd';
+        amountInput.classList.remove('error');
         submitButton.disabled = false;
         submitButton.innerHTML = originalButtonText;
       }, 3000);

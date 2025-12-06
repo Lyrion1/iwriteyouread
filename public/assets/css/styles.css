@@ -322,6 +322,11 @@ footer a {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 0.875rem;
+    transition: border-color 0.3s ease;
+}
+
+.amount-input.error {
+    border-color: #ef4444;
 }
 
 .submit-button {
