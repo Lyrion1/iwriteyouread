@@ -131,7 +131,10 @@ function createPostElement(post) {
                 // If even the fallback fails, show a nice placeholder
                 const parent = this.parentElement;
                 if (parent) {
-                    parent.innerHTML = '';
+                    // Remove the failed image element
+                    while (parent.firstChild) {
+                        parent.removeChild(parent.firstChild);
+                    }
                     parent.className = 'relative h-64 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center';
                     
                     const placeholderIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -154,26 +157,6 @@ function createPostElement(post) {
         
         imageDiv.appendChild(img);
         postLink.appendChild(imageDiv);
-    } else {
-        // Placeholder image (should not reach here with current logic, but kept for safety)
-        const placeholderDiv = document.createElement('div');
-        placeholderDiv.className = 'relative h-64 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center';
-        
-        const placeholderIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        placeholderIcon.setAttribute('class', 'w-24 h-24 text-blue-700');
-        placeholderIcon.setAttribute('fill', 'none');
-        placeholderIcon.setAttribute('stroke', 'currentColor');
-        placeholderIcon.setAttribute('viewBox', '0 0 24 24');
-        
-        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        path.setAttribute('stroke-linecap', 'round');
-        path.setAttribute('stroke-linejoin', 'round');
-        path.setAttribute('stroke-width', '2');
-        path.setAttribute('d', 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z');
-        
-        placeholderIcon.appendChild(path);
-        placeholderDiv.appendChild(placeholderIcon);
-        postLink.appendChild(placeholderDiv);
     }
     
     article.appendChild(postLink);
