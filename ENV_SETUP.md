@@ -22,6 +22,43 @@ This environment variable contains the Stripe Payment Link for the "Support My W
 6. Click "Create variable"
 7. Redeploy your site for changes to take effect
 
+### 2. STRIPE_PUBLISHABLE_KEY
+
+This environment variable contains the Stripe publishable key for client-side API access.
+
+**To set up in Netlify:**
+
+1. Go to your Netlify dashboard
+2. Select your site
+3. Navigate to "Site configuration" > "Environment variables"
+4. Click "Add a variable"
+5. Set:
+   - **Key**: `STRIPE_PUBLISHABLE_KEY`
+   - **Value**: `pk_live_51SbDJfAScifOaVAqYBQsAA6j79muTZ99cK8ramdd3IM2zeXrj3wxY1VPJGJAwL3VP8iz73jX8Fw9cKRDOmzi7nen00P7pBeI9`
+   - **Scopes**: Select "Functions" and "Builds" (Context: All)
+
+6. Click "Create variable"
+
+### 3. STRIPE_SECRET_KEY
+
+This environment variable contains the Stripe secret key for server-side API access. **CRITICAL**: This key must be kept secret and should only be used in serverless functions, never in client-side code.
+
+**To set up in Netlify:**
+
+1. Go to your Netlify dashboard
+2. Select your site
+3. Navigate to "Site configuration" > "Environment variables"
+4. Click "Add a variable"
+5. Set:
+   - **Key**: `STRIPE_SECRET_KEY`
+   - **Value**: `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`
+   - **Scopes**: Select "Functions" and "Builds" (Context: All)
+
+6. Click "Create variable"
+7. Redeploy your site for changes to take effect
+
+**Security Note**: The secret key should only be used in Netlify Functions (serverless functions) and never exposed to the client-side JavaScript. Keep this key confidential.
+
 ### Alternative: Manual Script Update
 
 For immediate deployment without Netlify environment variable injection, you can manually update the value in:
