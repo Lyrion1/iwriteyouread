@@ -3,6 +3,22 @@
 let allPosts = [];
 let currentFilter = 'all';
 
+// Test Unsplash API availability
+async function testUnsplashAvailability() {
+    try {
+        const testUrl = 'https://source.unsplash.com/featured/?test';
+        const response = await fetch(testUrl, { 
+            method: 'HEAD',
+            mode: 'no-cors' // Unsplash doesn't support CORS for source API, but this will still verify connectivity
+        });
+        console.log('Unsplash API connectivity test completed');
+        return true;
+    } catch (error) {
+        console.warn('Unsplash API may not be accessible:', error);
+        return false;
+    }
+}
+
 // Load blog posts from JSON
 async function loadBlogPosts() {
     const loadingElement = document.getElementById('loading');
@@ -82,16 +98,32 @@ function createPostElement(post) {
     let imageUrl = post.image;
     
     // If no image provided, generate Unsplash URL from first tag
-    // Note: Using source.unsplash.com for dynamic image generation based on tags
-    // This provides automatic fallback images for blog posts without custom images
+    // Priority tags for better image matching
+    const priorityTags = ['Democracy', 'American Politics', 'Liberty', 'Justice'];
+    
     if (!imageUrl && post.tags && post.tags.length > 0) {
+        // Try to use a priority tag if available, otherwise use first tag
+        let selectedTag = post.tags[0];
+        
+        for (const tag of post.tags) {
+            if (priorityTags.includes(tag)) {
+                selectedTag = tag;
+                break;
+            }
+        }
+        
         // Trim and check if tag is not empty
-        const trimmedTag = post.tags[0].toLowerCase().trim();
+        const trimmedTag = selectedTag.toLowerCase().trim();
         if (trimmedTag) {
             // Properly encode the tag for URL safety
             const tag = encodeURIComponent(trimmedTag);
             imageUrl = `https://source.unsplash.com/featured/?${tag}`;
         }
+    }
+    
+    // If still no image, fallback to a soft writing-themed image
+    if (!imageUrl) {
+        imageUrl = 'https://source.unsplash.com/featured/?writing,book,essay';
     }
     
     if (imageUrl) {
@@ -104,10 +136,41 @@ function createPostElement(post) {
         img.className = 'w-full h-full object-cover transition-transform duration-300 elegant-image';
         img.loading = 'lazy';
         
+        // Add error handler to fallback to writing-themed image if primary fails
+        img.onerror = function() {
+            if (this.src !== 'https://source.unsplash.com/featured/?writing,book,essay') {
+                console.log('Primary Unsplash image failed, falling back to writing-themed image');
+                this.src = 'https://source.unsplash.com/featured/?writing,book,essay';
+            } else {
+                console.error('Fallback image also failed, showing placeholder');
+                // If even the fallback fails, show a nice placeholder
+                const parent = this.parentElement;
+                if (parent) {
+                    parent.innerHTML = '';
+                    parent.className = 'relative h-64 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center';
+                    
+                    const placeholderIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    placeholderIcon.setAttribute('class', 'w-24 h-24 text-blue-700');
+                    placeholderIcon.setAttribute('fill', 'none');
+                    placeholderIcon.setAttribute('stroke', 'currentColor');
+                    placeholderIcon.setAttribute('viewBox', '0 0 24 24');
+                    
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    path.setAttribute('stroke-linecap', 'round');
+                    path.setAttribute('stroke-linejoin', 'round');
+                    path.setAttribute('stroke-width', '2');
+                    path.setAttribute('d', 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z');
+                    
+                    placeholderIcon.appendChild(path);
+                    parent.appendChild(placeholderIcon);
+                }
+            }
+        };
+        
         imageDiv.appendChild(img);
         postLink.appendChild(imageDiv);
     } else {
-        // Placeholder image
+        // Placeholder image (should not reach here with current logic, but kept for safety)
         const placeholderDiv = document.createElement('div');
         placeholderDiv.className = 'relative h-64 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center';
         
@@ -240,6 +303,9 @@ document.addEventListener('DOMContentLoaded', function() {
             filterPosts(tag);
         });
     });
+    
+    // Test Unsplash availability on page load
+    testUnsplashAvailability();
     
     // Load blog posts
     loadBlogPosts();
