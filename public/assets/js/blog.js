@@ -3,41 +3,13 @@
 let allPosts = [];
 let currentFilter = 'all';
 
-// Category-to-image mapping for blog post thumbnails
-// Maps post categories/tags to predefined thumbnail images
-const CATEGORY_IMAGE_MAP = {
-    'Immigration': '/images/immigration.svg',
-    'UK Politics': '/images/uk-politics.svg',
-    'Culture': '/images/culture.svg',
-    'Liberty': '/images/liberty.svg',
-    'Democracy': '/images/democracy.svg',
-    'Justice': '/images/justice.svg',
-    'American Politics': '/images/us-politics.svg'
-};
-
-// Default fallback image for posts without matching categories
-const DEFAULT_IMAGE = '/images/default.svg';
-
-// Priority tags for selecting the most relevant category image
-const PRIORITY_TAGS = ['Democracy', 'American Politics', 'Liberty', 'Justice', 'Immigration', 'UK Politics', 'Culture'];
-
-// Function to get image URL based on post tags
-// Returns predefined category image or default fallback
-function getImageForTag(tag) {
-    // Validate tag parameter
-    if (!tag || typeof tag !== 'string' || !tag.trim()) {
-        return DEFAULT_IMAGE;
-    }
-    
-    // Check if tag matches a category in our mapping
-    const normalizedTag = tag.trim();
-    if (CATEGORY_IMAGE_MAP[normalizedTag]) {
-        return CATEGORY_IMAGE_MAP[normalizedTag];
-    }
-    
-    // Return default if no match found
-    return DEFAULT_IMAGE;
-}
+// Unsplash fallback images for blog post thumbnails
+// Random blog-specific AI-generated placeholders
+const FALLBACK_IMAGES = [
+    "https://source.unsplash.com/random/600x400/?typewriter,writing",
+    "https://source.unsplash.com/random/600x400/?books,poetry",
+    "https://source.unsplash.com/random/600x400/?journal,literature",
+];
 
 // Load blog posts from JSON
 async function loadBlogPosts() {
@@ -122,46 +94,9 @@ function createPostElement(post) {
     postLink.href = post.url || '#';
     postLink.className = 'block';
     
-    // BLOG IMAGE CATEGORY MAPPING
-    // Goal: Use predefined category-based thumbnail images for blog posts
-    // 1. Get the first matching tag from the post that has a category image
-    // 2. Use that category's predefined thumbnail image
-    // 3. Fallback to default image if no matching category
-    
-    // Post image - use category mapping
-    let imageUrl = post.image;
-    
-    // If no image provided, select image based on post tags
-    if (!imageUrl && post.tags && post.tags.length > 0) {
-        // Try to use a priority tag if available, otherwise use first matching tag
-        let selectedTag = null;
-        
-        // First, check for priority tags
-        for (const tag of post.tags) {
-            if (PRIORITY_TAGS.includes(tag) && CATEGORY_IMAGE_MAP[tag]) {
-                selectedTag = tag;
-                break;
-            }
-        }
-        
-        // If no priority tag found, use first tag that has a mapping
-        if (!selectedTag) {
-            for (const tag of post.tags) {
-                if (CATEGORY_IMAGE_MAP[tag]) {
-                    selectedTag = tag;
-                    break;
-                }
-            }
-        }
-        
-        // Use the getImageForTag function to get the mapped image
-        imageUrl = selectedTag ? getImageForTag(selectedTag) : DEFAULT_IMAGE;
-    }
-    
-    // If still no image, fallback to default
-    if (!imageUrl) {
-        imageUrl = DEFAULT_IMAGE;
-    }
+    // Use random Unsplash placeholder images for blog posts
+    // Select a random image from the fallback images array
+    const imageUrl = FALLBACK_IMAGES[Math.floor(Math.random() * FALLBACK_IMAGES.length)];
     
     if (imageUrl) {
         const imageDiv = document.createElement('div');
@@ -173,37 +108,30 @@ function createPostElement(post) {
         img.className = 'w-full h-full object-cover transition-transform duration-300 elegant-image';
         img.loading = 'lazy';
         
-        // Add error handler to fallback to default image if category image fails
+        // Add error handler in case Unsplash image fails to load
         img.onerror = function() {
-            // Prevent infinite recursion by checking if we've already tried fallback
-            if (this.dataset.fallbackAttempted) {
-                console.error('Default image also failed, showing placeholder');
-                // If even the default fails, show a nice placeholder
-                const parent = this.parentElement;
-                if (parent) {
-                    // Remove the failed image element
-                    parent.replaceChildren();
-                    parent.className = 'relative h-64 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center';
-                    
-                    const placeholderIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                    placeholderIcon.setAttribute('class', 'w-24 h-24 text-blue-700');
-                    placeholderIcon.setAttribute('fill', 'none');
-                    placeholderIcon.setAttribute('stroke', 'currentColor');
-                    placeholderIcon.setAttribute('viewBox', '0 0 24 24');
-                    
-                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                    path.setAttribute('stroke-linecap', 'round');
-                    path.setAttribute('stroke-linejoin', 'round');
-                    path.setAttribute('stroke-width', '2');
-                    path.setAttribute('d', 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z');
-                    
-                    placeholderIcon.appendChild(path);
-                    parent.appendChild(placeholderIcon);
-                }
-            } else {
-                console.log('Category image failed, falling back to default image');
-                this.dataset.fallbackAttempted = 'true';
-                this.src = DEFAULT_IMAGE;
+            console.error('Unsplash image failed to load');
+            // Show a nice placeholder gradient if image fails
+            const parent = this.parentElement;
+            if (parent && !this.dataset.errorHandled) {
+                this.dataset.errorHandled = 'true';
+                parent.replaceChildren();
+                parent.className = 'relative h-64 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center';
+                
+                const placeholderIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                placeholderIcon.setAttribute('class', 'w-24 h-24 text-blue-700');
+                placeholderIcon.setAttribute('fill', 'none');
+                placeholderIcon.setAttribute('stroke', 'currentColor');
+                placeholderIcon.setAttribute('viewBox', '0 0 24 24');
+                
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('stroke-linecap', 'round');
+                path.setAttribute('stroke-linejoin', 'round');
+                path.setAttribute('stroke-width', '2');
+                path.setAttribute('d', 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z');
+                
+                placeholderIcon.appendChild(path);
+                parent.appendChild(placeholderIcon);
             }
         };
         
