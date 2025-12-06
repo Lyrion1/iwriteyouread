@@ -64,13 +64,15 @@ if (donationForm) {
       
       // Show error to user
       amountInput.classList.add('error');
-      submitButton.innerHTML = '❌ Error';
+      submitButton.innerHTML = 'Error - Retry';
+      submitButton.setAttribute('aria-label', 'Error occurred, please try again');
       
       // Reset after 3 seconds
       setTimeout(() => {
         amountInput.classList.remove('error');
         submitButton.disabled = false;
         submitButton.innerHTML = originalButtonText;
+        submitButton.removeAttribute('aria-label');
       }, 3000);
     }
   });
