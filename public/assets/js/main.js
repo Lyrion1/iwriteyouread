@@ -273,14 +273,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const supportButton = document.getElementById('support-button');
     if (supportButton) {
         // In production, this will be injected by Netlify at build time via env.js
-        // If STRIPE_CHECKOUT_URL is not defined, the button remains disabled
-        if (typeof STRIPE_CHECKOUT_URL !== 'undefined' && STRIPE_CHECKOUT_URL !== 'https://your-real-stripe-link.com') {
-            supportButton.href = STRIPE_CHECKOUT_URL;
+        // Support both STRIPE_LINK and STRIPE_CHECKOUT_URL for backward compatibility
+        const stripeUrl = (typeof STRIPE_LINK !== 'undefined' && STRIPE_LINK !== 'https://your-real-stripe-link.com') 
+            ? STRIPE_LINK 
+            : (typeof STRIPE_CHECKOUT_URL !== 'undefined' ? STRIPE_CHECKOUT_URL : null);
+            
+        if (stripeUrl && stripeUrl !== 'https://your-real-stripe-link.com') {
+            supportButton.href = stripeUrl;
             supportButton.style.pointerEvents = 'auto';
             supportButton.style.opacity = '1';
         } else {
-            // If STRIPE_CHECKOUT_URL is not properly set, log a warning and keep button disabled
-            console.warn('⚠️ STRIPE_CHECKOUT_URL not configured. Support button is disabled. Please set it in Netlify environment variables or update /assets/js/env.js');
+            // If stripe url is not properly set, log a warning and keep button disabled
+            console.warn('⚠️ STRIPE_LINK not configured. Support button is disabled. Please set it in Netlify environment variables or update /assets/js/env.js');
             supportButton.style.cursor = 'not-allowed';
             supportButton.title = 'Support link not configured';
         }

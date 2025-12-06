@@ -78,15 +78,23 @@ function createPostElement(post) {
     postLink.href = post.url || '#';
     postLink.className = 'block';
     
-    // Post image
-    if (post.image) {
+    // Post image - use Unsplash if no image provided
+    let imageUrl = post.image;
+    
+    // If no image provided, generate Unsplash URL from first tag
+    if (!imageUrl && post.tags && post.tags.length > 0) {
+        const tag = post.tags[0].toLowerCase().replace(/\s+/g, '+');
+        imageUrl = `https://source.unsplash.com/featured/?${tag}`;
+    }
+    
+    if (imageUrl) {
         const imageDiv = document.createElement('div');
         imageDiv.className = 'relative h-64 overflow-hidden bg-gradient-to-br from-blue-100 to-blue-200';
         
         const img = document.createElement('img');
-        img.src = post.image;
+        img.src = imageUrl;
         img.alt = post.title;
-        img.className = 'w-full h-full object-cover transition-transform duration-300';
+        img.className = 'w-full h-full object-cover transition-transform duration-300 elegant-image';
         img.loading = 'lazy';
         
         imageDiv.appendChild(img);
