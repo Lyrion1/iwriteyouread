@@ -45,7 +45,7 @@ exports.handler = async (event, context) => {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type',
       },
-      body: JSON.stringify({ sessionId: session.id }),
+      body: JSON.stringify({ url: session.url }),
     };
   } catch (error) {
     console.error('Error creating checkout session:', error);
