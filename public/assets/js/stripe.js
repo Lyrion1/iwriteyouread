@@ -1,23 +1,37 @@
 // Stripe Checkout Integration
-// Handles "Buy Me a Coffee" button click and initiates Stripe Checkout
+// Handles "Buy Me a Coffee" form submission and initiates Stripe Checkout
 
-// Get the support button
-const supportButton = document.getElementById('support-button');
+// Get the donation form
+const donationForm = document.getElementById('donation-form');
 
-if (supportButton) {
-  // Enable the button and remove disabled styling
-  supportButton.style.pointerEvents = 'auto';
-  supportButton.style.opacity = '1';
-  supportButton.style.cursor = 'pointer';
-  
-  // Add click handler
-  supportButton.addEventListener('click', async function(e) {
+if (donationForm) {
+  // Add submit handler
+  donationForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    // Disable button during processing
-    supportButton.style.pointerEvents = 'none';
-    supportButton.style.opacity = '0.6';
-    supportButton.innerHTML = '☕ Processing...';
+    // Get the amount from the input
+    const amountInput = document.getElementById('amount');
+    const amount = parseFloat(amountInput.value);
+    
+    // Validate the amount
+    if (!Number.isFinite(amount) || amount < 1) {
+      // Show validation error visually
+      amountInput.classList.add('error');
+      amountInput.focus();
+      
+      // Reset error state after 3 seconds
+      setTimeout(() => {
+        amountInput.classList.remove('error');
+      }, 3000);
+      
+      return;
+    }
+    
+    // Get the submit button and disable it during processing
+    const submitButton = donationForm.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerHTML;
+    submitButton.disabled = true;
+    submitButton.innerHTML = '☕ Processing...';
     
     try {
       // Call Netlify Function to create checkout session
@@ -26,10 +40,19 @@ if (supportButton) {
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ amount }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to create checkout session');
+        let errorMessage = 'Failed to create checkout session';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch (jsonError) {
+          // If response is not JSON, use default error message
+          console.error('Error parsing error response:', jsonError);
+        }
+        throw new Error(errorMessage);
       }
 
       const { url } = await response.json();
@@ -38,12 +61,19 @@ if (supportButton) {
       window.location.href = url;
     } catch (error) {
       console.error('Error:', error);
-      alert('Sorry, there was an error processing your donation. Please try again.');
       
-      // Re-enable button
-      supportButton.style.pointerEvents = 'auto';
-      supportButton.style.opacity = '1';
-      supportButton.innerHTML = '☕ Buy Me a Coffee';
+      // Show error to user
+      amountInput.classList.add('error');
+      submitButton.innerHTML = 'Error - Retry';
+      submitButton.setAttribute('aria-label', 'Error occurred, please try again');
+      
+      // Reset after 3 seconds
+      setTimeout(() => {
+        amountInput.classList.remove('error');
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonText;
+        submitButton.removeAttribute('aria-label');
+      }, 3000);
     }
   });
 }
