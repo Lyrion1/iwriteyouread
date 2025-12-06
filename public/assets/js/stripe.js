@@ -1,23 +1,29 @@
 // Stripe Checkout Integration
-// Handles "Buy Me a Coffee" button click and initiates Stripe Checkout
+// Handles "Buy Me a Coffee" form submission and initiates Stripe Checkout
 
-// Get the support button
-const supportButton = document.getElementById('support-button');
+// Get the donation form
+const donationForm = document.getElementById('donation-form');
 
-if (supportButton) {
-  // Enable the button and remove disabled styling
-  supportButton.style.pointerEvents = 'auto';
-  supportButton.style.opacity = '1';
-  supportButton.style.cursor = 'pointer';
-  
-  // Add click handler
-  supportButton.addEventListener('click', async function(e) {
+if (donationForm) {
+  // Add submit handler
+  donationForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    // Disable button during processing
-    supportButton.style.pointerEvents = 'none';
-    supportButton.style.opacity = '0.6';
-    supportButton.innerHTML = '☕ Processing...';
+    // Get the amount from the input
+    const amountInput = document.getElementById('amount');
+    const amount = parseFloat(amountInput.value);
+    
+    // Validate the amount
+    if (!amount || amount < 1) {
+      alert('Please enter a valid amount (minimum £1)');
+      return;
+    }
+    
+    // Get the submit button and disable it during processing
+    const submitButton = donationForm.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerHTML;
+    submitButton.disabled = true;
+    submitButton.innerHTML = '☕ Processing...';
     
     try {
       // Call Netlify Function to create checkout session
@@ -26,6 +32,7 @@ if (supportButton) {
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ amount }),
       });
 
       if (!response.ok) {
@@ -41,9 +48,8 @@ if (supportButton) {
       alert('Sorry, there was an error processing your donation. Please try again.');
       
       // Re-enable button
-      supportButton.style.pointerEvents = 'auto';
-      supportButton.style.opacity = '1';
-      supportButton.innerHTML = '☕ Buy Me a Coffee';
+      submitButton.disabled = false;
+      submitButton.innerHTML = originalButtonText;
     }
   });
 }
