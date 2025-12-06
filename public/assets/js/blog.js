@@ -3,13 +3,27 @@
 let allPosts = [];
 let currentFilter = 'all';
 
-// Unsplash fallback images for blog post thumbnails
-// Random blog-specific AI-generated placeholders
+// Placeholder images for blog post thumbnails
+// Using Lorem Picsum as a stable alternative to deprecated Unsplash random API
 const FALLBACK_IMAGES = [
-    "https://source.unsplash.com/random/600x400/?typewriter,writing",
-    "https://source.unsplash.com/random/600x400/?books,poetry",
-    "https://source.unsplash.com/random/600x400/?journal,literature",
+    "https://picsum.photos/seed/typewriter1/600/400",
+    "https://picsum.photos/seed/books2/600/400",
+    "https://picsum.photos/seed/journal3/600/400",
 ];
+
+// Simple hash function to deterministically select an image based on post ID/title
+function getImageForPost(post) {
+    // Use post ID or title to generate a consistent hash
+    const seed = post.id || post.title || '';
+    let hash = 0;
+    for (let i = 0; i < seed.length; i++) {
+        hash = ((hash << 5) - hash) + seed.charCodeAt(i);
+        hash = hash & hash; // Convert to 32-bit integer
+    }
+    // Use absolute value and modulo to get consistent index
+    const index = Math.abs(hash) % FALLBACK_IMAGES.length;
+    return FALLBACK_IMAGES[index];
+}
 
 // Load blog posts from JSON
 async function loadBlogPosts() {
@@ -94,9 +108,9 @@ function createPostElement(post) {
     postLink.href = post.url || '#';
     postLink.className = 'block';
     
-    // Use random Unsplash placeholder images for blog posts
-    // Select a random image from the fallback images array
-    const imageUrl = FALLBACK_IMAGES[Math.floor(Math.random() * FALLBACK_IMAGES.length)];
+    // Use deterministic placeholder images based on post ID/title
+    // This ensures consistent images for each post across page loads
+    const imageUrl = getImageForPost(post);
     
     if (imageUrl) {
         const imageDiv = document.createElement('div');
@@ -108,9 +122,9 @@ function createPostElement(post) {
         img.className = 'w-full h-full object-cover transition-transform duration-300 elegant-image';
         img.loading = 'lazy';
         
-        // Add error handler in case Unsplash image fails to load
+        // Add error handler in case placeholder image fails to load
         img.onerror = function() {
-            console.error('Unsplash image failed to load');
+            console.error('Placeholder image failed to load');
             // Show a nice placeholder gradient if image fails
             const parent = this.parentElement;
             if (parent && !this.dataset.errorHandled) {
