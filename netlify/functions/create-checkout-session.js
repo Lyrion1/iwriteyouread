@@ -1,5 +1,5 @@
 // Netlify Function to create Stripe Checkout Session
-// This function creates a Stripe Checkout session for a £5 donation
+// This function creates a Stripe Checkout session for a custom donation amount
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
@@ -17,6 +17,34 @@ exports.handler = async (event, context) => {
   const baseUrl = origin.replace(/\/$/, ''); // Remove trailing slash if present
 
   try {
+    // Parse the request body to get the custom amount
+    let amount;
+    try {
+      const body = JSON.parse(event.body);
+      amount = body.amount;
+    } catch (parseError) {
+      return {
+        statusCode: 400,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+        body: JSON.stringify({ error: 'Invalid request body' }),
+      };
+    }
+    
+    // Validate the amount
+    if (typeof amount !== 'number' || !Number.isFinite(amount) || amount < 1) {
+      return {
+        statusCode: 400,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+        body: JSON.stringify({ error: 'Invalid amount. Minimum donation is £1.' }),
+      };
+    }
+    
     // Create Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -28,7 +56,7 @@ exports.handler = async (event, context) => {
               name: 'Buy Me a Coffee',
               description: 'Support Alexander Afolabi\'s writing and essays',
             },
-            unit_amount: 500, // £5.00 in pence
+            unit_amount: Math.round(parseFloat((amount * 100).toFixed(2))), // Convert £ to pence with proper rounding
           },
           quantity: 1,
         },
