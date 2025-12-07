@@ -308,25 +308,41 @@ footer a {
     margin: 0;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
 }
 
 .donation-form label {
-    font-size: 1rem;
+    font-size: 1.25rem;
     margin: 0;
 }
 
 .amount-input {
-    width: 60px;
-    padding: 4px 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    width: 80px;
+    padding: 8px 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
     font-size: 0.875rem;
-    transition: border-color 0.3s ease;
+    font-weight: 600;
+    background-color: #ffffff;
+    color: #1f2937;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.amount-input:focus {
+    outline: none;
+    border-color: #6f4e37;
+    box-shadow: 0 0 0 3px rgba(111, 78, 55, 0.1);
+}
+
+.amount-input::placeholder {
+    color: #9ca3af;
+    font-weight: 500;
 }
 
 .amount-input.error {
     border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
 .submit-button {
@@ -338,6 +354,7 @@ footer a {
     cursor: pointer;
     padding: 0;
     font-family: Georgia, serif;
+    white-space: nowrap;
 }
 
 .submit-button:hover {
