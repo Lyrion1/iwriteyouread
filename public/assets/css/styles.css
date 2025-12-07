@@ -489,3 +489,103 @@ footer a {
 .feather-icon:hover {
     transform: translateY(-2px) rotate(5deg);
 }
+
+/* Buttondown Subscription Form Styles */
+#buttondown-subscription-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+#buttondown-subscription-form:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+#buttondown-subscription-form input[type="email"] {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    font-family: 'Lato', 'Inter', sans-serif;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #1f2937;
+    transition: all 0.3s ease;
+}
+
+#buttondown-subscription-form input[type="email"]:focus {
+    outline: none;
+    border-color: #92400e;
+    box-shadow: 0 0 0 3px rgba(146, 64, 14, 0.1);
+}
+
+#buttondown-subscription-form input[type="email"]::placeholder {
+    color: #9ca3af;
+}
+
+#buttondown-subscription-form button[type="submit"] {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Lato', 'Inter', sans-serif;
+    background-color: #92400e;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(146, 64, 14, 0.2);
+}
+
+#buttondown-subscription-form button[type="submit"]:hover:not(:disabled) {
+    background-color: #78350f;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(146, 64, 14, 0.3);
+}
+
+#buttondown-subscription-form button[type="submit"]:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+#thank-you-message {
+    display: none;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    background-color: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+#thank-you-message p {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #166534;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    #buttondown-subscription-form {
+        padding: 1.5rem;
+    }
+    
+    #buttondown-subscription-form input[type="email"],
+    #buttondown-subscription-form button[type="submit"] {
+        padding: 0.75rem 1rem;
+        font-size: 0.9375rem;
+    }
+}
