@@ -28,11 +28,10 @@ exports.handler = async (event, context) => {
     };
   }
 
-  // Detect if using test or live mode
+  // Validate that the secret key has the correct format and detect mode
   const isLiveMode = secretKey.startsWith('sk_live_');
   const isTestMode = secretKey.startsWith('sk_test_');
 
-  // Validate that the secret key has the correct format
   if (!isLiveMode && !isTestMode) {
     console.error('STRIPE_SECRET_KEY has invalid format - must start with sk_test_ or sk_live_');
     return {
@@ -104,7 +103,7 @@ exports.handler = async (event, context) => {
               name: 'Buy Me a Coffee',
               description: 'Support Alexander Afolabi\'s writing and essays',
             },
-            unit_amount: Math.round(parseFloat((amount * 100).toFixed(2))), // Convert £ to pence with proper rounding
+            unit_amount: Math.round(amount * 100), // Convert £ to pence
           },
           quantity: 1,
         },
