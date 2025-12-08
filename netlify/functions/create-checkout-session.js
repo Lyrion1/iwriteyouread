@@ -1,39 +1,70 @@
 // Netlify Function to create Stripe Checkout Session
 // This function creates a Stripe Checkout session for a custom donation amount
 
-// Validate and initialize Stripe with the secret key
-const secretKey = process.env.STRIPE_SECRET_KEY;
-
-// Validate that the secret key exists
-if (!secretKey) {
-  throw new Error('STRIPE_SECRET_KEY environment variable is not set. Please configure it in Netlify settings.');
-}
-
-// Validate that the secret key has the correct format
-if (!secretKey.startsWith('sk_')) {
-  throw new Error('STRIPE_SECRET_KEY has an invalid format. It should start with "sk_test_" or "sk_live_".');
-}
-
-// Detect if using test or live mode
-const isLiveMode = secretKey.startsWith('sk_live_');
-const isTestMode = secretKey.startsWith('sk_test_');
-
-if (!isLiveMode && !isTestMode) {
-  throw new Error('STRIPE_SECRET_KEY must be either a test key (sk_test_) or live key (sk_live_).');
-}
-
-// Log the mode (without exposing the key)
-console.log(`Stripe initialized in ${isLiveMode ? 'LIVE' : 'TEST'} mode`);
-
-// Initialize Stripe with the validated secret key
-const stripe = require('stripe')(secretKey);
-
 exports.handler = async (event, context) => {
   // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
       body: JSON.stringify({ error: 'Method not allowed' })
+    };
+  }
+
+  // Validate and initialize Stripe with the secret key
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+
+  // Validate that the secret key exists
+  if (!secretKey) {
+    console.error('STRIPE_SECRET_KEY environment variable is not set');
+    return {
+      statusCode: 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify({ 
+        error: 'Server configuration error. Please contact the administrator.' 
+      }),
+    };
+  }
+
+  // Detect if using test or live mode
+  const isLiveMode = secretKey.startsWith('sk_live_');
+  const isTestMode = secretKey.startsWith('sk_test_');
+
+  // Validate that the secret key has the correct format
+  if (!isLiveMode && !isTestMode) {
+    console.error('STRIPE_SECRET_KEY has invalid format - must start with sk_test_ or sk_live_');
+    return {
+      statusCode: 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify({ 
+        error: 'Server configuration error. Please contact the administrator.' 
+      }),
+    };
+  }
+
+  // Log the mode (without exposing the key)
+  console.log(`Stripe initialized in ${isLiveMode ? 'LIVE' : 'TEST'} mode`);
+
+  // Initialize Stripe with the validated secret key
+  let stripe;
+  try {
+    stripe = require('stripe')(secretKey);
+  } catch (initError) {
+    console.error('Failed to initialize Stripe:', initError.message);
+    return {
+      statusCode: 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify({ 
+        error: 'Failed to initialize payment system. Please contact the administrator.' 
+      }),
     };
   }
 
@@ -99,7 +130,10 @@ exports.handler = async (event, context) => {
     });
 
     console.log('Checkout session created successfully:', session.id);
-    console.log('Session URL:', session.url);
+    // Only log session URL in test mode for security
+    if (isTestMode) {
+      console.log('Session URL (test mode):', session.url);
+    }
 
     return {
       statusCode: 200,
