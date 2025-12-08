@@ -51,22 +51,7 @@ exports.handler = async (event, context) => {
   console.log(`Stripe initialized in ${isLiveMode ? 'LIVE' : 'TEST'} mode`);
 
   // Initialize Stripe with the validated secret key
-  let stripe;
-  try {
-    stripe = require('stripe')(secretKey);
-  } catch (initError) {
-    console.error('Failed to initialize Stripe:', initError.message);
-    return {
-      statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({ 
-        error: 'Failed to initialize payment system. Please contact the administrator.' 
-      }),
-    };
-  }
+  const stripe = require('stripe')(secretKey);
 
   // Get the origin for redirect URLs
   const origin = event.headers.origin || event.headers.referer || 'https://iwriteyouread.org';
