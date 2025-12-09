@@ -101,7 +101,7 @@ exports.handler = async (event, context) => {
             currency: 'gbp',
             product_data: {
               name: 'Buy Me a Coffee',
-              description: 'Support Alexander Afolabi's writing and essays',
+              description: 'Support Alexander Afolabi\'s writing and essays',
             },
             unit_amount: Math.round(amount * 100), // Convert £ to pence
           },
