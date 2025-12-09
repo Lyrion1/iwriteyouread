@@ -1,37 +1,21 @@
 // Stripe Checkout Integration
-// Handles "Buy Me a Coffee" form submission and initiates Stripe Checkout
+// Handles "Buy Me a Coffee" button click and initiates Stripe Checkout for £5
 
-// Get the donation form
-const donationForm = document.getElementById('donation-form');
+// Get the buy coffee button
+const buyCoffeeButton = document.getElementById('buy-coffee-button');
 
-if (donationForm) {
-  // Add submit handler
-  donationForm.addEventListener('submit', async function(e) {
+if (buyCoffeeButton) {
+  // Add click handler
+  buyCoffeeButton.addEventListener('click', async function(e) {
     e.preventDefault();
     
-    // Get the amount from the input
-    const amountInput = document.getElementById('amount');
-    const amount = parseFloat(amountInput.value);
+    // Fixed amount of £5
+    const amount = 5;
     
-    // Validate the amount
-    if (!Number.isFinite(amount) || amount < 1) {
-      // Show validation error visually
-      amountInput.classList.add('error');
-      amountInput.focus();
-      
-      // Reset error state after 3 seconds
-      setTimeout(() => {
-        amountInput.classList.remove('error');
-      }, 3000);
-      
-      return;
-    }
-    
-    // Get the submit button and disable it during processing
-    const submitButton = donationForm.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.innerHTML;
-    submitButton.disabled = true;
-    submitButton.innerHTML = '☕ Processing...';
+    // Disable button during processing
+    const originalButtonText = buyCoffeeButton.innerHTML;
+    buyCoffeeButton.disabled = true;
+    buyCoffeeButton.innerHTML = '☕ Processing...';
     
     try {
       // Call Netlify Function to create checkout session
@@ -63,16 +47,14 @@ if (donationForm) {
       console.error('Error:', error);
       
       // Show error to user
-      amountInput.classList.add('error');
-      submitButton.innerHTML = 'Error - Retry';
-      submitButton.setAttribute('aria-label', 'Error occurred, please try again');
+      buyCoffeeButton.innerHTML = 'Error - Retry';
+      buyCoffeeButton.setAttribute('aria-label', 'Error occurred, please try again');
       
       // Reset after 3 seconds
       setTimeout(() => {
-        amountInput.classList.remove('error');
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalButtonText;
-        submitButton.removeAttribute('aria-label');
+        buyCoffeeButton.disabled = false;
+        buyCoffeeButton.innerHTML = originalButtonText;
+        buyCoffeeButton.removeAttribute('aria-label');
       }, 3000);
     }
   });

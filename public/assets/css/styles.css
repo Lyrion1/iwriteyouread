@@ -303,6 +303,28 @@ footer a {
     box-shadow: 0 4px 12px rgba(111, 78, 55, 0.4);
 }
 
+/* Buy Coffee Button Styles */
+.buy-coffee-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    font-family: Georgia, serif;
+    white-space: nowrap;
+}
+
+.buy-coffee-button:hover {
+    opacity: 0.9;
+}
+
+.buy-coffee-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 /* Donation Form Styles */
 .donation-form {
     margin: 0;
