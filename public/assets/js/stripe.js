@@ -12,9 +12,9 @@ if (donationForm && donationAmountInput) {
     
     // Get the custom amount from input
     const amountValue = donationAmountInput.value.trim();
-    const amount = parseFloat(amountValue);
+    const amount = Number(amountValue);
     
-    // Validate the amount
+    // Validate the amount (using Number() for stricter parsing)
     if (!amountValue || !Number.isFinite(amount) || amount < 1) {
       // Show error state on input
       donationAmountInput.classList.add('error');
