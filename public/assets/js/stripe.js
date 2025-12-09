@@ -1,21 +1,44 @@
 // Stripe Checkout Integration
-// Handles "Buy Me a Coffee" button click and initiates Stripe Checkout for £5
+// Handles "Buy Me a Coffee" form submission and initiates Stripe Checkout with custom amount
 
-// Get the buy coffee button
-const buyCoffeeButton = document.getElementById('buy-coffee-button');
+// Get the donation form
+const donationForm = document.getElementById('donation-form');
+const donationAmountInput = document.getElementById('donation-amount');
 
-if (buyCoffeeButton) {
-  // Add click handler
-  buyCoffeeButton.addEventListener('click', async function(e) {
+if (donationForm && donationAmountInput) {
+  // Add submit handler
+  donationForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    // Fixed amount of £5
-    const amount = 5;
+    // Get the custom amount from input
+    const amountValue = donationAmountInput.value.trim();
+    const amount = parseFloat(amountValue);
     
-    // Disable button during processing
-    const originalButtonText = buyCoffeeButton.innerHTML;
-    buyCoffeeButton.disabled = true;
-    buyCoffeeButton.innerHTML = '☕ Processing...';
+    // Validate the amount
+    if (!amountValue || !Number.isFinite(amount) || amount < 1) {
+      // Show error state on input
+      donationAmountInput.classList.add('error');
+      console.error('Invalid amount entered:', amountValue);
+      
+      // Remove error state after 3 seconds
+      setTimeout(() => {
+        donationAmountInput.classList.remove('error');
+      }, 3000);
+      return;
+    }
+    
+    // Remove any error state
+    donationAmountInput.classList.remove('error');
+    
+    // Get the submit button
+    const submitButton = donationForm.querySelector('button[type="submit"]');
+    if (!submitButton) return;
+    
+    // Disable form during processing
+    const originalButtonText = submitButton.innerHTML;
+    submitButton.disabled = true;
+    donationAmountInput.disabled = true;
+    submitButton.innerHTML = 'Processing...';
     
     try {
       // Call Netlify Function to create checkout session
@@ -47,14 +70,17 @@ if (buyCoffeeButton) {
       console.error('Error:', error);
       
       // Show error to user
-      buyCoffeeButton.innerHTML = 'Error - Retry';
-      buyCoffeeButton.setAttribute('aria-label', 'Error occurred, please try again');
+      submitButton.innerHTML = 'Error - Retry';
+      submitButton.setAttribute('aria-label', 'Error occurred, please try again');
+      donationAmountInput.classList.add('error');
       
       // Reset after 3 seconds
       setTimeout(() => {
-        buyCoffeeButton.disabled = false;
-        buyCoffeeButton.innerHTML = originalButtonText;
-        buyCoffeeButton.removeAttribute('aria-label');
+        submitButton.disabled = false;
+        donationAmountInput.disabled = false;
+        submitButton.innerHTML = originalButtonText;
+        submitButton.removeAttribute('aria-label');
+        donationAmountInput.classList.remove('error');
       }, 3000);
     }
   });
