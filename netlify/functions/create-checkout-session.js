@@ -2,10 +2,28 @@
 // This function creates a Stripe Checkout session for a custom donation amount
 
 exports.handler = async (event, context) => {
+  // CORS headers for all responses
+  const corsHeaders = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  };
+
+  // Handle CORS preflight request
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 204,
+      headers: corsHeaders,
+      body: '',
+    };
+  }
+
   // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
+      headers: corsHeaders,
       body: JSON.stringify({ error: 'Method not allowed' })
     };
   }
@@ -18,10 +36,7 @@ exports.handler = async (event, context) => {
     console.error('STRIPE_SECRET_KEY environment variable is not set');
     return {
       statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: corsHeaders,
       body: JSON.stringify({ 
         error: 'Server configuration error. Please contact the administrator.' 
       }),
@@ -36,10 +51,7 @@ exports.handler = async (event, context) => {
     console.error('STRIPE_SECRET_KEY has invalid format - must start with sk_test_ or sk_live_');
     return {
       statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: corsHeaders,
       body: JSON.stringify({ 
         error: 'Server configuration error. Please contact the administrator.' 
       }),
@@ -53,12 +65,23 @@ exports.handler = async (event, context) => {
   const stripe = require('stripe')(secretKey);
 
   // Get the origin for redirect URLs
-  const origin = event.headers.origin || event.headers.referer || 'https://iwriteyouread.org';
-  const baseUrl = origin.replace(/\/$/, ''); // Remove trailing slash if present
+  // Use origin header if available, otherwise extract origin from referer, fallback to production URL
+  let baseUrl = event.headers.origin;
+  if (!baseUrl && event.headers.referer) {
+    try {
+      const refererUrl = new URL(event.headers.referer);
+      baseUrl = refererUrl.origin;
+    } catch (e) {
+      baseUrl = 'https://iwriteyouread.org';
+    }
+  }
+  if (!baseUrl) {
+    baseUrl = 'https://iwriteyouread.org';
+  }
 
   // Log request (without sensitive data)
   console.log('Checkout session request received');
-  console.log('Origin:', origin);
+  console.log('Base URL:', baseUrl);
 
   try {
     // Parse the request body to get the custom amount
@@ -69,10 +92,7 @@ exports.handler = async (event, context) => {
     } catch (parseError) {
       return {
         statusCode: 400,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
+        headers: corsHeaders,
         body: JSON.stringify({ error: 'Invalid request body' }),
       };
     }
@@ -82,10 +102,7 @@ exports.handler = async (event, context) => {
       console.log('Invalid amount received:', amount);
       return {
         statusCode: 400,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
+        headers: corsHeaders,
         body: JSON.stringify({ error: 'Invalid amount. Minimum donation is £1.' }),
       };
     }
@@ -121,11 +138,7 @@ exports.handler = async (event, context) => {
 
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
+      headers: corsHeaders,
       body: JSON.stringify({ url: session.url }),
     };
   } catch (error) {
@@ -156,10 +169,7 @@ exports.handler = async (event, context) => {
     
     return {
       statusCode: statusCode,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: corsHeaders,
       body: JSON.stringify({ 
         error: errorMessage,
         // Only include details in test mode for debugging
