@@ -4,6 +4,7 @@
 exports.handler = async (event, context) => {
   // CORS headers for all responses
   const corsHeaders = {
+    'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -35,10 +36,7 @@ exports.handler = async (event, context) => {
     console.error('STRIPE_SECRET_KEY environment variable is not set');
     return {
       statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: corsHeaders,
       body: JSON.stringify({ 
         error: 'Server configuration error. Please contact the administrator.' 
       }),
@@ -53,10 +51,7 @@ exports.handler = async (event, context) => {
     console.error('STRIPE_SECRET_KEY has invalid format - must start with sk_test_ or sk_live_');
     return {
       statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: corsHeaders,
       body: JSON.stringify({ 
         error: 'Server configuration error. Please contact the administrator.' 
       }),
@@ -97,10 +92,7 @@ exports.handler = async (event, context) => {
     } catch (parseError) {
       return {
         statusCode: 400,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
+        headers: corsHeaders,
         body: JSON.stringify({ error: 'Invalid request body' }),
       };
     }
@@ -110,10 +102,7 @@ exports.handler = async (event, context) => {
       console.log('Invalid amount received:', amount);
       return {
         statusCode: 400,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
+        headers: corsHeaders,
         body: JSON.stringify({ error: 'Invalid amount. Minimum donation is £1.' }),
       };
     }
@@ -149,11 +138,7 @@ exports.handler = async (event, context) => {
 
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
+      headers: corsHeaders,
       body: JSON.stringify({ url: session.url }),
     };
   } catch (error) {
@@ -184,10 +169,7 @@ exports.handler = async (event, context) => {
     
     return {
       statusCode: statusCode,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: corsHeaders,
       body: JSON.stringify({ 
         error: errorMessage,
         // Only include details in test mode for debugging
