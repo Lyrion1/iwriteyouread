@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read the latest essay from iwriteyouread.">
+    <title>Latest Essay | iwriteyouread</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-sans text-gray-800 bg-white min-h-screen">
+    <nav id="navbar" class="fixed w-full top-0 z-50 bg-white shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="/assets/logo.png" alt="Alexander Afolabi Logo" class="author-logo" />
+                    <a href="/" class="text-2xl font-serif font-bold text-gray-900 hover:text-gray-700 transition-colors">
+                        iwriteyouread
+                    </a>
+                </div>
+
+                <div class="hidden md:flex space-x-8">
+                    <a href="/" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">Home</a>
+                    <a href="/works.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">The Gryphon's Quill</a>
+                    <a href="/blog.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">Blog</a>
+                    <a href="/about.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">About</a>
+                    <a href="/contact.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">Contact</a>
+                </div>
+
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 hover:text-gray-900 focus:outline-none" aria-label="Toggle menu">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-4 pt-2 pb-4 space-y-2">
+                <a href="/" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">Home</a>
+                <a href="/works.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">The Gryphon's Quill</a>
+                <a href="/blog.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">Blog</a>
+                <a href="/about.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">About</a>
+                <a href="/contact.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <main class="pt-24 pb-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4">Latest Essay</h1>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">The most recent essay from iwriteyouread.</p>
+                <div class="w-24 h-1 bg-blue-700 mx-auto mt-6"></div>
+            </div>
+
+            <div id="latest-post" class="bg-white rounded-xl shadow-md overflow-hidden" hidden></div>
+
+            <div id="latest-loading" class="text-center py-12">
+                <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-700"></div>
+                <p class="text-gray-600 mt-4">Loading latest essay...</p>
+            </div>
+
+            <div id="latest-empty" class="text-center py-12" hidden>
+                <h3 class="font-serif text-2xl font-bold text-gray-900 mb-2">No essays found</h3>
+                <p class="text-gray-600">Please check back soon for the latest essay.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        function showFallback(message) {
+            const latestPost = document.getElementById('latest-post');
+            const emptyState = document.getElementById('latest-empty');
+            const loadingState = document.getElementById('latest-loading');
+
+            if (loadingState) {
+                loadingState.hidden = true;
+            }
+
+            if (latestPost) {
+                latestPost.hidden = true;
+            }
+
+            if (emptyState) {
+                const messageElement = emptyState.querySelector('p');
+                if (messageElement) {
+                    messageElement.textContent = message;
+                }
+                emptyState.hidden = false;
+            }
+        }
+
+        function renderLatestPost(post) {
+            const latestPost = document.getElementById('latest-post');
+            const loadingState = document.getElementById('latest-loading');
+            const emptyState = document.getElementById('latest-empty');
+
+            if (!latestPost) return;
+
+            latestPost.innerHTML = '';
+
+            const content = document.createElement('div');
+            content.className = 'p-8';
+
+            const titleLink = document.createElement('a');
+            titleLink.href = post.url || '#';
+            titleLink.className = 'block';
+
+            const title = document.createElement('h2');
+            title.className = 'font-serif text-2xl sm:text-3xl font-bold text-gray-900 mb-3 hover:text-blue-700 transition-colors';
+            title.textContent = post.title || 'Untitled Essay';
+
+            titleLink.appendChild(title);
+            content.appendChild(titleLink);
+
+            if (post.date) {
+                const date = document.createElement('p');
+                date.className = 'text-sm text-gray-500 mb-4';
+                date.textContent = formatDate(post.date);
+                content.appendChild(date);
+            }
+
+            const summary = document.createElement('p');
+            summary.className = 'text-gray-700 leading-relaxed mb-6';
+            summary.textContent = post.summary || '';
+            content.appendChild(summary);
+
+            const readMoreLink = document.createElement('a');
+            readMoreLink.href = post.url || '#';
+            readMoreLink.className = 'inline-flex items-center text-blue-700 font-semibold hover:text-blue-900 transition-colors';
+            readMoreLink.innerHTML = `
+                Read Full Essay
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            `;
+            content.appendChild(readMoreLink);
+
+            latestPost.appendChild(content);
+
+            if (loadingState) {
+                loadingState.hidden = true;
+            }
+
+            if (emptyState) {
+                emptyState.hidden = true;
+            }
+
+            latestPost.hidden = false;
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('/assets/blog/posts.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load posts');
+                }
+
+                const data = await response.json();
+                const posts = window.sortPostsByDate(data.posts);
+
+                if (!posts.length) {
+                    showFallback('No essays are available yet. Please check back soon.');
+                    return;
+                }
+
+                renderLatestPost(posts[0]);
+            } catch (error) {
+                console.error('Error loading latest post:', error);
+                showFallback('We could not load the latest essay right now. Please try again soon.');
+            }
+        });
+    </script>
+</body>
+</html>
