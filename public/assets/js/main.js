@@ -240,6 +240,15 @@ function formatDate(dateString) {
     return date.toLocaleDateString('en-US', options);
 }
 
+// Utility: Sort Posts By Date (newest first)
+function sortPostsByDate(posts) {
+    return (posts || []).slice().sort((a, b) => {
+        const dateA = a.date ? new Date(a.date).getTime() : 0;
+        const dateB = b.date ? new Date(b.date).getTime() : 0;
+        return dateB - dateA;
+    });
+}
+
 // Utility: Truncate Text
 function truncateText(text, maxLength) {
     if (text.length <= maxLength) return text;

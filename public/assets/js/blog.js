@@ -39,7 +39,7 @@ async function loadBlogPosts() {
         }
         
         const data = await response.json();
-        allPosts = data.posts || [];
+        allPosts = sortPostsByDate(data.posts);
         
         // Hide loading
         if (loadingElement) {
