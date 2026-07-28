@@ -21,7 +21,7 @@ jobs:
 
       - name: Convert and resize new raster images
         run: |
-          find public/images -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \)             ! -name '*.webp' | while read f; do
+          find public/images -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) ! -name '*.webp' | while read f; do
             OUT="${f%.*}.webp"
             if [ -f "$OUT" ]; then
               echo "Skipping $f, webp already exists"
