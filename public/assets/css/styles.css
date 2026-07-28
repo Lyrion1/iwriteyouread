@@ -30,7 +30,6 @@
   --ff-sans:  'Lato', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* Easing */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Transition durations */
   --t-fast:   200ms ease;
@@ -1024,6 +1023,7 @@ img {
 }
 
 /* Custom scrollbar */
+:root { scrollbar-color: var(--smoke) #1e1a28; scrollbar-width: thin; }
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: #1e1a28; }
 ::-webkit-scrollbar-thumb { background: var(--smoke); border-radius: 5px; }
