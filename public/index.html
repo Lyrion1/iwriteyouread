@@ -13,13 +13,13 @@
     <meta property="og:description" content="Thoughtful essays on democracy, culture, and liberty through books and commentary by Alexander Afolabi.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://iwriteyouread.org">
-    <meta property="og:image" content="https://iwriteyouread.org/assets/logoo.png">
+    <meta property="og:image" content="https://iwriteyouread.org/images/share-card.jpg">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="iwriteyouread | Thoughtful Essays on Democracy, Culture & Liberty">
     <meta name="twitter:description" content="Thoughtful essays on democracy, culture, and liberty through books and commentary by Alexander Afolabi.">
-    <meta name="twitter:image" content="https://iwriteyouread.org/assets/logoo.png">
+    <meta name="twitter:image" content="https://iwriteyouread.org/images/share-card.jpg">
     
     <title>iwriteyouread | Thoughtful Essays on Democracy, Culture & Liberty</title>
     
@@ -29,20 +29,31 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/logoo.png">
     
     <!-- TailwindCSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.tailwindcss.com"></script>
     
     <!-- Custom Styles -->
     <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/garden.css">
+    <link rel="preload" href="/images/bench.jpg" as="image">
+    <style>
+      #garden-bench-hero { background-color: #FBF8F1; }
+    </style>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400&family=Literata:wght@400;500;600;700&family=Merriweather:wght@400;700;900&family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <!-- AOS (Animate on Scroll) Library -->
     <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
 </head>
 <body class="font-sans text-gray-800 bg-white min-h-screen">
+    <!-- Garden: corner florals -->
+<img src="/images/corner-tl.jpg" alt="" aria-hidden="true" class="garden-corner garden-corner-tl" width="350" height="276" loading="lazy" decoding="async" />
+<img src="/images/corner-tr.jpg" alt="" aria-hidden="true" class="garden-corner garden-corner-tr" width="350" height="336" loading="lazy" decoding="async" />
+<img src="/images/corner-bl.jpg" alt="" aria-hidden="true" class="garden-corner garden-corner-bl" width="350" height="250" loading="lazy" decoding="async" />
+<img src="/images/corner-br.jpg" alt="" aria-hidden="true" class="garden-corner garden-corner-br" width="350" height="276" loading="lazy" decoding="async" />
+    <div class="garden-page-wrap">
     
     <!-- Navigation Bar -->
     <nav id="navbar" class="fixed w-full top-0 z-50 bg-white shadow-sm transition-all duration-300">
@@ -51,7 +62,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="/">
-                        <img src="/assets/logoo.png" alt="Alexander Afolabi Logo" class="author-logo" />
+                        <img src="/assets/logoo.png" alt="Alexander Afolabi Logo" class="author-logo" width="64" height="64" decoding="async" />
                     </a>
                 </div>
                 
@@ -60,6 +71,7 @@
                     <a href="/" class="nav-link text-gray-900 font-semibold">Home</a>
                     <a href="/works.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">The Gryphon's Quill</a>
                     <a href="/blog.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">Blog</a>
+                    <a href="/nook.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">The Nook</a>
                     <a href="/about.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">About</a>
                     <a href="/contact.html" class="nav-link text-gray-700 hover:text-gray-900 transition-colors font-medium">Contact</a>
                 </div>
@@ -80,6 +92,7 @@
                 <a href="/" class="block px-3 py-2 bg-gray-100 text-gray-900 rounded-md font-semibold">Home</a>
                 <a href="/works.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">The Gryphon's Quill</a>
                 <a href="/blog.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">Blog</a>
+                <a href="/nook.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">The Nook</a>
                 <a href="/about.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">About</a>
                 <a href="/contact.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors font-medium">Contact</a>
             </div>
@@ -88,9 +101,24 @@
     
     <!-- Hero Section -->
     <main class="pt-16">
-        <section id="homepage-hero" class="homepage-hero relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
-            <canvas id="rain-canvas" aria-hidden="true"></canvas>
+        <section id="homepage-hero" class="homepage-hero relative min-h-screen px-4 sm:px-6 lg:px-8 py-20">
             <div class="homepage-hero-content max-w-5xl mx-auto text-center">
+                <!-- Garden: Bench Hero -->
+                <section id="garden-bench-hero" class="garden-hero mb-12" aria-label="The garden bench">
+                  <img
+                    src="/images/bench.jpg"
+                    alt="Two children reading on a bench"
+                    width="334"
+                    height="322"
+                    class="garden-bench-img"
+                    aria-hidden="true"
+                  />
+                  <button id="garden-bench-btn" class="garden-bench-btn" aria-label="Read a line from the garden">
+                    Read a line from the garden
+                  </button>
+                  <span id="garden-bench-line" class="garden-bench-line" aria-live="polite"></span>
+                </section>
+
                 <!-- Poem Section -->
                 <div class="poem-section max-w-3xl mx-auto mb-12" data-aos="fade-up">
                     <p class="poem-text">
@@ -109,7 +137,7 @@
                         And wrote.<br>
                         Until it all became real.<br><br>
 
-                        Opeyeluwa Afolabi <img src="/assets/images/quilicon.png" alt="colorful quill" class="feather-icon" />
+                        Opeyeluwa Afolabi <img src="/assets/images/quilicon.png" alt="colorful quill" class="feather-icon" width="64" height="64" decoding="async" />
                     </p>
                 </div>
                 
@@ -159,6 +187,42 @@
                 </div>
             </div>
         </section>
+
+        <!-- Garden: Pick a Petal -->
+        <div class="garden-petal-container" aria-label="Pick a petal from the garden" style="justify-content: center; gap: 2rem;">
+          <button class="garden-flower-btn" aria-label="Pick a petal: rose">
+            <img src="/images/flower-rose.jpg" alt="A rose" width="170" height="500" loading="lazy" decoding="async" />
+          </button>
+          <button class="garden-flower-btn" aria-label="Pick a petal: daisy">
+            <img src="/images/flower-daisy.jpg" alt="A daisy" width="170" height="512" loading="lazy" decoding="async" />
+          </button>
+          <button class="garden-flower-btn" aria-label="Pick a petal: cosmos">
+            <img src="/images/flower-cosmos.jpg" alt="A cosmos flower" width="171" height="511" loading="lazy" decoding="async" />
+          </button>
+        </div>
+        
+        <!-- Garden: Petal card overlay -->
+        <div id="garden-card-overlay" class="garden-card-overlay" role="dialog" aria-modal="true" aria-label="A line from the garden">
+          <div class="garden-card">
+            <button id="garden-card-close" class="garden-card__close" aria-label="Close">&times;</button>
+            <p id="garden-card-line" class="garden-card__line"></p>
+            <p class="garden-card__author">Alexander Afolabi</p>
+            <p class="garden-card__url">iwriteyouread.org</p>
+            <button id="garden-card-share" class="garden-card__share">Share this line</button>
+            <p id="garden-card-copy-msg" class="garden-card__copy-msg" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <!-- Garden: Almanac -->
+        <section class="py-8">
+          <div class="max-w-3xl mx-auto px-4">
+            <div class="garden-almanac" data-src="/data/latest-post.json">
+              <p class="garden-almanac__label">From the blog</p>
+              <p class="garden-almanac__excerpt">Visit the blog for Alexander's latest writing.</p>
+              <a class="garden-almanac__link" href="/blog.html">Visit the blog</a>
+            </div>
+          </div>
+        </section>
     </main>
     
     <!-- Footer -->
@@ -180,6 +244,7 @@
                         <li><a href="/" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
                         <li><a href="/works.html" class="text-gray-400 hover:text-white transition-colors">The Gryphon's Quill</a></li>
                         <li><a href="/blog.html" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="/nook.html" class="text-gray-400 hover:text-white transition-colors">The Nook</a></li>
                         <li><a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About</a></li>
                         <li><a href="/contact.html" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
                     </ul>
@@ -213,83 +278,17 @@
             <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
                 <p class="mb-2">&copy; 2025 iwriteyouread.org. All rights reserved.</p>
                 <p class="text-sm text-gray-500">Alexander Afolabi</p>
+                <p class="garden-affiliate-footer">Affiliate links, where present, may earn a small commission at no extra cost to you.</p>
             </div>
         </div>
     </footer>
     
     <!-- JavaScript -->
-    <script src="/assets/js/main.js"></script>
-    <script src="/assets/js/buttondown-subscription.js"></script>
-    
-    <!-- Rain Animation (homepage only) -->
-    <script>
-        (function () {
-            var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-            if (mq.matches) return;
-
-            var canvas = document.getElementById('rain-canvas');
-            if (!canvas) return;
-            var ctx = canvas.getContext('2d');
-            var drops = [];
-            var NUM_DROPS = 90;
-            var raf = null;
-
-            function resize() {
-                canvas.width = canvas.offsetWidth;
-                canvas.height = canvas.offsetHeight;
-            }
-
-            var ro = new ResizeObserver(resize);
-            ro.observe(canvas);
-            resize();
-
-            for (var i = 0; i < NUM_DROPS; i++) {
-                drops.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    len: Math.random() * 14 + 8,
-                    speed: Math.random() * 1.2 + 0.4,
-                    opacity: Math.random() * 0.12 + 0.04
-                });
-            }
-
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                drops.forEach(function (d) {
-                    ctx.beginPath();
-                    ctx.moveTo(d.x, d.y);
-                    ctx.lineTo(d.x + 0.5, d.y + d.len);
-                    ctx.strokeStyle = 'rgba(180, 200, 230, ' + d.opacity + ')';
-                    ctx.lineWidth = 0.8;
-                    ctx.stroke();
-                    d.y += d.speed;
-                    if (d.y > canvas.height) {
-                        d.y = -d.len;
-                        d.x = Math.random() * canvas.width;
-                    }
-                });
-                raf = requestAnimationFrame(draw);
-            }
-
-            function stop() {
-                if (raf !== null) {
-                    cancelAnimationFrame(raf);
-                    raf = null;
-                }
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ro.disconnect();
-            }
-
-            if (mq.addEventListener) {
-                mq.addEventListener('change', function (e) { if (e.matches) stop(); });
-            }
-
-            draw();
-        })();
-    </script>
+    <script defer src="/assets/js/main.js"></script>
+    <script defer src="/assets/js/buttondown-subscription.js"></script>
 
     <!-- AOS (Animate on Scroll) Library -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script defer src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         // Initialize AOS with custom settings
         AOS.init({
@@ -302,5 +301,16 @@
             }
         });
     </script>
+    </div>
+    <!-- Garden: Birdsong toggle -->
+<!-- [TO CONFIRM] - no audio file exists yet. Control is rendered disabled. -->
+<button id="garden-bird-toggle" class="garden-bird-toggle" aria-label="Toggle birdsong" aria-pressed="false">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+    <path d="M12 3c-1.5 2-3 4-3 7h6c0-3-1.5-5-3-7z"/>
+    <path d="M9 10c-3 0-5 2-5 5h16c0-3-2-5-5-5"/>
+    <circle cx="12" cy="18" r="2"/>
+  </svg>
+</button>
+    <script defer src="/assets/js/garden.js"></script>
 </body>
 </html>

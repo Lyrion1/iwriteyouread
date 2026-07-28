@@ -1,0 +1,46 @@
+name: Optimise images
+
+on:
+  push:
+    paths:
+      - 'public/images/**'
+
+jobs:
+  optimise:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y webp imagemagick
+
+      - name: Convert and resize new raster images
+        run: |
+          find public/images -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \)             ! -name '*.webp' | while read f; do
+            OUT="${f%.*}.webp"
+            if [ -f "$OUT" ]; then
+              echo "Skipping $f, webp already exists"
+              continue
+            fi
+            WIDTH=$(identify -format '%w' "$f" 2>/dev/null || echo 0)
+            if [ "$WIDTH" -gt 1400 ]; then
+              cwebp -q 82 -resize 1400 0 "$f" -o "$OUT" 2>/dev/null || convert "$f" -resize '1400>' -quality 82 "$OUT" 2>/dev/null
+            else
+              cwebp -q 82 "$f" -o "$OUT" 2>/dev/null || convert "$f" -quality 82 "$OUT" 2>/dev/null
+            fi
+          done
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing to commit, skipping"
+          else
+            git commit -m "chore: optimise images"
+            git push
+          fi
+
