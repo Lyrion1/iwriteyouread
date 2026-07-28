@@ -1,6 +1,0 @@
-name = "iwriteyouread"
-main = "src/index.js"
-compatibility_date = "2024-01-01"
-
-[[triggers.crons]]
-cron = "0 23 * * *"
