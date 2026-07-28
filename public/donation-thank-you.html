@@ -16,60 +16,32 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Lato:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
     
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        h1, h2 {
-            font-family: 'Merriweather', serif;
-        }
         .thank-you-icon {
             font-size: 4rem;
             margin-bottom: 1rem;
         }
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 2rem;
-            margin: 0.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .btn-primary {
-            background-color: #1f2937;
-            color: white;
-        }
-        .btn-primary:hover {
-            background-color: #111827;
-            transform: translateY(-2px);
-        }
-        .btn-secondary {
-            background-color: #6b7280;
-            color: white;
-        }
-        .btn-secondary:hover {
-            background-color: #4b5563;
-            transform: translateY(-2px);
-        }
     </style>
 </head>
-<body style="padding: 2rem; text-align: center; background: linear-gradient(to bottom right, #f9fafb, #ffffff, #eff6ff); min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+<body style="padding: 2rem; text-align: center; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
     
-    <div style="max-width: 700px;">
-        <div class="thank-you-icon">☕</div>
-        <h1 style="font-size: 3rem; font-weight: bold; color: #111827; margin-bottom: 1rem;">Thank You!</h1>
-        <h2 style="font-size: 1.5rem; color: #374151; margin-bottom: 1.5rem;">Your Support Means the World</h2>
-        <p style="font-size: 1.125rem; color: #4b5563; line-height: 1.75; margin-bottom: 2rem;">
+    <div style="max-width: 700px; color: var(--parchment);">
+        <div class="thank-you-icon">&#9749;</div>
+        <h1 style="font-family: var(--ff-serif); font-size: 3rem; font-weight: bold; color: var(--parchment); margin-bottom: 1rem;">Thank You!</h1>
+        <h2 style="font-family: var(--ff-serif); font-size: 1.5rem; color: var(--c-text-dark); margin-bottom: 1.5rem;">Your Support Means the World</h2>
+        <p style="font-size: 1.125rem; color: var(--c-text-dark); line-height: 1.75; margin-bottom: 2rem;">
             Your generous contribution helps us continue writing thoughtfully and independently. 
             Every coffee you buy supports the creation of meaningful essays and stories that explore 
             democracy, liberty, and the human experience.
         </p>
         <div style="margin-top: 2rem;">
-            <a href="/blog.html" class="btn btn-primary">Read More Essays</a>
-            <a href="/index.html" class="btn btn-secondary">Back to Home</a>
+            <a href="/blog.html" class="btn-dark-primary">Read More Essays</a>
+            <a href="/index.html" class="btn-dark-secondary">Back to Home</a>
         </div>
     </div>
     

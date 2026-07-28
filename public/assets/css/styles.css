@@ -1,635 +1,1306 @@
-/* Custom Styles for iwriteyouread.org */
+/* =============================================================
+   iwriteyouread.org  |  Site-Wide Visual System
+   Palette: deep ink, midnight plum, saffron, verdigris, gilt
+   One stylesheet imported by every page.
+   Mobile-first. No em dashes anywhere.
+   ============================================================= */
 
-/* Font Configuration */
-body {
-    font-family: 'Lato', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background-color: #ffffff;
+
+/* 1. Custom Properties
+   ------------------------------------------------------------- */
+:root {
+  /* Core palette (7 hues) */
+  --ink:       #16141a;   /* deep near-black with blue-violet undertone */
+  --plum:      #2b1d3e;   /* aubergine ink-well depth */
+  --saffron:   #c4752a;   /* warm amber -- accent 1 */
+  --verdigris: #2a6b5c;   /* aged copper-green -- accent 2, contrasts saffron */
+  --parchment: #f5e9d6;   /* warm cream paper -- reading surface */
+  --gilt:      #e8a832;   /* bright old gold -- interactive highlight */
+  --smoke:     #6b6080;   /* muted plum-grey -- secondary UI */
+
+  /* Semantic aliases */
+  --c-surface-card:   #f8f3eb;
+  --c-text-dark:      #e8dfd0;
+  --c-text-muted:     #9c91a8;
+  --c-border-subtle:  rgba(255, 255, 255, 0.07);
+  --c-border-card:    rgba(255, 255, 255, 0.12);
+
+  /* Font stacks */
+  --ff-serif: 'Merriweather', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --ff-sans:  'Lato', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Easing */
+
+  /* Transition durations */
+  --t-fast:   200ms ease;
+  --t-normal: 250ms ease;
+  --t-slow:   300ms ease;
+
+  /* Paper grain texture: SVG fractal noise at low opacity.
+     Stored as a custom property so it is defined only once. */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.08'/%3E%3C/svg%3E");
 }
 
-.font-serif,
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Merriweather', 'Playfair Display', Georgia, 'Times New Roman', serif;
+
+/* 2. Keyframes
+   ------------------------------------------------------------- */
+@keyframes bg-drift {
+  from { background-position: 0 0, 0% 50%; }
+  to   { background-position: 0 0, 100% 50%; }
 }
 
-/* Smooth Scrolling */
-html {
-    scroll-behavior: smooth;
+@keyframes bg-drift-warm {
+  from { background-position: 0 0, 0% 30%; }
+  to   { background-position: 0 0, 100% 70%; }
 }
 
-/* Scroll-Reveal Animation Enhancement */
-/* Customize AOS animations to match literary aesthetic */
-[data-aos] {
-    transition-timing-function: ease-out;
+@keyframes bg-drift-cool {
+  from { background-position: 0 0, 20% 0%; }
+  to   { background-position: 0 0, 80% 100%; }
 }
 
-/* Ensure animations are subtle and refined */
-[data-aos][data-aos][data-aos-duration="600"] {
-    transition-duration: 600ms;
-}
-
-/* Custom fade-up animation for poetic elements */
-[data-aos="fade-up"] {
-    transform: translateY(20px);
-    opacity: 0;
-    transition-property: transform, opacity;
-}
-
-[data-aos="fade-up"].aos-animate {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-/* Animation Utilities */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.animate-fade-in {
-    animation: fadeIn 0.3s ease-out;
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-/* Navbar Styles */
+
+/* 3. Base
+   ------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Body: layered background system.
+   Layer 1 (top): SVG fractal-noise grain at low opacity.
+   Layer 2 (bottom): slow-shifting gradient.
+   Uses !important to override Tailwind CDN's bg-white utility class. */
+body {
+  font-family: var(--ff-sans);
+  color: var(--c-text-dark);
+  background-color: var(--ink) !important;
+  background-image:
+    var(--grain),
+    linear-gradient(
+      160deg,
+      #16141a  0%,
+      #2b1d3e  30%,
+      #1a2236  65%,
+      #16141a  100%
+    ) !important;
+  background-size: 220px 220px, 300% 300% !important;
+  background-position: 0 0, 0% 50% !important;
+  background-repeat: repeat, no-repeat !important;
+  animation: bg-drift 32s ease-in-out infinite alternate;
+}
+
+
+/* 4. Per-Page Background Variations
+   Uses CSS :has() (Baseline 2023, all modern browsers).
+   Placed after the base body rule so specificity wins naturally.
+   ------------------------------------------------------------- */
+
+/* Home: warm saffron-plum depth */
+body:has(#homepage-hero) {
+  background-image:
+    var(--grain),
+    linear-gradient(
+      155deg,
+      #16141a  0%,
+      #2b1d3e  25%,
+      #26180e  55%,
+      #16141a  100%
+    ) !important;
+  animation: bg-drift-warm 36s ease-in-out infinite alternate;
+}
+
+/* Blog index: cool verdigris depth */
+body:has(#blog-posts) {
+  background-image:
+    var(--grain),
+    linear-gradient(
+      165deg,
+      #16141a  0%,
+      #0f2923  30%,
+      #122432  65%,
+      #16141a  100%
+    ) !important;
+  animation: bg-drift-cool 34s ease-in-out infinite alternate;
+}
+
+/* Blog post pages: warm ink, parchment article surface.
+   Matched via article > .prose which is specific to generated post files. */
+body:has(article .prose) {
+  background-image:
+    var(--grain),
+    linear-gradient(
+      180deg,
+      #1e1420  0%,
+      #261a1a  45%,
+      #1c1516  100%
+    ) !important;
+  animation: bg-drift 38s ease-in-out infinite alternate;
+}
+
+
+/* 5. Navbar
+   ID selector beats Tailwind's .bg-white class (1,0,0 vs 0,1,0).
+   ------------------------------------------------------------- */
 #navbar {
-    transition: all 0.3s ease;
+  background: rgba(22, 20, 26, 0.92) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--c-border-subtle);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.35) !important;
+  transition: box-shadow var(--t-normal);
 }
 
+#navbar.shadow-md {
+  box-shadow: 0 4px 36px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Desktop nav links */
 .nav-link {
-    position: relative;
+  position: relative;
+  color: #c8bfd6 !important;
+  font-family: var(--ff-sans);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding-bottom: 2px;
+  transition: color var(--t-fast), transform var(--t-fast) !important;
+}
+
+.nav-link:hover,
+.nav-link.text-gray-900,
+.nav-link.font-semibold {
+  color: var(--gilt) !important;
+  transform: translateY(-1px);
 }
 
 .nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px;
-    left: 50%;
-    background-color: #1e3a8a;
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--gilt);
+  border-radius: 2px;
+  transition: width var(--t-normal), left var(--t-normal);
+  transform: none;
 }
 
-.nav-link:hover::after {
-    width: 100%;
+.nav-link:hover::after,
+.nav-link.text-gray-900::after,
+.nav-link.font-semibold::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Site title in nav */
+#navbar a.font-serif {
+  color: var(--parchment) !important;
+  transition: color var(--t-fast);
+}
+
+#navbar a.font-serif:hover {
+  color: var(--gilt) !important;
+}
+
+/* Mobile menu button */
+#navbar button {
+  color: #c8bfd6 !important;
+  transition: color var(--t-fast);
+}
+
+#navbar button:hover {
+  color: var(--gilt) !important;
+}
+
+/* Mobile menu panel */
+#mobile-menu {
+  background: rgba(22, 20, 26, 0.97) !important;
+  border-top: 1px solid var(--c-border-subtle) !important;
+}
+
+#mobile-menu a {
+  color: #c8bfd6 !important;
+  border-radius: 6px;
+  transition: background var(--t-fast), color var(--t-fast) !important;
+}
+
+#mobile-menu a:hover,
+#mobile-menu a.bg-gray-100,
+#mobile-menu a.text-gray-900 {
+  background: rgba(232, 168, 50, 0.12) !important;
+  color: var(--gilt) !important;
 }
 
 /* Mobile Menu Transitions */
 #mobile-menu {
-    transition: max-height 0.3s ease-in-out;
+  transition: max-height var(--t-slow) ease-in-out;
 }
 
-/* Button Hover Effects */
-.btn-primary,
-.btn-secondary,
-.btn-tertiary {
-    transition: all 0.2s ease;
+
+/* 6. Page-intro areas (page headers sitting on the dark body)
+   Add class="page-intro" to the top header div on each page.
+   ------------------------------------------------------------- */
+.page-intro h1,
+.page-intro h2,
+.page-intro h3 {
+  color: var(--parchment) !important;
 }
 
-/* Card Hover Effects */
-.card-hover {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.page-intro p {
+  color: var(--c-text-dark) !important;
 }
 
-.card-hover:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+.page-intro .w-24.h-1 {
+  background-color: var(--gilt) !important;
 }
 
-/* Blog Post Styles */
-.blog-post {
-    transition: all 0.3s ease;
+.page-intro .bg-blue-700 {
+  background-color: var(--verdigris) !important;
 }
 
-.blog-post:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+.page-intro .bg-amber-700 {
+  background-color: var(--saffron) !important;
 }
 
-.blog-post img {
-    transition: transform 0.3s ease;
+
+/* 7. Typography Scale
+   clamp() ensures headings are large on desktop, never overflow on mobile.
+   ------------------------------------------------------------- */
+.font-serif,
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ff-serif);
 }
 
-.blog-post:hover img {
-    transform: scale(1.05);
+h1 {
+  font-size: clamp(1.875rem, 2vw + 1.5rem, 4.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
 }
 
-/* Tag Filter Styles */
-.tag-filter {
-    transition: all 0.2s ease;
-    cursor: pointer;
+h2 {
+  font-size: clamp(1.375rem, 1.5vw + 1rem, 2.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
-.tag-filter.active {
-    background-color: #92400e;
-    color: white;
-    border-color: #92400e;
+h3 {
+  font-size: clamp(1.125rem, 1vw + 0.875rem, 1.875rem);
+  line-height: 1.3;
 }
 
-/* Prose Styles for Blog Content */
-.prose {
-    max-width: 65ch;
-}
 
-.prose p {
-    margin-bottom: 1.25em;
-    line-height: 1.75;
-}
+/* 8. Homepage Sections
+   ------------------------------------------------------------- */
 
-.prose h2 {
-    margin-top: 2em;
-    margin-bottom: 1em;
-    font-size: 1.5em;
-    font-weight: 700;
-}
-
-.prose h3 {
-    margin-top: 1.6em;
-    margin-bottom: 0.6em;
-    font-size: 1.25em;
-    font-weight: 600;
-}
-
-.prose a {
-    color: #1e3a8a;
-    text-decoration: underline;
-}
-
-.prose a:hover {
-    color: #1e40af;
-}
-
-/* Newsletter Modal Styles */
-#newsletter-modal {
-    backdrop-filter: blur(4px);
-}
-
-#newsletter-modal > div {
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-/* Form Styles */
-input:focus,
-textarea:focus,
-select:focus {
-    outline: none;
-    border-color: #1e3a8a;
-    ring: 2px;
-    ring-color: rgba(30, 58, 138, 0.2);
-}
-
-/* Loading Animation */
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.animate-spin {
-    animation: spin 1s linear infinite;
-}
-
-/* Responsive Images */
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Site Logo Styles */
-.site-logo {
-    max-width: 100px; /* Maximum width of 100px */
-    width: 3rem; /* 48px for desktop */
-    height: 3rem; /* 48px for desktop */
-    border-radius: 50%; /* Circular shape */
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    flex-shrink: 0; /* Prevent logo from shrinking */
-    margin-right: 10px; /* 10px spacing between logo and title */
-}
-
-/* Author Logo in Header */
-.author-logo {
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    flex-shrink: 0;
-    margin-right: 12px;
-}
-
-/* Responsive logo sizing */
-@media (max-width: 640px) {
-    .site-logo {
-        width: 2.5rem; /* 40px for mobile */
-        height: 2.5rem; /* 40px for mobile */
-    }
-}
-
-/* Homepage Hero Background */
+/* Hero: body gradient shows through, no separate background */
 .homepage-hero {
-    background: linear-gradient(160deg, #111118 0%, #1c1c2a 40%, #252530 70%, #1a1a24 100%);
+  background: transparent;
+  position: relative;
 }
 
 #rain-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .homepage-hero-content {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .homepage-hero .poem-text {
-    color: #d6cfc5;
+  color: #d6cfc5;
 }
 
-/* Gradient Backgrounds */
-.gradient-bg {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+/* Newsletter section */
+#newsletter {
+  background: rgba(28, 18, 48, 0.75) !important;
+  background-image: none !important;
+  border-top: 1px solid var(--c-border-subtle);
+  border-bottom: 1px solid var(--c-border-subtle);
 }
 
-/* Book Cover Shadow */
-.book-shadow {
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.2);
+#newsletter h2 {
+  color: var(--parchment) !important;
 }
 
-/* Gumroad Button Override */
-.gumroad-button {
-    display: inline-block;
-    text-decoration: none !important;
-}
-
-/* Footer Links */
-footer a {
-    transition: color 0.2s ease;
-}
-
-/* Accessibility */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
-/* Focus Visible */
-*:focus-visible {
-    outline: 2px solid #1e3a8a;
-    outline-offset: 2px;
-}
-
-/* Buy Me Coffee Button - Brown Theme */
-.coffee-button {
-    background-color: #6f4e37;
-    color: white;
-    border-radius: 30px;
-    padding: 10px 18px;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-family: Georgia, serif;
-    box-shadow: 0 2px 8px rgba(111, 78, 55, 0.3);
-    transition: all 0.3s ease;
-    z-index: 40;
-    font-weight: 600;
-    font-size: 0.875rem;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.coffee-button:hover {
-    background-color: #5a3d2c;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(111, 78, 55, 0.4);
-}
-
-/* Buy Coffee Button Styles */
-.buy-coffee-button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 0.875rem;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 0;
-    font-family: Georgia, serif;
-    white-space: nowrap;
-}
-
-.buy-coffee-button:hover {
-    opacity: 0.9;
-}
-
-.buy-coffee-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-/* Donation Form Styles */
-.donation-form {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.donation-form label {
-    font-size: 1.25rem;
-    margin: 0;
-}
-
-.amount-input {
-    width: 80px;
-    padding: 8px 12px;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    background-color: #ffffff;
-    color: #1f2937;
-    transition: all 0.3s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.amount-input:focus {
-    outline: none;
-    border-color: #6f4e37;
-    box-shadow: 0 0 0 3px rgba(111, 78, 55, 0.1);
-}
-
-.amount-input::placeholder {
-    color: #9ca3af;
-    font-weight: 500;
-}
-
-.amount-input.error {
-    border-color: #ef4444;
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-}
-
-.submit-button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 0.875rem;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 0;
-    font-family: Georgia, serif;
-    white-space: nowrap;
-}
-
-.submit-button:hover {
-    opacity: 0.9;
-}
-
-.submit-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+#newsletter p.text-gray-700,
+#newsletter p.text-center {
+  color: var(--c-text-dark) !important;
 }
 
 
-/* Print Styles */
-@media print {
-    nav,
-    footer,
-    #newsletter-modal {
-        display: none;
-    }
-    
-    body {
-        background: white;
-    }
+/* 9. Blog Post Reading Surface
+   Calm, high-contrast parchment panel on the dark page background.
+   ------------------------------------------------------------- */
+body:has(article .prose) article {
+  background: var(--parchment);
+  border-radius: 8px;
+  padding-top: 2.5rem;
+  padding-bottom: 3.5rem;
+  box-shadow:
+    0 8px 60px rgba(0, 0, 0, 0.55),
+    0 2px 16px rgba(0, 0, 0, 0.25);
+  color: #1c1512;
 }
 
-/* Dark Mode Support (Future Enhancement) */
-@media (prefers-color-scheme: dark) {
-    /* Keep light mode for now as per requirements */
+/* Text colours on the parchment surface */
+body:has(article .prose) article h1,
+body:has(article .prose) article h2,
+body:has(article .prose) article h3,
+body:has(article .prose) article h4 {
+  color: #1c1512 !important;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
+body:has(article .prose) article .text-gray-600,
+body:has(article .prose) article .text-gray-900,
+body:has(article .prose) article time,
+body:has(article .prose) article .font-semibold {
+  color: #2d1f0f !important;
 }
 
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
+body:has(article .prose) article .text-gray-600 {
+  color: #5a4a3a !important;
 }
 
-::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
+/* Tags on post pages */
+body:has(article .prose) article .text-blue-700 {
+  color: var(--saffron) !important;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
+body:has(article .prose) article .bg-blue-50 {
+  background-color: rgba(196, 117, 42, 0.12) !important;
 }
 
-/* Selection */
-::selection {
-    background-color: #92400e;
-    color: white;
+/* Back-to-blog link */
+body:has(article .prose) .text-blue-700 {
+  color: var(--verdigris) !important;
 }
 
-::-moz-selection {
-    background-color: #92400e;
-    color: white;
+body:has(article .prose) .hover\:text-blue-900:hover {
+  color: var(--saffron) !important;
 }
 
-/* Excerpt Toggle Animation */
-#excerpt-content {
-    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+/* "More Essays" button */
+body:has(article .prose) .bg-blue-700 {
+  background-color: var(--saffron) !important;
 }
 
-#excerpt-icon {
-    transition: transform 0.3s ease;
+body:has(article .prose) .hover\:bg-blue-800:hover {
+  background-color: #a3601e !important;
 }
 
-#excerpt-icon.rotate {
-    transform: rotate(180deg);
+/* Post article footer divider */
+body:has(article .prose) article footer {
+  border-top-color: rgba(92, 74, 58, 0.3) !important;
 }
 
-/* Prose Photo Styling */
-.prose-photo {
-    width: 80%;
-    max-width: 500px;
-    border-radius: 12px;
-    margin: 20px auto;
-    display: block;
+/* Prose: Merriweather body text, 65-75ch, generous leading */
+.prose {
+  max-width: 65ch;
+  font-family: var(--ff-serif);
+  font-size: clamp(1rem, 0.5vw + 0.875rem, 1.125rem);
+  line-height: 1.75;
+  color: #1c1512;
 }
 
-/* Poem Section Styling */
-.poem-section {
-    text-align: center;
+.prose p {
+  margin-bottom: 1.4em;
+  line-height: 1.78;
 }
 
-.poem-text {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 1.5rem;
-    line-height: 2.2;
-    color: #374151;
-    font-style: italic;
+.prose h2 {
+  margin-top: 2.2em;
+  margin-bottom: 0.9em;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #1c1512;
 }
 
-@media (max-width: 768px) {
-    .poem-text {
-        font-size: 1.25rem;
-        line-height: 2;
-    }
+.prose h3 {
+  margin-top: 1.75em;
+  margin-bottom: 0.65em;
+  font-size: 1.25em;
+  font-weight: 600;
+  color: #1c1512;
 }
 
-@media (max-width: 640px) {
-    .poem-text {
-        font-size: 1.125rem;
-        line-height: 1.8;
-    }
+.prose a {
+  color: var(--verdigris);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--t-fast);
 }
 
-/* Image with rounded corners and shadows */
-.elegant-image {
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.prose a:hover {
+  color: var(--saffron);
 }
 
-.elegant-image:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+.prose .lead,
+.prose p.lead {
+  font-size: 1.15em;
+  line-height: 1.65;
+  color: #3d2f1f;
 }
 
-/* Feather icon styling */
-.feather-icon {
-    display: inline-block;
-    width: 1.5em;
-    height: 1.5em;
-    vertical-align: middle;
-    margin-left: 0.3em;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-    transition: transform 0.3s ease;
+
+/* 10. Blog Index Cards
+    ------------------------------------------------------------- */
+
+/* Accent colour per card position -- playful, not uniform */
+#blog-posts > article:nth-child(3n + 1) { --card-accent: var(--saffron); }
+#blog-posts > article:nth-child(3n + 2) { --card-accent: var(--verdigris); }
+#blog-posts > article:nth-child(3n + 3) { --card-accent: var(--smoke); }
+
+.blog-post {
+  background-color: var(--c-surface-card) !important;
+  border-radius: 14px !important;
+  border: 2px solid var(--card-accent, var(--saffron)) !important;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.2),
+    0 1px 6px rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden;
+  transition:
+    transform var(--t-normal),
+    box-shadow var(--t-normal),
+    border-color var(--t-fast) !important;
 }
 
-.feather-icon:hover {
-    transform: translateY(-2px) rotate(5deg);
+.blog-post:hover {
+  transform: translateY(-5px) !important;
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.32),
+    0 4px 18px rgba(0, 0, 0, 0.16) !important;
+  border-color: var(--gilt) !important;
 }
 
-/* Buttondown Subscription Form Styles */
+.blog-post img {
+  transition: transform var(--t-slow) !important;
+}
+
+.blog-post:hover img {
+  transform: scale(1.04) !important;
+}
+
+/* Text colours inside cards (on parchment surface) */
+.blog-post .text-blue-700 {
+  color: var(--saffron) !important;
+}
+
+.blog-post .bg-blue-50 {
+  background-color: rgba(196, 117, 42, 0.1) !important;
+}
+
+.blog-post h2.text-gray-900,
+.blog-post .text-gray-900 {
+  color: #1c1512 !important;
+}
+
+.blog-post .text-gray-700 {
+  color: #3d2f1f !important;
+}
+
+.blog-post .text-gray-500 {
+  color: #7a6a5a !important;
+}
+
+.blog-post a.text-blue-700,
+.blog-post .inline-flex.text-blue-700 {
+  color: var(--verdigris) !important;
+  transition: color var(--t-fast);
+}
+
+.blog-post a.hover\:text-blue-900:hover,
+.blog-post .inline-flex:hover {
+  color: var(--saffron) !important;
+}
+
+/* Blog index page header and filter area */
+body:has(#blog-posts) main > div > .page-intro h1 {
+  color: var(--parchment) !important;
+}
+
+body:has(#blog-posts) .text-gray-600.max-w-2xl {
+  color: var(--c-text-dark) !important;
+}
+
+body:has(#blog-posts) .bg-blue-700.mx-auto {
+  background-color: var(--verdigris) !important;
+}
+
+/* Tag filter buttons */
+.tag-filter {
+  cursor: pointer;
+  transition:
+    background var(--t-fast),
+    color var(--t-fast),
+    border-color var(--t-fast),
+    transform var(--t-fast),
+    box-shadow var(--t-fast) !important;
+}
+
+.tag-filter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tag-filter.active,
+.tag-filter.bg-blue-700 {
+  background-color: var(--saffron) !important;
+  border-color: var(--saffron) !important;
+  color: #fff !important;
+}
+
+.tag-filter:not(.active) {
+  background-color: rgba(245, 233, 214, 0.08) !important;
+  border-color: rgba(200, 191, 214, 0.3) !important;
+  color: var(--c-text-dark) !important;
+}
+
+.tag-filter:not(.active):hover {
+  background-color: rgba(232, 168, 50, 0.15) !important;
+  border-color: var(--gilt) !important;
+  color: var(--gilt) !important;
+}
+
+/* Loading spinner */
+.border-b-2.border-blue-700 {
+  border-color: var(--verdigris) !important;
+}
+
+/* Empty state on dark blog page */
+body:has(#blog-posts) #empty-state h3 {
+  color: var(--parchment) !important;
+}
+
+body:has(#blog-posts) #empty-state p {
+  color: var(--c-text-dark) !important;
+}
+
+
+/* 11. Buttons and Interactive Elements
+    ------------------------------------------------------------- */
+
+/* Primary CTA buttons */
+a.bg-amber-700,
+.bg-amber-700 {
+  background-color: var(--saffron) !important;
+  color: #fff !important;
+  border-radius: 10px;
+  transition:
+    background-color var(--t-normal),
+    transform var(--t-normal),
+    box-shadow var(--t-normal) !important;
+}
+
+a.hover\:bg-amber-800:hover,
+.hover\:bg-amber-800:hover {
+  background-color: #a3601e !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 24px rgba(196, 117, 42, 0.35) !important;
+}
+
+/* Generic button overrides for blue-themed buttons on dark pages */
+body:has(#blog-posts) .bg-blue-700,
+body:has(#homepage-hero) .bg-blue-700 {
+  background-color: var(--verdigris) !important;
+}
+
+/* Buttondown newsletter form */
 #buttondown-subscription-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  background-color: rgba(245, 233, 214, 0.06) !important;
+  border: 1px solid rgba(232, 168, 50, 0.2) !important;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: box-shadow var(--t-slow), transform var(--t-slow);
 }
 
 #buttondown-subscription-form:hover {
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(-2px) !important;
 }
 
 #buttondown-subscription-form input[type="email"] {
-    width: 100%;
-    padding: 0.875rem 1rem;
-    font-size: 1rem;
-    font-family: 'Lato', 'Inter', sans-serif;
-    border: 2px solid #d1d5db;
-    border-radius: 8px;
-    background-color: #ffffff;
-    color: #1f2937;
-    transition: all 0.3s ease;
-}
-
-#buttondown-subscription-form input[type="email"]:focus {
-    outline: none;
-    border-color: #92400e;
-    box-shadow: 0 0 0 3px rgba(146, 64, 14, 0.1);
+  background-color: rgba(245, 233, 214, 0.08) !important;
+  border: 2px solid rgba(232, 168, 50, 0.25) !important;
+  color: var(--parchment) !important;
+  border-radius: 8px;
+  font-family: var(--ff-sans);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
 }
 
 #buttondown-subscription-form input[type="email"]::placeholder {
-    color: #9ca3af;
+  color: rgba(200, 191, 214, 0.55) !important;
+}
+
+#buttondown-subscription-form input[type="email"]:focus {
+  border-color: var(--gilt) !important;
+  box-shadow: 0 0 0 3px rgba(232, 168, 50, 0.18) !important;
+  outline: none;
 }
 
 #buttondown-subscription-form button[type="submit"] {
-    width: 100%;
-    padding: 0.875rem 1rem;
-    font-size: 1rem;
-    font-weight: 600;
-    font-family: 'Lato', 'Inter', sans-serif;
-    background-color: #92400e;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(146, 64, 14, 0.2);
+  background-color: var(--saffron) !important;
+  border-radius: 8px;
+  font-family: var(--ff-sans);
+  transition: background-color var(--t-normal), transform var(--t-normal), box-shadow var(--t-normal);
 }
 
 #buttondown-subscription-form button[type="submit"]:hover:not(:disabled) {
-    background-color: #78350f;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(146, 64, 14, 0.3);
+  background-color: #a3601e !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 16px rgba(196, 117, 42, 0.35) !important;
 }
 
 #buttondown-subscription-form button[type="submit"]:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Buy coffee button */
+.coffee-button {
+  background: linear-gradient(135deg, var(--saffron) 0%, #a3601e 100%);
+  color: #fff;
+  border-radius: 30px;
+  padding: 10px 18px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-family: var(--ff-serif);
+  box-shadow: 0 2px 12px rgba(196, 117, 42, 0.35);
+  transition: transform var(--t-normal), box-shadow var(--t-normal);
+  z-index: 40;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.coffee-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(196, 117, 42, 0.45);
+}
+
+/* Donation form */
+.donation-form {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.donation-form label {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.amount-input {
+  width: 80px;
+  padding: 8px 12px;
+  border: 2px solid rgba(232, 168, 50, 0.4) !important;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: #fff !important;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.amount-input:focus {
+  outline: none;
+  border-color: var(--gilt) !important;
+  box-shadow: 0 0 0 3px rgba(232, 168, 50, 0.2) !important;
+}
+
+.amount-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-weight: 500;
+}
+
+.amount-input.error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+.submit-button,
+.buy-coffee-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--ff-serif);
+  white-space: nowrap;
+  transition: opacity var(--t-fast);
+}
+
+.submit-button:hover,
+.buy-coffee-button:hover {
+  opacity: 0.9;
+}
+
+.submit-button:disabled,
+.buy-coffee-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Form input focus */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--gilt);
+  box-shadow: 0 0 0 3px rgba(232, 168, 50, 0.18);
+}
+
+
+/* 12. Footer
+    ------------------------------------------------------------- */
+footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+footer a {
+  display: inline-block;
+  transition: color var(--t-fast), transform var(--t-fast) !important;
+}
+
+footer a:hover {
+  color: var(--gilt) !important;
+  transform: translateX(3px);
+}
+
+footer h3.font-serif {
+  color: var(--parchment) !important;
+}
+
+footer .text-gray-400 {
+  color: var(--c-text-muted) !important;
+}
+
+footer .text-gray-500 {
+  color: #6b6080 !important;
+}
+
+footer .border-gray-800 {
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+
+/* 13. Focus Visible
+    Gilt ring on all interactive elements.
+    ------------------------------------------------------------- */
+*:focus-visible {
+  outline: 3px solid var(--gilt) !important;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+
+/* 14. Scroll-Reveal Animations
+    Applied via IntersectionObserver in main.js.
+    Disabled automatically under prefers-reduced-motion.
+    ------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Blog post header enters on scroll */
+body:has(article .prose) article > header {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+}
+
+body:has(article .prose) article > header.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* 15. Card Hover (shared utility)
+    ------------------------------------------------------------- */
+.card-hover {
+  transition: transform var(--t-slow), box-shadow var(--t-slow);
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+
+/* 16. Poem Section
+    ------------------------------------------------------------- */
+.poem-section {
+  text-align: center;
+}
+
+.poem-text {
+  font-family: var(--ff-serif);
+  font-size: clamp(1.125rem, 1vw + 1rem, 1.5rem);
+  line-height: 2.1;
+  color: #d6cfc5;
+  font-style: italic;
+}
+
+
+/* 17. Preserved Utilities
+    ------------------------------------------------------------- */
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.site-logo {
+  max-width: 100px;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+
+.author-logo {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+
+.book-shadow {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, var(--plum) 0%, var(--verdigris) 100%);
+}
+
+.gumroad-button {
+  display: inline-block;
+  text-decoration: none !important;
+}
+
+.elegant-image {
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transition: transform var(--t-slow), box-shadow var(--t-slow);
+}
+
+.elegant-image:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.feather-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  margin-left: 0.3em;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: transform var(--t-slow);
+}
+
+.feather-icon:hover {
+  transform: translateY(-2px) rotate(5deg);
+}
+
+.prose-photo {
+  width: 80%;
+  max-width: 500px;
+  border-radius: 12px;
+  margin: 20px auto;
+  display: block;
+}
+
+#excerpt-content {
+  transition: max-height var(--t-slow) ease-out, opacity var(--t-slow) ease-out;
+}
+
+#excerpt-icon {
+  transition: transform var(--t-slow);
+}
+
+#excerpt-icon.rotate {
+  transform: rotate(180deg);
 }
 
 #thank-you-message {
-    display: none;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-    background-color: #f0fdf4;
-    border: 1px solid #86efac;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  display: none;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: rgba(42, 107, 92, 0.15);
+  border: 1px solid rgba(42, 107, 92, 0.4);
+  border-radius: 12px;
 }
 
 #thank-you-message p {
-    margin: 0;
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: #166534;
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--parchment);
 }
 
-/* Responsive adjustments */
+/* Newsletter modal */
+#newsletter-modal {
+  backdrop-filter: blur(4px);
+}
+
+#newsletter-modal > div {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Text selection */
+::selection {
+  background-color: var(--saffron);
+  color: #fff;
+}
+
+::-moz-selection {
+  background-color: var(--saffron);
+  color: #fff;
+}
+
+/* Custom scrollbar */
+:root { scrollbar-color: var(--smoke) #1e1a28; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #1e1a28; }
+::-webkit-scrollbar-thumb { background: var(--smoke); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: #887aa0; }
+
+
+/* 18. Responsive (mobile-first)
+    ------------------------------------------------------------- */
+
+/* Minimum guaranteed support: 375px wide */
+@media (max-width: 375px) {
+  body {
+    font-size: 0.9375rem;
+  }
+
+  .coffee-button {
+    font-size: 0.8rem;
+    padding: 8px 14px;
+    bottom: 14px;
+    right: 14px;
+  }
+
+  .donation-form {
+    gap: 8px;
+  }
+
+  .amount-input {
+    width: 64px;
+  }
+}
+
 @media (max-width: 640px) {
-    #buttondown-subscription-form {
-        padding: 1.5rem;
-    }
-    
-    #buttondown-subscription-form input[type="email"],
-    #buttondown-subscription-form button[type="submit"] {
-        padding: 0.75rem 1rem;
-        font-size: 0.9375rem;
-    }
+  .site-logo {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .poem-text {
+    font-size: 1.125rem;
+    line-height: 1.9;
+  }
+
+  #buttondown-subscription-form {
+    padding: 1.25rem !important;
+  }
+
+  #buttondown-subscription-form input[type="email"],
+  #buttondown-subscription-form button[type="submit"] {
+    padding: 0.75rem 1rem !important;
+    font-size: 0.9375rem;
+  }
+
+  .blog-post:hover {
+    transform: translateY(-3px) !important;
+  }
+
+  /* Post article: full-width on narrow screens for easier reading */
+  body:has(article .prose) article {
+    border-radius: 0;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .poem-text {
+    font-size: 1.125rem;
+    line-height: 2;
+  }
+}
+
+
+/* 19. AOS integration (existing animate-on-scroll library)
+    ------------------------------------------------------------- */
+[data-aos] {
+  transition-timing-function: ease-out;
+}
+
+[data-aos][data-aos][data-aos-duration="600"] {
+  transition-duration: 600ms;
+}
+
+[data-aos="fade-up"] {
+  transform: translateY(20px);
+  opacity: 0;
+  transition-property: transform, opacity;
+}
+
+[data-aos="fade-up"].aos-animate {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+/* 20. prefers-reduced-motion
+    ------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  /* Static gradient fallback: no animation */
+  body,
+  body:has(#homepage-hero),
+  body:has(#blog-posts),
+  body:has(article .prose) {
+    animation: none !important;
+    background-size: 220px 220px, 100% 100% !important;
+    background-position: 0 0, center !important;
+  }
+
+  /* Reveal animations bypassed */
+  .reveal,
+  body:has(article .prose) article > header {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* All hover / entry transitions disabled */
+  .blog-post,
+  .card-hover,
+  .elegant-image,
+  footer a,
+  .nav-link,
+  .tag-filter,
+  .coffee-button,
+  a.bg-amber-700,
+  #buttondown-subscription-form,
+  #buttondown-subscription-form button[type="submit"] {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+
+/* 21. Print
+    ------------------------------------------------------------- */
+@media print {
+  nav,
+  footer,
+  #newsletter-modal,
+  .coffee-button {
+    display: none;
+  }
+
+  body {
+    background: #fff !important;
+    background-image: none !important;
+    color: #000 !important;
+    animation: none !important;
+  }
+
+  body:has(article .prose) article {
+    background: #fff !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .prose a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555;
+  }
+}
+
+
+/* 22. Dark Mode (reserved -- site intentionally uses dark theme always)
+    ------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  /* Site is already dark-themed by default */
+}
+
+
+/* 23. Additional per-page text overrides
+    These handle text that appears directly on the dark body background
+    on pages that do not have a light-bg wrapping section.
+    ------------------------------------------------------------- */
+
+/* Loading and error states on dark pages (latest.html, blog.html) */
+#latest-loading p,
+#loading p {
+  color: var(--c-text-muted) !important;
+}
+
+#latest-error h3,
+#empty-state h3 {
+  color: var(--parchment) !important;
+}
+
+#latest-error p,
+#empty-state p {
+  color: var(--c-text-dark) !important;
+}
+
+/* Latest post card (bg-white on dark page) */
+#latest-post {
+  background-color: var(--c-surface-card) !important;
+  border-radius: 14px !important;
+  border: 2px solid var(--saffron) !important;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.2),
+    0 1px 6px rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden;
+}
+
+/* About page section headings (outside light-bg containers) */
+/* Works page section headings (outside light-bg containers) */
+/* General: h2/p directly on the dark body in non-special pages.
+   Selectors cover: .mb-12 > h2, section > h2, .text-center > h2, and paragraphs.
+   This is a broad safety net for about, works, contact, media, etc. */
+body:not(:has(article .prose)) main > div > .mb-12 > h2,
+body:not(:has(article .prose)) main > div > section > h2,
+body:not(:has(article .prose)) main > div > .text-center > h2 {
+  color: var(--parchment) !important;
+}
+
+body:not(:has(article .prose)) main > div > .text-center > p {
+  color: var(--c-text-dark) !important;
+}
+
+/* Contact CTA section on about page and similar */
+body:not(:has(article .prose)):not(:has(#blog-posts)):not(:has(#homepage-hero)) main .text-center p.text-gray-600 {
+  color: var(--c-text-dark) !important;
+}
+
+/* Contact page: dark-bg section heading (text-center mb-16 is covered by page-intro) */
+/* Contact info box with gradient background is self-contained -- no override needed */
+
+/* Media partnerships: section subheadings outside light-bg are inside bg-gray-50 -- no override needed */
+
+/* Essays extracts: handled by page-intro */
+
+
+/* 24. Standalone page buttons (404, thank-you pages)
+    Reusable classes to replace inline style handlers.
+    ------------------------------------------------------------- */
+.btn-dark-primary {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: var(--ff-serif);
+  background: var(--saffron);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(196, 117, 42, 0.3);
+  transition:
+    background var(--t-normal),
+    transform var(--t-normal),
+    box-shadow var(--t-normal);
+}
+
+.btn-dark-primary:hover {
+  background: #a3601e;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(196, 117, 42, 0.4);
+  color: #fff;
+}
+
+.btn-dark-secondary {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: var(--ff-serif);
+  background: rgba(245, 233, 214, 0.08);
+  color: var(--parchment);
+  border: 1px solid rgba(245, 233, 214, 0.2);
+  transition:
+    background var(--t-normal),
+    border-color var(--t-normal),
+    transform var(--t-normal);
+}
+
+.btn-dark-secondary:hover {
+  background: rgba(232, 168, 50, 0.15);
+  border-color: var(--gilt);
+  color: var(--parchment);
+  transform: translateY(-2px);
 }

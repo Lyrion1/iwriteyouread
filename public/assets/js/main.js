@@ -1,5 +1,27 @@
 // Main JavaScript for iwriteyouread.org
 
+// Scroll-reveal via IntersectionObserver.
+// Adds .is-visible to .reveal elements and article > header when they enter the viewport.
+// Completely disabled under prefers-reduced-motion.
+(function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.reveal, article > header').forEach(function (el) {
+            io.observe(el);
+        });
+    });
+}());
+
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
