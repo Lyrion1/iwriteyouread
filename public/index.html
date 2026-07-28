@@ -88,8 +88,9 @@
     
     <!-- Hero Section -->
     <main class="pt-16">
-        <section class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
-            <div class="max-w-5xl mx-auto text-center">
+        <section id="homepage-hero" class="homepage-hero relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
+            <canvas id="rain-canvas" aria-hidden="true"></canvas>
+            <div class="homepage-hero-content max-w-5xl mx-auto text-center">
                 <!-- Poem Section -->
                 <div class="poem-section max-w-3xl mx-auto mb-12" data-aos="fade-up">
                     <p class="poem-text">
@@ -220,6 +221,73 @@
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/buttondown-subscription.js"></script>
     
+    <!-- Rain Animation (homepage only) -->
+    <script>
+        (function () {
+            var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+            if (mq.matches) return;
+
+            var canvas = document.getElementById('rain-canvas');
+            if (!canvas) return;
+            var ctx = canvas.getContext('2d');
+            var drops = [];
+            var NUM_DROPS = 90;
+            var raf = null;
+
+            function resize() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+
+            var ro = new ResizeObserver(resize);
+            ro.observe(canvas);
+            resize();
+
+            for (var i = 0; i < NUM_DROPS; i++) {
+                drops.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    len: Math.random() * 14 + 8,
+                    speed: Math.random() * 1.2 + 0.4,
+                    opacity: Math.random() * 0.12 + 0.04
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drops.forEach(function (d) {
+                    ctx.beginPath();
+                    ctx.moveTo(d.x, d.y);
+                    ctx.lineTo(d.x + 0.5, d.y + d.len);
+                    ctx.strokeStyle = 'rgba(180, 200, 230, ' + d.opacity + ')';
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                    d.y += d.speed;
+                    if (d.y > canvas.height) {
+                        d.y = -d.len;
+                        d.x = Math.random() * canvas.width;
+                    }
+                });
+                raf = requestAnimationFrame(draw);
+            }
+
+            function stop() {
+                if (raf !== null) {
+                    cancelAnimationFrame(raf);
+                    raf = null;
+                }
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ro.disconnect();
+            }
+
+            if (mq.addEventListener) {
+                mq.addEventListener('change', function (e) { if (e.matches) stop(); });
+            }
+
+            draw();
+        })();
+    </script>
+
     <!-- AOS (Animate on Scroll) Library -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
