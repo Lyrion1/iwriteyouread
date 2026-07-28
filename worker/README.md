@@ -58,9 +58,10 @@ Wrangler will confirm the cron schedule (`0 23 * * *`, i.e. every night at
 
 ## Manual trigger
 
-A POST request to `https://<worker-url>/trigger` with the header
-an `Authorization` header whose value is the word `Bearer` followed by a space and your `GITHUB_TOKEN` value, will run the blog engine immediately,
-outside the scheduled cron. Useful for testing after deployment.
+A POST request to `https://<worker-url>/trigger` with an `Authorization` header
+(value: the word `Bearer` followed by a space and your `GITHUB_TOKEN` value)
+will run the blog engine immediately, outside the scheduled cron. Useful for
+testing after deployment.
 
 ## Configuration
 

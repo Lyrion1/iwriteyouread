@@ -299,7 +299,7 @@ async function githubPut(path, token, content, message, sha) {
   const url = `${GITHUB_API_BASE}/repos/${GITHUB_REPO}/contents/${path}`;
   const body = {
     message,
-    content: btoa(unescape(encodeURIComponent(content))),
+    content: btoa(String.fromCharCode(...new TextEncoder().encode(content))),
     branch: GITHUB_BRANCH,
   };
   if (sha) body.sha = sha;
@@ -323,7 +323,7 @@ async function githubPut(path, token, content, message, sha) {
 
 function decodeBase64(encoded) {
   const cleaned = encoded.replace(/\n/g, "");
-  return decodeURIComponent(escape(atob(cleaned)));
+  return new TextDecoder().decode(Uint8Array.from(atob(cleaned), (c) => c.charCodeAt(0)));
 }
 
 // ── Anthropic API call ───────────────────────────────────────────────────────
