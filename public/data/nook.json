@@ -1,0 +1,177 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "text": "What do you need right now?",
+      "answers": [
+        {
+          "text": "To be soothed",
+          "profile": "A"
+        },
+        {
+          "text": "To be unsettled",
+          "profile": "B"
+        },
+        {
+          "text": "To be inspired",
+          "profile": "C"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Where would you most like to read?",
+      "answers": [
+        {
+          "text": "A quiet garden bench",
+          "profile": "A"
+        },
+        {
+          "text": "A busy city corner",
+          "profile": "B"
+        },
+        {
+          "text": "Somewhere entirely new",
+          "profile": "C"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "How do you want to feel when you close the book?",
+      "answers": [
+        {
+          "text": "Peacefully reflective",
+          "profile": "A"
+        },
+        {
+          "text": "Deeply challenged",
+          "profile": "B"
+        },
+        {
+          "text": "Ready to act",
+          "profile": "C"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "What kind of world do you want to inhabit while reading?",
+      "answers": [
+        {
+          "text": "Familiar and warm",
+          "profile": "A"
+        },
+        {
+          "text": "Strange and provocative",
+          "profile": "B"
+        },
+        {
+          "text": "Real and urgent",
+          "profile": "C"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "Which matters more to you in a book?",
+      "answers": [
+        {
+          "text": "Beautiful language",
+          "profile": "A"
+        },
+        {
+          "text": "Ideas that disturb",
+          "profile": "B"
+        },
+        {
+          "text": "Stories that change things",
+          "profile": "C"
+        }
+      ]
+    }
+  ],
+  "profiles": {
+    "A": {
+      "name": "The Contemplative Reader",
+      "description": "You read to find stillness and meaning. Language matters as much as story.",
+      "books": [
+        {
+          "title": "The Spirit of America: Views from the Other Side",
+          "author": "Alexander Afolabi",
+          "reason": "A quiet, searching examination of American democracy from an outside perspective. It rewards the patient reader who wants to think, not just consume.",
+          "link": "https://www.amazon.com/dp/[TO CONFIRM]",
+          "isAuthorBook": true
+        },
+        {
+          "title": "[TO CONFIRM]",
+          "author": "[TO CONFIRM]",
+          "reason": "[TO CONFIRM]",
+          "link": "",
+          "isAuthorBook": false
+        },
+        {
+          "title": "[TO CONFIRM]",
+          "author": "[TO CONFIRM]",
+          "reason": "[TO CONFIRM]",
+          "link": "",
+          "isAuthorBook": false
+        }
+      ]
+    },
+    "B": {
+      "name": "The Restless Reader",
+      "description": "You read to be unsettled, to have your assumptions examined and sometimes dismantled.",
+      "books": [
+        {
+          "title": "The Spirit of America: Views from the Other Side",
+          "author": "Alexander Afolabi",
+          "reason": "This book asks hard questions about democracy, identity and belonging that do not resolve neatly. It will stay with you.",
+          "link": "https://www.amazon.com/dp/[TO CONFIRM]",
+          "isAuthorBook": true
+        },
+        {
+          "title": "[TO CONFIRM]",
+          "author": "[TO CONFIRM]",
+          "reason": "[TO CONFIRM]",
+          "link": "",
+          "isAuthorBook": false
+        },
+        {
+          "title": "[TO CONFIRM]",
+          "author": "[TO CONFIRM]",
+          "reason": "[TO CONFIRM]",
+          "link": "",
+          "isAuthorBook": false
+        }
+      ]
+    },
+    "C": {
+      "name": "The Engaged Reader",
+      "description": "You read because books change things. You want ideas with stakes.",
+      "books": [
+        {
+          "title": "The Spirit of America: Views from the Other Side",
+          "author": "Alexander Afolabi",
+          "reason": "A direct engagement with the most pressing questions in contemporary American life. Written for readers who believe words have consequences.",
+          "link": "https://www.amazon.com/dp/[TO CONFIRM]",
+          "isAuthorBook": true
+        },
+        {
+          "title": "[TO CONFIRM]",
+          "author": "[TO CONFIRM]",
+          "reason": "[TO CONFIRM]",
+          "link": "",
+          "isAuthorBook": false
+        },
+        {
+          "title": "[TO CONFIRM]",
+          "author": "[TO CONFIRM]",
+          "reason": "[TO CONFIRM]",
+          "link": "",
+          "isAuthorBook": false
+        }
+      ]
+    }
+  }
+}
