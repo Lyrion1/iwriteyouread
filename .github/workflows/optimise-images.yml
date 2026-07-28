@@ -5,6 +5,9 @@ on:
     paths:
       - 'public/images/**'
 
+permissions:
+  contents: write
+
 jobs:
   optimise:
     runs-on: ubuntu-latest
