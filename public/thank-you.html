@@ -16,31 +16,34 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Lato:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
-<body class="font-sans text-gray-900 bg-gradient-to-br from-gray-50 via-white to-blue-50 min-h-screen flex items-center justify-center">
+<body class="font-sans min-h-screen flex items-center justify-center">
     
     <div class="max-w-2xl mx-auto px-4 text-center">
         <!-- Success Icon -->
         <div class="mb-8">
-            <div class="inline-flex items-center justify-center w-24 h-24 bg-green-100 rounded-full">
-                <svg class="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="inline-flex items-center justify-center w-24 h-24 rounded-full" style="background:rgba(42,107,92,0.2);border:2px solid var(--verdigris,#2a6b5c)">
+                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color:var(--verdigris,#2a6b5c)">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
             </div>
         </div>
         
         <!-- Thank You Message -->
-        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+        <h1 class="font-serif text-4xl sm:text-5xl font-bold mb-4" style="color:var(--parchment,#f5e9d6)">
             Thank You!
         </h1>
         
-        <p class="text-lg text-gray-600 mb-8 max-w-lg mx-auto">
+        <p class="text-lg mb-8 max-w-lg mx-auto" style="color:var(--c-text-dark,#e8dfd0)">
             Your message has been received. I'll get back to you as soon as possible, typically within 48 hours.
         </p>
         
         <!-- Home Button -->
-        <a href="/" class="inline-block px-8 py-4 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition-colors shadow-lg hover:shadow-xl">
+        <a href="/" class="inline-block px-8 py-4 font-semibold rounded-lg shadow-lg" style="background:var(--saffron,#c4752a);color:#fff;transition:background 250ms ease,transform 250ms ease,box-shadow 250ms ease;" onmouseover="this.style.background='#a3601e';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(196,117,42,0.35)'" onmouseout="this.style.background='var(--saffron,#c4752a)';this.style.transform='';this.style.boxShadow=''">
             Return Home
         </a>
     </div>
