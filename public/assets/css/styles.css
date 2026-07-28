@@ -36,6 +36,10 @@
   --t-fast:   200ms ease;
   --t-normal: 250ms ease;
   --t-slow:   300ms ease;
+
+  /* Paper grain texture: SVG fractal noise at low opacity.
+     Stored as a custom property so it is defined only once. */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.08'/%3E%3C/svg%3E");
 }
 
 
@@ -81,7 +85,7 @@ body {
   color: var(--c-text-dark);
   background-color: var(--ink) !important;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.08'/%3E%3C/svg%3E"),
+    var(--grain),
     linear-gradient(
       160deg,
       #16141a  0%,
@@ -104,7 +108,7 @@ body {
 /* Home: warm saffron-plum depth */
 body:has(#homepage-hero) {
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.08'/%3E%3C/svg%3E"),
+    var(--grain),
     linear-gradient(
       155deg,
       #16141a  0%,
@@ -118,7 +122,7 @@ body:has(#homepage-hero) {
 /* Blog index: cool verdigris depth */
 body:has(#blog-posts) {
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.08'/%3E%3C/svg%3E"),
+    var(--grain),
     linear-gradient(
       165deg,
       #16141a  0%,
@@ -133,7 +137,7 @@ body:has(#blog-posts) {
    Matched via article > .prose which is specific to generated post files. */
 body:has(article .prose) {
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.08'/%3E%3C/svg%3E"),
+    var(--grain),
     linear-gradient(
       180deg,
       #1e1420  0%,
@@ -1250,3 +1254,53 @@ body:not(:has(article .prose)):not(:has(#blog-posts)):not(:has(#homepage-hero)) 
 /* Media partnerships: section subheadings outside light-bg are inside bg-gray-50 -- no override needed */
 
 /* Essays extracts: handled by page-intro */
+
+
+/* 24. Standalone page buttons (404, thank-you pages)
+    Reusable classes to replace inline style handlers.
+    ------------------------------------------------------------- */
+.btn-dark-primary {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: var(--ff-serif);
+  background: var(--saffron);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(196, 117, 42, 0.3);
+  transition:
+    background var(--t-normal),
+    transform var(--t-normal),
+    box-shadow var(--t-normal);
+}
+
+.btn-dark-primary:hover {
+  background: #a3601e;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(196, 117, 42, 0.4);
+  color: #fff;
+}
+
+.btn-dark-secondary {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: var(--ff-serif);
+  background: rgba(245, 233, 214, 0.08);
+  color: var(--parchment);
+  border: 1px solid rgba(245, 233, 214, 0.2);
+  transition:
+    background var(--t-normal),
+    border-color var(--t-normal),
+    transform var(--t-normal);
+}
+
+.btn-dark-secondary:hover {
+  background: rgba(232, 168, 50, 0.15);
+  border-color: var(--gilt);
+  color: var(--parchment);
+  transform: translateY(-2px);
+}
