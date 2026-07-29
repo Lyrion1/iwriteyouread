@@ -28,25 +28,30 @@
 html, body { max-width: 100%; overflow-x: hidden; margin: 0; }
 img, svg, video { max-width: 100%; height: auto; display: block; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  background-color: #FBF8F1;
+  background-image: radial-gradient(ellipse at center, #FBF8F1 0%, #F1EADA 100%);
+  background-attachment: fixed;
+}
 
 body {
   font-family: var(--ff-body);
   color: var(--ink);
-  background-color: var(--paper);
-  background-image: radial-gradient(ellipse at center, var(--paper) 0%, var(--paper-2) 100%);
-  background-attachment: fixed;
+  background: transparent;
   min-height: 100vh;
 }
 
-/* Paper grain overlay */
+/* Paper grain overlay — CSS opacity controls the overall grain intensity;
+   the SVG rect renders at opacity 1 so only this CSS value matters */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: 0;
+  opacity: 0.04;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.03'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -218,9 +223,13 @@ input[name="botcheck"] { display: none !important; }
   border-bottom-color: var(--honey);
 }
 
-main { padding-top: 4rem; }
+/* Structural elements: sit above florals (z-index 0) with transparent backgrounds.
+   Utility classes (.bg-gray-50, .bg-white, etc.) use !important and override
+   this base transparent rule where a section-level background is intentional. */
+header, main, footer { position: relative; z-index: 1; background: transparent; }
+section { position: relative; z-index: 1; background: transparent; padding-block: clamp(3rem, 8vw, 6rem); }
 
-section { padding-block: clamp(3rem, 8vw, 6rem); }
+main { padding-top: 4rem; }
 
 section + section { padding-top: 0; }
 
@@ -446,7 +455,7 @@ section.garden-hero {
 }
 
 footer {
-  background: var(--paper-2) !important;
+  background: transparent !important;
   color: var(--ink) !important;
   padding-block: clamp(3rem, 6vw, 4rem);
   margin-top: 0;
@@ -782,7 +791,7 @@ button[type="submit"]:hover { background: var(--honey); transform: translateY(-2
 
 .garden-corner {
   position: fixed;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
   width: clamp(120px, 18vw, 260px);
   height: auto;
@@ -1791,3 +1800,26 @@ body:has(.max-w-2xl.mx-auto.text-center:not([id])) {
 /* Text colour for blog back-link */
 .text-blue-700 { color: var(--honey); }
 .hover\:text-blue-900:hover { color: var(--ivy); }
+
+/* ================================================================
+   works.html — header in normal flow, book cover styling
+   ================================================================ */
+
+/* Navbar sits in normal document flow (no fixed/absolute) */
+.page-works #navbar {
+  position: static;
+  padding-block: 1rem;
+}
+
+/* Remove the top offset that existed to compensate for a fixed nav */
+.page-works main {
+  padding-top: 0;
+}
+
+/* Book cover: max-width 320px, centred, no box */
+.works-book-cover {
+  max-width: 320px;
+  width: 100%;
+  margin-inline: auto;
+  flex-shrink: 0;
+}
