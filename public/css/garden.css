@@ -42,7 +42,8 @@ body {
   min-height: 100vh;
 }
 
-/* Paper grain overlay */
+/* Paper grain overlay — CSS opacity controls the overall grain intensity;
+   the SVG rect renders at opacity 1 so only this CSS value matters */
 body::before {
   content: '';
   position: fixed;
@@ -222,7 +223,9 @@ input[name="botcheck"] { display: none !important; }
   border-bottom-color: var(--honey);
 }
 
-/* Structural elements: sit above florals (z-index 0) with transparent backgrounds */
+/* Structural elements: sit above florals (z-index 0) with transparent backgrounds.
+   Utility classes (.bg-gray-50, .bg-white, etc.) use !important and override
+   this base transparent rule where a section-level background is intentional. */
 header, main, footer { position: relative; z-index: 1; background: transparent; }
 section { position: relative; z-index: 1; background: transparent; padding-block: clamp(3rem, 8vw, 6rem); }
 
