@@ -27,6 +27,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html, body { max-width: 100%; overflow-x: hidden; margin: 0; }
 img, svg, video { max-width: 100%; height: auto; display: block; }
+img { background: transparent !important; box-shadow: none !important; border: 0 !important; }
 
 html {
   scroll-behavior: smooth;
@@ -287,9 +288,10 @@ section.garden-hero {
   max-width: 340px;
   height: auto;
   margin-inline: auto;
+  mix-blend-mode: multiply;
 }
 
-@media (max-width: 599px) {
+@media (max-width: 768px) {
   .garden-bench-img { max-width: 200px; }
 }
 
@@ -834,15 +836,16 @@ button[type="submit"]:hover { background: var(--honey); transform: translateY(-2
   padding: 0;
   background: transparent;
   display: block;
+  mix-blend-mode: multiply;
 }
 
-.garden-corner-tl { top: 0; left: 0; }
-.garden-corner-tr { top: 0; right: 0; }
-.garden-corner-bl { bottom: 0; left: 0; }
-.garden-corner-br { bottom: 0; right: 0; }
+.garden-corner-tl { top: -10px; left: -10px; }
+.garden-corner-tr { top: -10px; right: -10px; }
+.garden-corner-bl { bottom: -10px; left: -10px; }
+.garden-corner-br { bottom: -10px; right: -10px; }
 
-/* Mobile: only show TL and BR, at 100px */
-@media (max-width: 599px) {
+/* Mobile: only show TL and BR, at 100px, flush and bleeding off the corner */
+@media (max-width: 768px) {
   .garden-corner-tr,
   .garden-corner-bl { display: none; }
   .garden-corner-tl,
@@ -887,6 +890,7 @@ html::after {
   opacity: 0.72;
   pointer-events: none;
   z-index: 2;
+  mix-blend-mode: multiply;
 }
 
 /* Hidden on narrow viewports */
@@ -906,15 +910,19 @@ html::after {
 .garden-flower-btn {
   background: none;
   border: none;
+  box-shadow: none;
   cursor: pointer;
   padding: 0;
   width: 64px;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .garden-flower-btn img {
   width: 100%;
   height: auto;
   transition: transform 250ms ease;
+  mix-blend-mode: multiply;
 }
 
 .garden-flower-btn:hover img,
@@ -941,7 +949,7 @@ html::after {
 
 .garden-card {
   position: relative;
-  background: var(--paper-2);
+  background: var(--paper-2) url('/images/garden/card-paper.WEBP?v=3') center/cover no-repeat;
   width: min(90vw, 340px);
   min-height: 260px;
   padding: 2rem;
@@ -1329,11 +1337,14 @@ html::after {
 .garden-guestbook__msg--success { color: var(--ivy); }
 .garden-guestbook__msg--error { color: #a33; }
 
+/* Pick a Petal control (bottom-right fixed circle) */
 .garden-bird-toggle {
   position: fixed;
   bottom: 1.5rem;
   right: 1.5rem;
   z-index: 50;
+  min-width: 44px;
+  min-height: 44px;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -1345,11 +1356,12 @@ html::after {
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: background 250ms, transform 250ms;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .garden-bird-toggle:hover { background: var(--blush); transform: translateY(-2px); }
 .garden-bird-toggle:focus-visible { outline: 2px solid var(--honey); }
-.garden-bird-toggle[aria-pressed="true"] { background: var(--sage); }
 .garden-bird-toggle svg { width: 22px; height: 22px; color: var(--ink); }
 
 .garden-affiliate-notice,
@@ -1914,9 +1926,9 @@ article img:not(.author-logo):not(.feather-icon) {
 }
 
 /* ================================================================
-   Mobile overrides — 375px priority
+   Mobile overrides — 375px / 414px / 768px
    ================================================================ */
-@media (max-width: 599px) {
+@media (max-width: 768px) {
   /* Poem panel: tighter padding, 1rem from screen edges */
   .poem-section {
     padding: 1.25rem;

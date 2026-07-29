@@ -56,21 +56,19 @@
     }());
 
     (function initPetals() {
-      var btns = document.querySelectorAll('.garden-flower-btn');
-      if (!btns.length) return;
-
       var overlay = document.getElementById('garden-card-overlay');
+      if (!overlay) return;
+
       var lineEl = document.getElementById('garden-card-line');
       var shareBtn = document.getElementById('garden-card-share');
       var copyMsg = document.getElementById('garden-card-copy-msg');
       var closeBtn = document.getElementById('garden-card-close');
-      if (!overlay) return;
 
       var currentLine = '';
 
       function openCard(line) {
         currentLine = line;
-        if (lineEl) lineEl.textContent = '“' + line + '”';
+        if (lineEl) lineEl.textContent = '"' + line + '"';
         overlay.classList.add('is-open');
         if (closeBtn) closeBtn.focus();
       }
@@ -81,13 +79,24 @@
 
       fetchJSON('/data/lines.json', function (lines) {
         if (!lines || !lines.length) return;
+
+        /* Flower buttons in the petal container */
+        var flowerBtns = document.querySelectorAll('.garden-flower-btn');
         var idx = 0;
-        Array.prototype.forEach.call(btns, function (btn) {
+        Array.prototype.forEach.call(flowerBtns, function (btn) {
           btn.addEventListener('click', function () {
             openCard(lines[idx % lines.length]);
             idx++;
           });
         });
+
+        /* Pick a Petal circular control (bottom-right) */
+        var petalBtn = document.getElementById('garden-bird-toggle');
+        if (petalBtn) {
+          petalBtn.addEventListener('click', function () {
+            openCard(lines[Math.floor(Math.random() * lines.length)]);
+          });
+        }
       });
 
       if (closeBtn) closeBtn.addEventListener('click', closeCard);
@@ -101,7 +110,7 @@
       if (shareBtn) {
         shareBtn.addEventListener('click', function () {
           var siteUrl = 'https://iwriteyouread.org';
-          var text = '“' + currentLine + '” - Alexander Afolabi, ' + siteUrl;
+          var text = '"' + currentLine + '" - Alexander Afolabi, ' + siteUrl;
           if (navigator.share) {
             navigator.share({ text: text, url: siteUrl }).catch(function () {});
           } else if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -171,32 +180,6 @@
             '<p class="garden-almanac__excerpt">' + post.excerpt + '</p>' +
             '<a class="garden-almanac__link" href="' + post.url + '">Read the essay</a>';
         });
-      });
-    }());
-
-    (function initBird() {
-      var btn = document.getElementById('garden-bird-toggle');
-      if (!btn) return;
-
-      var audio = document.getElementById('garden-bird-audio');
-      if (!audio) {
-        btn.disabled = true;
-        btn.setAttribute('title', 'Birdsong coming soon');
-        return;
-      }
-
-      var playing = false;
-      btn.setAttribute('aria-pressed', 'false');
-      btn.addEventListener('click', function () {
-        if (playing) {
-          audio.pause();
-          playing = false;
-          btn.setAttribute('aria-pressed', 'false');
-        } else {
-          audio.play().catch(function () {});
-          playing = true;
-          btn.setAttribute('aria-pressed', 'true');
-        }
       });
     }());
   });
