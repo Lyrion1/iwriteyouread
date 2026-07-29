@@ -143,33 +143,35 @@
         </section>
         
         <!-- Newsletter Section -->
-        <section id="newsletter" class="py-20 bg-gray-50 reveal">
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-center mb-4 text-gray-900">
-                    Stay Connected
-                </h2>
-                <p class="text-center text-gray-700 mb-8 text-lg leading-relaxed">
-                    Get notified when Alexander publishes new essays, books, or research. No spam, just content that matters.
-                </p>
-                
-                <!-- Newsletter Form -->
-                <form id="buttondown-subscription-form" action="https://buttondown.email/api/emails/embed-subscribe/iwriteyouread" method="post">
-                    <input 
-                        type="email" 
-                        name="email" 
-                        required 
-                        placeholder="Enter your email"
-                        aria-label="Email address for newsletter subscription"
-                    />
-                    <input type="hidden" name="embed" value="1" />
-                    <button type="submit">
-                        Subscribe
-                    </button>
-                </form>
-                
-                <!-- Thank You Message (hidden by default) -->
-                <div id="thank-you-message">
-                    <p>Thanks for subscribing!</p>
+        <section id="newsletter" class="reveal">
+            <div class="container-wide">
+                <div class="newsletter-flow container-narrow">
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold mb-4 text-gray-900">
+                        Stay Connected
+                    </h2>
+                    <p class="text-gray-700 mb-8 text-lg leading-relaxed">
+                        Get notified when Alexander publishes new essays, books, or research. No spam, just content that matters.
+                    </p>
+                    
+                    <!-- Newsletter Form -->
+                    <form id="buttondown-subscription-form" action="https://buttondown.email/api/emails/embed-subscribe/iwriteyouread" method="post">
+                        <input 
+                            type="email" 
+                            name="email" 
+                            required 
+                            placeholder="Enter your email"
+                            aria-label="Email address for newsletter subscription"
+                        />
+                        <input type="hidden" name="embed" value="1" />
+                        <button type="submit">
+                            Subscribe
+                        </button>
+                    </form>
+                    
+                    <!-- Thank You Message (hidden by default) -->
+                    <div id="thank-you-message">
+                        <p>Thanks for subscribing!</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -200,7 +202,7 @@
         </div>
 
         <!-- Garden: Almanac -->
-        <section class="py-8">
+        <section>
           <div class="max-w-3xl mx-auto px-4">
             <div class="garden-almanac" data-src="/data/latest-post.json">
               <p class="garden-almanac__label">From the blog</p>
