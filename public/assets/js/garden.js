@@ -136,29 +136,48 @@
 
       fetchJSON('/data/shelf.json', function (books) {
         if (!books) return;
-        books.forEach(function (book, i) {
-          var btn = document.createElement('button');
-          btn.className = 'garden-spine';
-          btn.setAttribute('aria-label', book.title + ' by ' + book.author);
-          btn.setAttribute('data-index', i);
-          btn.style.background = book.spineColor || '#8A9C82';
-          var titleEl = document.createElement('span');
-          titleEl.className = 'garden-spine__title';
-          titleEl.textContent = book.title;
-          btn.appendChild(titleEl);
-          btn.addEventListener('click', function () {
-            var authorStr = book.author !== '[TO CONFIRM]' ? book.author : '';
-            var noteHtml = '<p style="font-size:0.75rem;color:var(--garden-sage);margin-bottom:0.5rem">' +
-              (authorStr ? 'Note on ' + book.title + ' by ' + authorStr : book.title) +
+
+        fetchJSON('/data/site.json', function (site) {
+          var tag = (site && site.affiliateTag) ? site.affiliateTag : '';
+
+          function buildAffiliateUrl(link) {
+            if (!link || link === '') return link;
+            if (!tag || tag === '') return link;
+            var sep = link.indexOf('?') !== -1 ? '&' : '?';
+            return link + sep + 'tag=' + encodeURIComponent(tag);
+          }
+
+          function showNote(book) {
+            var noteHtml = '<p style="font-size:0.75rem;color:var(--sage);margin-bottom:0.5rem">' +
+              'Note on <em>' + book.title + '</em> by ' + book.author +
               '</p><p>' + book.note + '</p>';
-            if (book.link && book.link !== '') {
-              noteHtml += '<a href="' + book.link + '" class="garden-almanac__link" target="_blank" rel="sponsored nofollow noopener">See on Amazon</a>';
+            var linkUrl = buildAffiliateUrl(book.link);
+            if (linkUrl && linkUrl !== '') {
+              noteHtml += '<a href="' + linkUrl + '" class="garden-almanac__link" target="_blank" rel="sponsored nofollow noopener">Find on Amazon UK</a>';
             }
             noteEl.innerHTML = noteHtml;
             noteEl.classList.add('is-visible');
-            noteEl.focus();
+          }
+
+          books.forEach(function (book, i) {
+            var btn = document.createElement('button');
+            btn.className = 'garden-spine';
+            btn.setAttribute('aria-label', book.title + ' by ' + book.author);
+            btn.setAttribute('data-index', i);
+            btn.style.background = book.spineColor || '#8A9C82';
+            var titleEl = document.createElement('span');
+            titleEl.className = 'garden-spine__title';
+            titleEl.textContent = book.title;
+            btn.appendChild(titleEl);
+
+            btn.addEventListener('mouseenter', function () { showNote(book); });
+            btn.addEventListener('focus', function () { showNote(book); });
+            btn.addEventListener('click', function () {
+              showNote(book);
+              noteEl.focus();
+            });
+            strip.appendChild(btn);
           });
-          strip.appendChild(btn);
         });
       });
     }());

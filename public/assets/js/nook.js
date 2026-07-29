@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  var scores = { A: 0, B: 0, C: 0 };
+  var scores = { soothed: 0, provoked: 0, understood: 0 };
   var currentQ = 0;
   var questions = [];
   var profiles = {};
@@ -16,8 +16,8 @@
 
   function getProfile() {
     var max = 0;
-    var winner = 'A';
-    ['A', 'B', 'C'].forEach(function (k) {
+    var winner = 'soothed';
+    ['soothed', 'provoked', 'understood'].forEach(function (k) {
       if (scores[k] > max) {
         max = scores[k];
         winner = k;
@@ -69,9 +69,10 @@
   }
 
   function buildAffiliateUrl(link, tag) {
-    if (!link || link === '' || tag === '[TO CONFIRM]') return link;
+    if (!link || link === '') return link;
+    if (!tag || tag === '') return link;
     var sep = link.indexOf('?') !== -1 ? '&' : '?';
-    return link + sep + 'tag=' + tag;
+    return link + sep + 'tag=' + encodeURIComponent(tag);
   }
 
   function showResult(profileKey) {
@@ -85,18 +86,17 @@
     if (!p) return;
 
     fetchJSON('/data/site.json', function (site) {
-      var tag = site && site.affiliateTag ? site.affiliateTag : '[TO CONFIRM]';
+      var tag = (site && site.affiliateTag) ? site.affiliateTag : '';
       var html = '<p class="garden-nook__result-name">' + p.name + '</p>' +
-        '<p style="margin-bottom:1.5rem;line-height:1.6">' + p.description + '</p>' +
-        '<p class="garden-affiliate-notice">Some links below may earn a small commission at no extra cost to you.</p>';
+        '<p style="margin-bottom:1.5rem;line-height:1.6">' + p.description + '</p>';
       p.books.forEach(function (book) {
-        var linkUrl = book.isAuthorBook ? buildAffiliateUrl(book.link, tag) : '';
+        var linkUrl = buildAffiliateUrl(book.link, tag);
         html += '<div class="garden-nook__book">' +
           '<p class="garden-nook__book-title">' + book.title + '</p>' +
           '<p class="garden-nook__book-author">' + book.author + '</p>' +
           '<p class="garden-nook__book-reason">' + book.reason + '</p>';
-        if (linkUrl && book.link !== '' && book.link.indexOf('[TO CONFIRM]') === -1) {
-          html += '<a class="garden-nook__book-link" href="' + linkUrl + '" target="_blank" rel="sponsored nofollow noopener">Find it on Amazon</a>';
+        if (linkUrl && linkUrl !== '') {
+          html += '<a class="garden-nook__book-link" href="' + linkUrl + '" target="_blank" rel="sponsored nofollow noopener">Find on Amazon UK</a>';
         }
         html += '</div>';
       });
@@ -106,7 +106,7 @@
       restartBtn.className = 'garden-nook__restart';
       restartBtn.textContent = 'Start again';
       restartBtn.addEventListener('click', function () {
-        scores = { A: 0, B: 0, C: 0 };
+        scores = { soothed: 0, provoked: 0, understood: 0 };
         currentQ = 0;
         resultEl.classList.remove('is-visible');
         resultEl.innerHTML = '';
@@ -134,4 +134,3 @@
     });
   });
 }());
-

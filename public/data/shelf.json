@@ -1,44 +1,98 @@
 [
   {
-    "title": "[TO CONFIRM]",
-    "author": "[TO CONFIRM]",
-    "note": "[TO CONFIRM]",
-    "link": "",
-    "spineColor": "#8A9C82"
-  },
-  {
-    "title": "[TO CONFIRM]",
-    "author": "[TO CONFIRM]",
-    "note": "[TO CONFIRM]",
-    "link": "",
-    "spineColor": "#A99BC1"
-  },
-  {
-    "title": "[TO CONFIRM]",
-    "author": "[TO CONFIRM]",
-    "note": "[TO CONFIRM]",
-    "link": "",
+    "title": "Half of a Yellow Sun",
+    "author": "Chimamanda Ngozi Adichie",
+    "category": "Fiction",
+    "note": "Set during the Nigerian Civil War, this novel follows three characters whose lives converge in the violence of the Biafra conflict. Adichie writes with precision and compassion, making the historical intimate and unforgettable.",
+    "link": "https://www.amazon.co.uk/s?k=Half+of+a+Yellow+Sun+Chimamanda+Ngozi+Adichie",
     "spineColor": "#E3B7B4"
   },
   {
-    "title": "[TO CONFIRM]",
-    "author": "[TO CONFIRM]",
-    "note": "[TO CONFIRM]",
-    "link": "",
+    "title": "Small Island",
+    "author": "Andrea Levy",
+    "category": "Fiction",
+    "note": "Set in postwar London, this novel traces the parallel journeys of Jamaican immigrants and an English woman adjusting to a world transformed by empire. Levy weaves together voices and histories to create something tender and unsparing.",
+    "link": "https://www.amazon.co.uk/s?k=Small+Island+Andrea+Levy",
+    "spineColor": "#A99BC1"
+  },
+  {
+    "title": "The Remains of the Day",
+    "author": "Kazuo Ishiguro",
+    "category": "Fiction",
+    "note": "A quietly devastating portrait of an English butler reflecting on decades of loyal service and the opportunities for life he allowed to pass. Ishiguro's restrained prose makes the emotional weight all the more profound.",
+    "link": "https://www.amazon.co.uk/s?k=The+Remains+of+the+Day+Kazuo+Ishiguro",
+    "spineColor": "#8A9C82"
+  },
+  {
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "category": "Non-fiction",
+    "note": "A sweeping account of humankind from prehistoric foragers to the present, arguing that shared fictions are the foundation of human civilisation. It provokes large questions about what we have gained and lost across one hundred thousand years.",
+    "link": "https://www.amazon.co.uk/s?k=Sapiens+Yuval+Noah+Harari",
     "spineColor": "#D9A741"
   },
   {
-    "title": "[TO CONFIRM]",
-    "author": "[TO CONFIRM]",
-    "note": "[TO CONFIRM]",
-    "link": "",
+    "title": "Natives",
+    "author": "Akala",
+    "category": "Non-fiction",
+    "note": "Akala examines race, class and empire in Britain through memoir and cultural history, drawing on his own upbringing and the lives of historical figures. The book challenges comfortable assumptions about British society with evidence and argument.",
+    "link": "https://www.amazon.co.uk/s?k=Natives+Akala",
     "spineColor": "#4F6350"
   },
   {
-    "title": "[TO CONFIRM]",
-    "author": "[TO CONFIRM]",
-    "note": "[TO CONFIRM]",
-    "link": "",
+    "title": "The Secret Barrister",
+    "author": "The Secret Barrister",
+    "category": "Non-fiction",
+    "note": "Written anonymously by a practising barrister, this book exposes the systemic failures of the English criminal justice system through vivid courtroom cases. It is both a call for reform and a compelling portrait of a profession under strain.",
+    "link": "https://www.amazon.co.uk/s?k=The+Secret+Barrister",
     "spineColor": "#33302B"
+  },
+  {
+    "title": "Long Walk to Freedom",
+    "author": "Nelson Mandela",
+    "category": "Memoir",
+    "note": "Mandela traces his journey from rural South Africa through twenty-seven years of imprisonment to the presidency of a democratic nation. The autobiography is a study in moral courage, patience and the long arc of political struggle.",
+    "link": "https://www.amazon.co.uk/s?k=Long+Walk+to+Freedom+Nelson+Mandela",
+    "spineColor": "#7E9377"
+  },
+  {
+    "title": "Educated",
+    "author": "Tara Westover",
+    "category": "Memoir",
+    "note": "Tara Westover grew up in rural Idaho without formal schooling, shaped by a survivalist family cut off from mainstream society. Her memoir charts the cost and liberation of education, asking what it means to construct a self through knowledge.",
+    "link": "https://www.amazon.co.uk/s?k=Educated+Tara+Westover",
+    "spineColor": "#9A8CB8"
+  },
+  {
+    "title": "Becoming",
+    "author": "Michelle Obama",
+    "category": "Memoir",
+    "note": "Michelle Obama reflects on her upbringing on Chicago's South Side, her years in the White House, and the work of defining herself on her own terms. The memoir is candid and warm, tracing the private life behind a very public role.",
+    "link": "https://www.amazon.co.uk/s?k=Becoming+Michelle+Obama",
+    "spineColor": "#DFA9A5"
+  },
+  {
+    "title": "A Writer's Diary",
+    "author": "Virginia Woolf",
+    "category": "Journals and nature",
+    "note": "Edited from the full diary Woolf kept for over twenty-five years, this volume collects her reflections on writing, reading, creative doubt and literary ambition. It offers an intimate window into the working mind of one of the twentieth century's most original writers.",
+    "link": "https://www.amazon.co.uk/s?k=A+Writer%27s+Diary+Virginia+Woolf",
+    "spineColor": "#C9922B"
+  },
+  {
+    "title": "The Peregrine",
+    "author": "J A Baker",
+    "category": "Journals and nature",
+    "note": "Baker spent ten winters following peregrine falcons across the Essex flatlands and recorded his observations in prose of extraordinary intensity. The book dissolves the boundary between watcher and watched, transforming nature writing into something close to visionary.",
+    "link": "https://www.amazon.co.uk/s?k=The+Peregrine+J+A+Baker",
+    "spineColor": "#3F5641"
+  },
+  {
+    "title": "H is for Hawk",
+    "author": "Helen Macdonald",
+    "category": "Journals and nature",
+    "note": "After her father's sudden death, Helen Macdonald trained a goshawk and found in it an unexpected passage through grief. The book moves between memoir, natural history and a meditation on T H White, becoming one of the defining nature books of its generation.",
+    "link": "https://www.amazon.co.uk/s?k=H+is+for+Hawk+Helen+Macdonald",
+    "spineColor": "#2E2B26"
   }
 ]
