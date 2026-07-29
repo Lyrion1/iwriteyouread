@@ -867,7 +867,7 @@ html::after {
   content: '';
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
   background:
     radial-gradient(ellipse 60% 50% at 0% 0%, rgba(241,234,218,0.55) 0%, transparent 60%),
@@ -1897,11 +1897,16 @@ body:has(.max-w-2xl.mx-auto.text-center:not([id])) {
 
 /* All content images in main article areas must never overflow container */
 .works-book-cover img,
-main img:not(.garden-corner):not(.garden-bench-img):not(.garden-flower-btn img):not(.author-logo):not(.feather-icon):not(.garden-margin-flower) {
+main img:not(.garden-corner):not(.garden-bench-img):not(.garden-flower-btn):not(.author-logo):not(.feather-icon):not(.garden-margin-flower) {
   max-width: 100%;
   height: auto;
   border-radius: 12px;
   display: block;
+}
+
+/* Flower button images: no border-radius override */
+.garden-flower-btn img {
+  border-radius: 0;
 }
 
 /* Poem and blog images specifically */
