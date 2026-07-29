@@ -30,15 +30,15 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="/images/garden/bench.WEBP" as="image">
+    <link rel="preload" href="/images/garden/bench.WEBP?v=3" as="image">
     <link rel="stylesheet" href="/css/garden.css">
 </head>
 <body class="font-sans text-gray-800 bg-white min-h-screen">
     <!-- Garden: corner florals -->
-<img src="/images/garden/corner-tl.WEBP" alt="" aria-hidden="true" class="garden-corner garden-corner-tl" width="350" height="276" loading="lazy" decoding="async" />
-<img src="/images/garden/corner-tr.WEBP" alt="" aria-hidden="true" class="garden-corner garden-corner-tr" width="350" height="336" loading="lazy" decoding="async" />
-<img src="/images/garden/corner-bl.WEBP" alt="" aria-hidden="true" class="garden-corner garden-corner-bl" width="350" height="250" loading="lazy" decoding="async" />
-<img src="/images/garden/corner-br.WEBP" alt="" aria-hidden="true" class="garden-corner garden-corner-br" width="350" height="276" loading="lazy" decoding="async" />
+<img src="/images/garden/corner-tl.WEBP?v=3" alt="" aria-hidden="true" class="garden-corner garden-corner-tl" width="350" height="365" loading="lazy" decoding="async" />
+<img src="/images/garden/corner-tr.WEBP?v=3" alt="" aria-hidden="true" class="garden-corner garden-corner-tr" width="350" height="336" loading="lazy" decoding="async" />
+<img src="/images/garden/corner-bl.WEBP?v=3" alt="" aria-hidden="true" class="garden-corner garden-corner-bl" width="350" height="250" loading="lazy" decoding="async" />
+<img src="/images/garden/corner-br.WEBP?v=3" alt="" aria-hidden="true" class="garden-corner garden-corner-br" width="350" height="276" loading="lazy" decoding="async" />
     <div class="garden-page-wrap">
     
     <!-- Navigation Bar -->
@@ -92,7 +92,7 @@
                 <!-- Garden: Bench Hero -->
                 <section id="garden-bench-hero" class="garden-hero mb-12" aria-label="The garden bench">
                   <img
-                    src="/images/garden/bench.WEBP"
+                    src="/images/garden/bench.WEBP?v=3"
                     alt="Two children reading on a bench"
                     width="334"
                     height="322"
@@ -179,13 +179,13 @@
         <!-- Garden: Pick a Petal -->
         <div class="garden-petal-container" aria-label="Pick a petal from the garden">
           <button class="garden-flower-btn" aria-label="Pick a petal: rose">
-            <img src="/images/garden/flower-rose.WEBP" alt="A rose" width="170" height="500" loading="lazy" decoding="async" />
+            <img src="/images/garden/flower-rose.WEBP?v=3" alt="A rose" width="170" height="500" loading="lazy" decoding="async" />
           </button>
           <button class="garden-flower-btn" aria-label="Pick a petal: daisy">
-            <img src="/images/garden/flower-daisy.WEBP" alt="A daisy" width="170" height="512" loading="lazy" decoding="async" />
+            <img src="/images/garden/flower-daisy.WEBP?v=3" alt="A daisy" width="170" height="512" loading="lazy" decoding="async" />
           </button>
           <button class="garden-flower-btn" aria-label="Pick a petal: cosmos">
-            <img src="/images/garden/flower-cosmos.WEBP" alt="A cosmos flower" width="171" height="511" loading="lazy" decoding="async" />
+            <img src="/images/garden/flower-cosmos.WEBP?v=3" alt="A cosmos flower" width="171" height="427" loading="lazy" decoding="async" />
           </button>
         </div>
         
@@ -204,9 +204,9 @@
         <!-- Garden: Almanac -->
         <section style="position: relative;">
           <!-- Margin flowers: visible ≥ 900px only -->
-          <img src="/images/garden/flower-rose.WEBP" alt="" aria-hidden="true" class="garden-margin-flower" style="top: 40%; left: -2rem; transform: rotate(-15deg);" loading="lazy" decoding="async" />
-          <img src="/images/garden/flower-daisy.WEBP" alt="" aria-hidden="true" class="garden-margin-flower" style="top: 10%; right: -1.5rem; transform: rotate(12deg);" loading="lazy" decoding="async" />
-          <img src="/images/garden/flower-cosmos.WEBP" alt="" aria-hidden="true" class="garden-margin-flower" style="bottom: 5%; left: 3%; transform: rotate(8deg);" loading="lazy" decoding="async" />
+          <img src="/images/garden/flower-rose.WEBP?v=3" alt="" aria-hidden="true" class="garden-margin-flower" style="top: 40%; left: -2rem; transform: rotate(-15deg);" loading="lazy" decoding="async" />
+          <img src="/images/garden/flower-daisy.WEBP?v=3" alt="" aria-hidden="true" class="garden-margin-flower" style="top: 10%; right: -1.5rem; transform: rotate(12deg);" loading="lazy" decoding="async" />
+          <img src="/images/garden/flower-cosmos.WEBP?v=3" alt="" aria-hidden="true" class="garden-margin-flower" style="bottom: 5%; left: 3%; transform: rotate(8deg);" loading="lazy" decoding="async" />
           <div class="max-w-3xl mx-auto px-4">
             <div class="garden-almanac" data-src="/data/latest-post.json">
               <p class="garden-almanac__label">From the blog</p>
@@ -280,13 +280,16 @@
     <script defer src="/assets/js/buttondown-subscription.js"></script>
 
         </div>
-    <!-- Garden: Birdsong toggle -->
-<!-- [TO CONFIRM] - no audio file exists yet. Control is rendered disabled. -->
-<button id="garden-bird-toggle" class="garden-bird-toggle" aria-label="Toggle birdsong" aria-pressed="false">
+    <!-- Garden: Pick a Petal control -->
+<button id="garden-bird-toggle" class="garden-bird-toggle" aria-label="Pick a petal" title="Pick a petal">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-    <path d="M12 3c-1.5 2-3 4-3 7h6c0-3-1.5-5-3-7z"/>
-    <path d="M9 10c-3 0-5 2-5 5h16c0-3-2-5-5-5"/>
-    <circle cx="12" cy="18" r="2"/>
+    <circle cx="12" cy="12" r="2"/>
+    <ellipse cx="12" cy="7" rx="1.8" ry="3.5"/>
+    <ellipse cx="16.3" cy="9.5" rx="1.8" ry="3.5" transform="rotate(60 16.3 9.5)"/>
+    <ellipse cx="16.3" cy="14.5" rx="1.8" ry="3.5" transform="rotate(120 16.3 14.5)"/>
+    <ellipse cx="12" cy="17" rx="1.8" ry="3.5"/>
+    <ellipse cx="7.7" cy="14.5" rx="1.8" ry="3.5" transform="rotate(60 7.7 14.5)"/>
+    <ellipse cx="7.7" cy="9.5" rx="1.8" ry="3.5" transform="rotate(120 7.7 9.5)"/>
   </svg>
 </button>
     <script defer src="/assets/js/garden.js"></script>
