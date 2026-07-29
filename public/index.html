@@ -28,12 +28,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/logoo.png">
     
-<!-- Custom Styles -->
-    <link rel="preload" href="/images/bench.jpg" as="image">
-<!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- AOS (Animate on Scroll) Library -->
+    <link rel="preload" href="/images/bench.jpg" as="image">
     <link rel="stylesheet" href="/css/garden.css">
 </head>
 <body class="font-sans text-gray-800 bg-white min-h-screen">
@@ -276,21 +273,7 @@
     <script defer src="/assets/js/main.js"></script>
     <script defer src="/assets/js/buttondown-subscription.js"></script>
 
-    <!-- AOS (Animate on Scroll) Library -->
-    <script defer src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        // Initialize AOS with custom settings
-        AOS.init({
-            duration: 600,
-            delay: 100,
-            once: true,
-            easing: 'ease-out',
-            disable: function() {
-                return window.innerWidth < 768;
-            }
-        });
-    </script>
-    </div>
+        </div>
     <!-- Garden: Birdsong toggle -->
 <!-- [TO CONFIRM] - no audio file exists yet. Control is rendered disabled. -->
 <button id="garden-bird-toggle" class="garden-bird-toggle" aria-label="Toggle birdsong" aria-pressed="false">
