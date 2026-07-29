@@ -26,20 +26,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/logoo.png">
     
-    <!-- TailwindCSS CDN -->
-    <script defer src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <link rel="stylesheet" href="/assets/css/garden.css">
-    
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400&family=Literata:wght@400;500;600;700&family=Merriweather:wght@400;700;900&family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- AOS (Animate on Scroll) Library -->
-    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/garden.css">
 </head>
 <body class="font-sans text-gray-800 bg-white min-h-screen">
     <!-- Garden: corner florals -->
@@ -270,13 +259,13 @@
             
             <!-- Garden: Guest Book -->
             <section class="mb-16">
-              <h2 style="font-family: var(--garden-font-display); font-size: clamp(1.4rem, 4vw, 1.8rem); font-weight: 400; color: var(--garden-ivy); margin-bottom: 0.5rem;">The Guest Book</h2>
-              <p style="color: var(--garden-sage); font-size: 0.95rem; margin-bottom: 1.5rem;">What are you reading at the moment?</p>
+              <h2>The Guest Book</h2>
+              <p>What are you reading at the moment?</p>
               <div class="garden-guestbook">
                 <form id="garden-guestbook-form" method="POST" action="https://api.web3forms.com/submit">
                   <input type="hidden" name="access_key" value="7f533d2f-b66e-4747-a485-e368b116403a" />
                   <input type="hidden" name="subject" value="Guest Book Entry - iwriteyouread" />
-                  <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+                  <input type="text" name="botcheck" tabindex="-1" autocomplete="off" />
 
                   <label for="gb-name">Your name</label>
                   <input type="text" id="gb-name" name="name" placeholder="What shall we call you?" autocomplete="name" />
@@ -285,7 +274,7 @@
                   <textarea id="gb-reading" name="reading" rows="3" required placeholder="A title, a poem, anything..."></textarea>
 
                   <label for="gb-email">Email address (optional)</label>
-                  <p style="font-size:0.8rem;color:var(--garden-sage);margin:-0.75rem 0 0.75rem">For the occasional word from Alexander. Nothing else, ever.</p>
+                  <p>For the occasional word from Alexander. Nothing else, ever.</p>
                   <input type="email" id="gb-email" name="email" placeholder="you@example.com" autocomplete="email" />
 
                   <button type="submit" class="garden-guestbook__submit">Leave your entry</button>
@@ -368,21 +357,7 @@
     <!-- JavaScript -->
     <script defer src="/assets/js/main.js"></script>
     
-    <!-- AOS (Animate on Scroll) Library -->
-    <script defer src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        // Initialize AOS with custom settings
-        AOS.init({
-            duration: 600,
-            delay: 100,
-            once: true,
-            easing: 'ease-out',
-            disable: function() {
-                return window.innerWidth < 768;
-            }
-        });
-    </script>
-    </div>
+        </div>
     <!-- Garden: Birdsong toggle -->
 <!-- [TO CONFIRM] - no audio file exists yet. Control is rendered disabled. -->
 <button id="garden-bird-toggle" class="garden-bird-toggle" aria-label="Toggle birdsong" aria-pressed="false">
