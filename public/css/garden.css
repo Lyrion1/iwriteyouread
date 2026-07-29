@@ -102,6 +102,20 @@ input[name="botcheck"] { display: none !important; }
   padding-inline: clamp(1.25rem, 5vw, 3rem);
 }
 
+main > :is(div.max-w-4xl, div.max-w-5xl, div.max-w-7xl, article.max-w-4xl),
+main > section > :is(div.max-w-3xl, div.max-w-4xl) {
+  max-width: 68rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 3rem);
+}
+
+article .prose,
+.about-reading,
+.works-poem-reading {
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
 #navbar {
   position: fixed;
   top: 0;
@@ -369,8 +383,21 @@ section.garden-hero {
   transform: translateY(-2px);
 }
 
+@media (min-width: 640px) {
+  #buttondown-subscription-form {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+}
+
 #newsletter {
   background: var(--paper-2);
+}
+
+#newsletter .newsletter-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 #newsletter h2 {
@@ -385,16 +412,16 @@ section.garden-hero {
 }
 
 #buttondown-subscription-form {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 0.75rem;
-  justify-content: center;
-  max-width: 34rem;
-  margin-inline: auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
 }
 
 #buttondown-subscription-form input[type="email"] {
-  flex: 1 1 200px;
+  min-width: 0;
   padding: 0.75rem 1rem;
   border: 1px solid var(--sage);
   border-radius: 4px;
@@ -829,7 +856,7 @@ button[type="submit"]:hover { background: var(--honey); transform: translateY(-2
   justify-content: center;
   align-items: flex-end;
   gap: 2rem;
-  margin: 2rem 0;
+  margin: 0;
   padding-inline: clamp(1.25rem, 5vw, 3rem);
 }
 
