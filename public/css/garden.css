@@ -1895,9 +1895,10 @@ body:has(.max-w-2xl.mx-auto.text-center:not([id])) {
    Content images: cap to container, no overflow (task #6)
    ================================================================ */
 
-/* All content images in main article areas must never overflow container */
+/* Book cover and article content images */
 .works-book-cover img,
-main img:not(.garden-corner):not(.garden-bench-img):not(.garden-flower-btn):not(.author-logo):not(.feather-icon):not(.garden-margin-flower) {
+.elegant-image,
+article img:not(.author-logo):not(.feather-icon) {
   max-width: 100%;
   height: auto;
   border-radius: 12px;
@@ -1907,15 +1908,6 @@ main img:not(.garden-corner):not(.garden-bench-img):not(.garden-flower-btn):not(
 /* Flower button images: no border-radius override */
 .garden-flower-btn img {
   border-radius: 0;
-}
-
-/* Poem and blog images specifically */
-.elegant-image {
-  max-width: 100%;
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  display: block;
 }
 
 /* ================================================================
