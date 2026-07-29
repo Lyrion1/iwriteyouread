@@ -334,6 +334,7 @@ section.garden-hero {
   background: rgba(255, 255, 255, 0.45);
   border-radius: 18px;
   padding: 2.5rem;
+  border: 1px solid rgba(126, 147, 119, 0.35);
   border: 1px solid color-mix(in srgb, var(--sage) 35%, transparent);
 }
 
