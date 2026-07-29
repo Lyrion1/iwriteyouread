@@ -6,15 +6,15 @@
       "answers": [
         {
           "text": "To be soothed",
-          "profile": "A"
+          "profile": "soothed"
         },
         {
           "text": "To be unsettled",
-          "profile": "B"
+          "profile": "provoked"
         },
         {
           "text": "To be inspired",
-          "profile": "C"
+          "profile": "understood"
         }
       ]
     },
@@ -24,15 +24,15 @@
       "answers": [
         {
           "text": "A quiet garden bench",
-          "profile": "A"
+          "profile": "soothed"
         },
         {
           "text": "A busy city corner",
-          "profile": "B"
+          "profile": "provoked"
         },
         {
           "text": "Somewhere entirely new",
-          "profile": "C"
+          "profile": "understood"
         }
       ]
     },
@@ -42,15 +42,15 @@
       "answers": [
         {
           "text": "Peacefully reflective",
-          "profile": "A"
+          "profile": "soothed"
         },
         {
           "text": "Deeply challenged",
-          "profile": "B"
+          "profile": "provoked"
         },
         {
           "text": "Ready to act",
-          "profile": "C"
+          "profile": "understood"
         }
       ]
     },
@@ -60,15 +60,15 @@
       "answers": [
         {
           "text": "Familiar and warm",
-          "profile": "A"
+          "profile": "soothed"
         },
         {
           "text": "Strange and provocative",
-          "profile": "B"
+          "profile": "provoked"
         },
         {
           "text": "Real and urgent",
-          "profile": "C"
+          "profile": "understood"
         }
       ]
     },
@@ -78,97 +78,118 @@
       "answers": [
         {
           "text": "Beautiful language",
-          "profile": "A"
+          "profile": "soothed"
         },
         {
           "text": "Ideas that disturb",
-          "profile": "B"
+          "profile": "provoked"
         },
         {
           "text": "Stories that change things",
-          "profile": "C"
+          "profile": "understood"
         }
       ]
     }
   ],
   "profiles": {
-    "A": {
-      "name": "The Contemplative Reader",
-      "description": "You read to find stillness and meaning. Language matters as much as story.",
+    "soothed": {
+      "name": "The Soothed Reader",
+      "description": "These are books that slow time down and ask you to attend to the world with care and precision. Each one rewards patience, offering beauty and contemplation rather than urgency.",
       "books": [
         {
-          "title": "The Spirit of America: Views from the Other Side",
+          "title": "The Spirit of America",
           "author": "Alexander Afolabi",
           "reason": "A quiet, searching examination of American democracy from an outside perspective. It rewards the patient reader who wants to think, not just consume.",
-          "link": "https://www.amazon.com/dp/[TO CONFIRM]",
+          "link": "https://www.amazon.co.uk/s?k=The+Spirit+of+America+Alexander+Afolabi",
           "isAuthorBook": true
         },
         {
-          "title": "[TO CONFIRM]",
-          "author": "[TO CONFIRM]",
-          "reason": "[TO CONFIRM]",
-          "link": "",
+          "title": "The Peregrine",
+          "author": "J A Baker",
+          "reason": "Baker's ten-winter pursuit of peregrine falcons across the Essex flatlands produced prose of extraordinary stillness and intensity. Few books ask the reader to slow down so completely, or reward it so richly.",
+          "link": "https://www.amazon.co.uk/s?k=The+Peregrine+J+A+Baker",
           "isAuthorBook": false
         },
         {
-          "title": "[TO CONFIRM]",
-          "author": "[TO CONFIRM]",
-          "reason": "[TO CONFIRM]",
-          "link": "",
+          "title": "H is for Hawk",
+          "author": "Helen Macdonald",
+          "reason": "Part elegy, part natural history, this memoir of grief and goshawk training is written with a tenderness that makes it impossible to set down. It is one of the finest accounts of solitude and recovery in recent literature.",
+          "link": "https://www.amazon.co.uk/s?k=H+is+for+Hawk+Helen+Macdonald",
+          "isAuthorBook": false
+        },
+        {
+          "title": "A Writer's Diary",
+          "author": "Virginia Woolf",
+          "reason": "Woolf's diary is a companion for anyone who has ever sat alone with a difficult sentence and felt both the terror and the necessity of it. It reads like a conversation about craft, doubt and the daily life of the mind.",
+          "link": "https://www.amazon.co.uk/s?k=A+Writer%27s+Diary+Virginia+Woolf",
           "isAuthorBook": false
         }
       ]
     },
-    "B": {
-      "name": "The Restless Reader",
-      "description": "You read to be unsettled, to have your assumptions examined and sometimes dismantled.",
+    "provoked": {
+      "name": "The Provoked Reader",
+      "description": "These books refuse to let you settle. They make arguments, expose injustices and demand that you engage with the world as it is rather than as you might prefer it to be.",
       "books": [
         {
-          "title": "The Spirit of America: Views from the Other Side",
+          "title": "The Spirit of America",
           "author": "Alexander Afolabi",
-          "reason": "This book asks hard questions about democracy, identity and belonging that do not resolve neatly. It will stay with you.",
-          "link": "https://www.amazon.com/dp/[TO CONFIRM]",
+          "reason": "This book asks hard questions about democracy, identity and belonging that do not resolve neatly. Written from outside the usual frame of American political commentary, it will stay with you.",
+          "link": "https://www.amazon.co.uk/s?k=The+Spirit+of+America+Alexander+Afolabi",
           "isAuthorBook": true
         },
         {
-          "title": "[TO CONFIRM]",
-          "author": "[TO CONFIRM]",
-          "reason": "[TO CONFIRM]",
-          "link": "",
+          "title": "Natives",
+          "author": "Akala",
+          "reason": "Akala fuses personal history with political argument to examine race and class in Britain with unflinching clarity. The book dismantles comfortable myths about meritocracy and empire, leaving the reader with more questions than before and better tools to answer them.",
+          "link": "https://www.amazon.co.uk/s?k=Natives+Akala",
           "isAuthorBook": false
         },
         {
-          "title": "[TO CONFIRM]",
-          "author": "[TO CONFIRM]",
-          "reason": "[TO CONFIRM]",
-          "link": "",
+          "title": "Sapiens",
+          "author": "Yuval Noah Harari",
+          "reason": "Harari surveys the entire span of human history to ask whether our species has actually progressed, or merely accumulated new ways of causing harm. It is deliberately provocative and does not always land on comfortable conclusions.",
+          "link": "https://www.amazon.co.uk/s?k=Sapiens+Yuval+Noah+Harari",
+          "isAuthorBook": false
+        },
+        {
+          "title": "Half of a Yellow Sun",
+          "author": "Chimamanda Ngozi Adichie",
+          "reason": "Adichie places you inside the chaos of the Biafran War through characters you come to love, making the political viscerally personal. The novel refuses to offer simple resolution and trusts the reader to sit with that discomfort.",
+          "link": "https://www.amazon.co.uk/s?k=Half+of+a+Yellow+Sun+Chimamanda+Ngozi+Adichie",
           "isAuthorBook": false
         }
       ]
     },
-    "C": {
-      "name": "The Engaged Reader",
-      "description": "You read because books change things. You want ideas with stakes.",
+    "understood": {
+      "name": "The Understood Reader",
+      "description": "These books place you inside lives that are trying to make sense of circumstances beyond their control. Reading them, you may find your own experience reflected in ways that feel both surprising and true.",
       "books": [
         {
-          "title": "The Spirit of America: Views from the Other Side",
+          "title": "The Spirit of America",
           "author": "Alexander Afolabi",
-          "reason": "A direct engagement with the most pressing questions in contemporary American life. Written for readers who believe words have consequences.",
-          "link": "https://www.amazon.com/dp/[TO CONFIRM]",
+          "reason": "A direct engagement with the most pressing questions in contemporary American life, written for readers who believe that words have consequences and that clarity matters. It offers the outside view that insiders rarely provide.",
+          "link": "https://www.amazon.co.uk/s?k=The+Spirit+of+America+Alexander+Afolabi",
           "isAuthorBook": true
         },
         {
-          "title": "[TO CONFIRM]",
-          "author": "[TO CONFIRM]",
-          "reason": "[TO CONFIRM]",
-          "link": "",
+          "title": "Educated",
+          "author": "Tara Westover",
+          "reason": "Westover's account of building an education against formidable opposition is not simply about escaping a difficult childhood. It is about the painful process of revising the story you have been given about yourself, which is a journey most readers will recognise in some form.",
+          "link": "https://www.amazon.co.uk/s?k=Educated+Tara+Westover",
           "isAuthorBook": false
         },
         {
-          "title": "[TO CONFIRM]",
-          "author": "[TO CONFIRM]",
-          "reason": "[TO CONFIRM]",
-          "link": "",
+          "title": "Small Island",
+          "author": "Andrea Levy",
+          "reason": "Levy gives voice to characters who are each trying to be understood by a world that has already decided who they are. The novel's four perspectives create a portrait of postwar Britain in which belonging is something that must be fought for, not assumed.",
+          "link": "https://www.amazon.co.uk/s?k=Small+Island+Andrea+Levy",
+          "isAuthorBook": false
+        },
+        {
+          "title": "The Remains of the Day",
+          "author": "Kazuo Ishiguro",
+          "reason": "Stevens, Ishiguro's butler narrator, spends the novel trying to understand choices he made decades ago while being unable to admit he regrets them. The result is one of the most precise portraits of self-deception in twentieth-century fiction.",
+          "link": "https://www.amazon.co.uk/s?k=The+Remains+of+the+Day+Kazuo+Ishiguro",
           "isAuthorBook": false
         }
       ]

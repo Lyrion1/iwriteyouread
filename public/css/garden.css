@@ -1117,10 +1117,28 @@ html::after {
   font-size: 0.9rem;
   color: var(--ink);
   line-height: 1.6;
-  display: none;
+  /* hidden but in flow for transition */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms ease, visibility 250ms ease;
 }
 
-.garden-shelf-note.is-visible { display: block; }
+.garden-shelf-note.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 767px) {
+  /* On mobile: note is out of flow until selected, then flows below strip */
+  .garden-shelf-note {
+    display: none;
+    max-width: 100%;
+    opacity: 1;
+    visibility: visible;
+    transition: none;
+  }
+  .garden-shelf-note.is-visible { display: block; }
+}
 
 @media (min-width: 768px) {
   .garden-shelf-layout {
@@ -1364,11 +1382,10 @@ html::after {
 .garden-bird-toggle:focus-visible { outline: 2px solid var(--honey); }
 .garden-bird-toggle svg { width: 22px; height: 22px; color: var(--ink); }
 
-.garden-affiliate-notice,
 .garden-affiliate-footer {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   color: var(--ink-soft);
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   line-height: 1.5;
 }
 
@@ -1967,5 +1984,32 @@ article img:not(.author-logo):not(.feather-icon) {
     width: 100%;
     display: block;
     box-sizing: border-box;
+  }
+
+  /* Minimum 16px text on mobile — overrides smaller font sizes */
+  p, li, label, input, textarea, select, .garden-nook__answer,
+  .garden-nook__book-reason, .garden-shelf-note,
+  .garden-nook__book-author, .garden-nook__book-link {
+    font-size: 1rem;
+  }
+
+  /* Nook answers: full width, min tap target */
+  .garden-nook__answer {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+  }
+
+  /* Shelf strip: horizontal scroll on mobile, spines tappable */
+  .garden-spine {
+    min-width: 44px;
+    min-height: 100px;
+  }
+
+  /* Shelf note: full-width below strip on mobile */
+  .garden-shelf-note {
+    margin-top: 1rem;
+    width: 100%;
   }
 }
